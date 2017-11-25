@@ -53,6 +53,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -202,38 +204,152 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\WeddingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\GuestDetail.cs">
+      <DependentUpon>WeddingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GuestHeader.cs">
+      <DependentUpon>WeddingModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\WeddingModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WeddingModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WeddingModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WeddingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WeddingModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WeddingModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\icomoon.css" />
+    <Content Include="Content\magnific-popup.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="Content\superfish.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\bootstrap\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\icomoon\icomoon.svg" />
+    <Content Include="fonts\icomoon\icomoon\demo-files\demo.css" />
+    <Content Include="fonts\icomoon\icomoon\demo-files\demo.js" />
+    <Content Include="fonts\icomoon\icomoon\demo.html" />
+    <Content Include="fonts\icomoon\icomoon\fonts\icomoon.svg" />
+    <Content Include="fonts\icomoon\icomoon\Read Me.txt" />
+    <Content Include="fonts\icomoon\icomoon\style.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\bride.jpg" />
+    <Content Include="images\brideGroom.ico" />
+    <Content Include="images\bridesmaid-1.jpg" />
+    <Content Include="images\bridesmaid-2.jpg" />
+    <Content Include="images\bridesmaid-3.jpg" />
+    <Content Include="images\bridesmaid-4.jpg" />
+    <Content Include="images\ColombiaBoat2.jpg" />
+    <Content Include="images\ColombiaGondola.jpg" />
+    <Content Include="images\ColombiaMountains.jpg" />
+    <Content Include="images\ColombiaWaterfall.jpg" />
+    <Content Include="images\Drinks.jpg" />
+    <Content Include="images\epicRobe.jpg" />
+    <Content Include="images\epicRobe2.jpg" />
+    <Content Include="images\groom-men-1.jpg" />
+    <Content Include="images\groom-men-2.jpg" />
+    <Content Include="images\groom-men-3.jpg" />
+    <Content Include="images\groom-men-4.jpg" />
+    <Content Include="images\groom.jpg" />
+    <Content Include="images\JoshWedding.JPG" />
+    <Content Include="images\PreRafting.jpg" />
+    <Content Include="images\putInBayBoats.JPG" />
+    <Content Include="images\RachelFruit.jpg" />
+    <Content Include="images\rafting2.JPG" />
+    <Content Include="images\texasWedding.JPG" />
+    <Content Include="images\Westfall3.jpg" />
+    <Content Include="images\Westfall4.jpg" />
+    <Content Include="images\WestfallOutdoorCeremony.png" />
+    <Content Include="js\app.js" />
+    <Content Include="js\scripts.js" />
+    <Content Include="Models\WeddingModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WeddingModel.edmx</DependentUpon>
+      <LastGenOutput>WeddingModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\WeddingModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WeddingModel.edmx</DependentUpon>
+      <LastGenOutput>WeddingModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\bootstrap-notify.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\style.css.map" />
+    <Content Include="images\.DS_Store" />
+    <Content Include="less\style.less" />
+    <EntityDeploy Include="Models\WeddingModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WeddingModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\WeddingModel.edmx.diagram">
+      <DependentUpon>WeddingModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="fonts\bootstrap\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\bootstrap\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\bootstrap\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\bootstrap\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\icomoon\.DS_Store" />
+    <Content Include="fonts\icomoon\icomoon.eot" />
+    <Content Include="fonts\icomoon\icomoon.ttf" />
+    <Content Include="fonts\icomoon\icomoon.woff" />
+    <Content Include="fonts\icomoon\icomoon\.DS_Store" />
+    <Content Include="fonts\icomoon\icomoon\fonts\icomoon.eot" />
+    <Content Include="fonts\icomoon\icomoon\fonts\icomoon.ttf" />
+    <Content Include="fonts\icomoon\icomoon\fonts\icomoon.woff" />
+    <Content Include="fonts\icomoon\icomoon\selection.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\google_map.js" />
+    <Content Include="Scripts\handlebars-v4.0.11.js" />
+    <Content Include="Scripts\hoverIntent.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.easing.1.3.js" />
+    <Content Include="Scripts\jquery.magnific-popup.min.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.stellar.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.waypoints.min.js" />
+    <Content Include="Scripts\magnific-popup-options.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modernizr-2.6.2.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\scripts.js" />
+    <Content Include="Scripts\scripts.min.js" />
+    <Content Include="Scripts\sticky.js" />
+    <Content Include="Scripts\superfish.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -268,6 +384,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Wedding\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -284,6 +401,9 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

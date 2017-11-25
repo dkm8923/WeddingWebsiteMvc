@@ -1,0 +1,415 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+ <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Rachel &amp; Dan - July 14, 2018</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Rachel Thompson Dan Mauk Wedding" />
+    <meta name="keywords" content="Rachel Thompson, Dan Mauk, WestFall Event Center, Mauk, Thompson" />
+    <meta name="author" content="Dan Mauk" />
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="shortcut icon" href="@Url.Content("~/images/brideGroom.ico")"> 
+
+    <link href="https://fonts.googleapis.com/css?family=Montez" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
+
+    @Styles.Render("~/WeddingCss/css")
+    
+    <!-- Modernizr JS -->
+    @*<script src="~/Scripts/modernizr-2.6.2.min.js"></script>*@
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
+    <script src="~/Scripts/respond.min.js"></script>
+    <![endif]-->
+
+
+
+</head>
+<body id="page-top">
+    <div id="fh5co-wrapper">
+        <div id="fh5co-page">
+            <header id="fh5co-header-section" class="sticky-banner">
+                <div class="container">
+                    <div class="nav-header">
+                        <a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle dark"><i></i></a>
+                        <h1 id="fh5co-logo"><a href="#home" id="aCornerHomeLink" class="js-scroll-trigger">Rachel & Dan</a></h1>
+                        <nav class="fixed-top" id="fh5co-menu-wrap" role="navigation">
+                            <ul id="top-menu" class="sf-menu" id="fh5co-primary-menu">
+                                <li id="liHome" class="navLink">
+                                    <a href="#home" class="js-scroll-trigger">Home</a>
+                                </li>
+                                <li class="navLink">
+                                    <a href="#brideandgroom" class="js-scroll-trigger">Bride &amp; Groom</a>
+                                </li>
+                                <li class="navLink">
+                                    <a href="#whenwhere" class="js-scroll-trigger">When &amp; Where</a>
+                                </li>
+                                <!--<li class="navLink hidden">
+                                    <a href="#guest" class="js-scroll-trigger">Guest</a>
+                                </li>-->
+                                <li class="navLink">
+                                    <a href="#gallery" class="js-scroll-trigger">Gallery</a>
+                                </li>
+                                <li class="navLink">
+                                    <a href="#rsvp" class="js-scroll-trigger">RSVP</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+
+            <div id="home">
+                <div class="fh5co-hero" data-section="home">
+                    <div class="fh5co-overlay"></div>
+                    <div class="fh5co-cover text-center" data-stellar-background-ratio=".5" style="background-image: url(@Url.Content("~/images/ColombiaWaterfall.JPG"));">
+                        <div class="display-t">
+                            <div class="display-tc">
+                                <div class="container">
+                                    <div id="divHomeHeaderTemplate">
+                                        <div class="col-md-10 col-md-offset-1">
+                                            <div class="animate-box">
+                                                <h1>The Wedding</h1>
+                                                <h2>Rachel &amp; Dan</h2>
+                                                <p><span>7.14.2018</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="fh5co-couple" class="fh5co-section-gray">
+                    <div id="divContainer" class="container">
+                        <div class="row row-bottom-padded-md animate-box">
+                            <div class="col-md-6 col-md-offset-3 text-center">
+                                <div class="col-md-5 col-sm-5 col-xs-5 nopadding">
+                                    <img src="@Url.Content("~/images/groom.jpg")" class="img-responsive" alt="Groom">
+                                    <h3>Dan Mauk</h3>
+                                </div>
+                                <div class="col-md-2 col-sm-2 col-xs-2 nopadding"><h2 class="amp-center"><i class="icon-heart"></i></h2></div>
+                                <div class="col-md-5 col-sm-5 col-xs-5 nopadding">
+                                    <img src="@Url.Content("~/images/bride.jpg")" class="img-responsive" alt="Bride">
+                                    <h3>Rachel Thompson</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row animate-box">
+                            <div class="col-md-8 col-md-offset-2">
+                                <div class="col-md-12 text-center heading-section">
+                                    <h2>Are Getting Married</h2>
+                                    <p><strong>on July 14, 2018 &mdash; Valley View, Ohio</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="fh5co-countdown">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2 text-center animate-box">
+                            <p class="countdown">
+                                <span id="days"></span>
+                                <span id="hours"></span>
+                                <span id="minutes"></span>
+                                <span id="seconds"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="brideandgroom">
+                <div id="fh5co-groom-bride">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                                <h2>Bride &amp; Groom</h2>
+                            </div>
+                        </div>
+                        <div class="row padding">
+                            <div class="couple-wrap">
+                                <div class="col-md-6 nopadding animate-box">
+                                    <img src="@Url.Content("~/images/epicRobe.jpg")" class="img-responsive" alt="img">
+                                </div>
+                                <div class="col-md-6 nopadding animate-box">
+                                    <div class="couple-desc">
+                                        <h3>Dan Mauk</h3>
+                                        <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius. Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row padding">
+                            <div class="couple-wrap">
+                                <div class="col-md-6 col-md-push-6 nopadding animate-box">
+                                    <img src="@Url.Content("~/images/RachelFruit.jpg")" class="img-responsive" alt="img">
+                                </div>
+                                <div class="col-md-6 col-md-pull-6 nopadding animate-box">
+                                    <div class="couple-desc">
+                                        <h3>Rachel Thompson;</h3>
+                                        <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius. Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="whenwhere">
+                <div id="fh5co-when-where" class="fh5co-section-gray">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                                <h2>When &amp; Where</h2>
+                            </div>
+                        </div>
+                        <div class="row row-bottom-padded-md">
+                            <div class="col-md-6 text-center animate-box">
+                                <div class="wedding-events">
+                                    <div class="ceremony-bg" style="background-image: url(@Url.Content("~/images/WestfallOutdoorCeremony.png"));"></div>
+                                    <div class="desc">
+                                        <h3>Wedding Ceremony</h3>
+                                        <p><strong>Saturday, July 14, 2018, 5:00 PM - 5:30PM At WestFall Event Center</strong></p>
+                                        <p>The Ceremony will take place next to the Reception area. Please arrive 15 minutes early.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-center animate-box">
+                                <div class="wedding-events">
+                                    <div class="ceremony-bg" style="background-image: url(@Url.Content("~/images/Westfall3.jpg"));"></div>
+                                    <div class="desc">
+                                        <h3>Wedding Party</h3>
+                                        <p><strong>Saturday, July 14, 2018, 6.00 PM - 11.00PM At WestFall Event Center</strong></p>
+                                        <p>Free Food, Free Drinks, Dj, Lawn Games, Bonfire... Should be a good time!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="map" class="fh5co-map"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div id="guest" class="hidden">
+                <div id="fh5co-guest">
+                    <div class="container">
+                        <div class="row animate-box">
+                            <div class="col-md-8 col-md-offset-2 text-center heading-section">
+                                <h2>The Groomsmen</h2>
+                            </div>
+                        </div>
+                        <div class="row row-bottom-padded-lg">
+                            <div class="col-md-3 text-center animate-box">
+                                <div class="groom-men">
+                                    <img src="@Url.Content("~/images/groom-men-1.jpg")" class="img-responsive" alt="img">
+                                    <h3>Steve Schultz</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-center animate-box">
+                                <div class="groom-men">
+                                    <img src="@Url.Content("~/images/groom-men-2.jpg")" class="img-responsive" alt="img">
+                                    <h3>Ryan Mazzocco</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-center animate-box">
+                                <div class="groom-men">
+                                    <img src="@Url.Content("~/images/groom-men-3.jpg")" class="img-responsive" alt="img">
+                                    <h3>Mike Mauk</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-center animate-box">
+                                <div class="groom-men">
+                                    <img src="@Url.Content("~/images/groom-men-4.jpg")" class="img-responsive" alt="img">
+                                    <h3>Josh Pease</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row animate-box">
+                            <div class="col-md-8 col-md-offset-2 text-center heading-section">
+                                <h2>The Bridesmaids</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 text-center animate-box">
+                                <div class="groom-men">
+                                    <img src="@Url.Content("~/images/bridesmaid-1.jpg")" class="img-responsive" alt="img">
+                                    <h3>Arthur Stone</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-center animate-box">
+                                <div class="groom-men">
+                                    <img src="@Url.Content("~/images/bridesmaid-2.jpg")" class="img-responsive" alt="img">
+                                    <h3>Mike Paterson</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-center animate-box">
+                                <div class="groom-men">
+                                    <img src="@Url.Content("~/images/bridesmaid-3.jpg")" class="img-responsive" alt="img">
+                                    <h3>Brench Thompson</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-center animate-box">
+                                <div class="groom-men">
+                                    <img src="@Url.Content("~/images/bridesmaid-4.jpg")" class="img-responsive" alt="img">
+                                    <h3>Blake Haste</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+
+            <div id="gallery">
+                <div id="fh5co-gallery">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                                <h2>Wedding Gallery</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="gallery animate-box">
+                                    <a class="gallery-img image-popup image-popup" href="images/ColombiaBoat2.jpg"><img src="@Url.Content("~/images/ColombiaBoat2.jpg")" class="img-responsive" alt="img"></a>
+                                </div>
+                                <div class="gallery animate-box">
+                                    <a class="gallery-img image-popup" href="images/rafting2.jpg"><img src="@Url.Content("~/images/rafting2.jpg")" class="img-responsive" alt="img"></a>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="gallery animate-box">
+                                    <a class="gallery-img image-popup" href="images/JoshWedding.jpg"><img src="@Url.Content("~/images/JoshWedding.jpg")" class="img-responsive" alt="img"></a>
+                                </div>
+                                <div class="gallery animate-box">
+                                    <a class="gallery-img image-popup" href="images/ColombiaGondola.jpg"><img src="@Url.Content("~/images/ColombiaGondola.jpg")" class="img-responsive" alt="img"></a>
+                                </div>
+                                <div class="gallery animate-box">
+                                    <a class="gallery-img image-popup" href="images/putInBayBoats.jpg"><img src="@Url.Content("~/images/putInBayBoats.jpg")" class="img-responsive" alt="img"></a>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="gallery animate-box">
+                                    <a class="gallery-img image-popup" href="images/Drinks.jpg"><img src="@Url.Content("~/images/Drinks.jpg")" class="img-responsive" alt="img"></a>
+                                </div>
+                                <div class="gallery animate-box">
+                                    <a class="gallery-img image-popup" href="images/texasWedding.jpg"><img src="@Url.Content("~/images/texasWedding.jpg")" class="img-responsive" alt="img"></a> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="rsvp">
+                <div id="fh5co-started" style="background-image:url(@Url.Content("~/images/Westfall4.jpg"));" data-stellar-background-ratio="0.5">
+                    <div class="overlay"></div>
+                    <div class="container">
+                        <div class="row animate-box">
+                            <div class="col-md-8 col-md-offset-2 text-center heading-section">
+                                <h2>Are You Attending?</h2>
+                                <!--<p>Please let us know if you can make it. Thanks!</p>-->
+                                <p id="pStep1">Please enter the confirmation code from the invitation. Hope you can make it! Thanks!</p>
+                                <p id="pStep2" class="hidden">Please let us know your guest count (Including Yourself) and if you can attend!</p>
+                            </div>
+                        </div>
+                        <div class="row animate-box">
+                            <div class="col-md-10 col-md-offset-1">
+                                <form class="form-inline">
+                                    <div id="divErrorMsgContainer" class="row errorMsgContainer hiddenVisibility"><span class='errorMsg'>Please Enter Confirmation Code!</span></div>
+                                    <div id="divFormStep1" class="row">
+                                        <div class="col-md-5 col-sm-5 col-md-offset-1">
+                                            <div class="form-group">
+                                                <label for="name" class="sr-only">Code</label>
+                                                <input type="password" class="form-control" id="confirmCode" placeholder="Enter Confirmation Code">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-3">
+                                            <div class="form-group">
+                                                <button class="btn btn-primary btn-block" id="btnSendConfirm">Confirm</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-3">
+                                            <div class="form-group">
+                                                <button class="btn btn-primary btn-block" id="btnCancelStep1">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="divFormStep2" class="row hidden">
+                                        <div class="col-md-4 col-sm-4 rowGuestCt">
+                                            <div class="form-group">
+                                                <label for="guestCt" class="sr-only">Guest Ct</label>
+                                                <label for="guestCt" class="formLbl control-label">Guest Ct</label>
+                                                <input type="number" class="form-control" id="guestCt" placeholder="Count">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 rowAttending">
+                                            <div class="form-group">
+                                                <label for="cbAttending" class="sr-only">Attending?</label>
+                                                <label for="cbAttending" class="formLbl control-label" ">Attending?</label>
+                                                <input type="checkbox" class="form-control" id="cbAttending" checked="checked">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-2">
+                                            <div class="form-group">
+                                                <button class="btn btn-primary btn-block" id="btnSendRsvp">RSVP</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-2">
+                                            <div class="form-group">
+                                                <button class="btn btn-primary btn-block" id="btnCancelStep2">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer>
+                <div id="footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <h2>Rachel &amp; Dan</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <a href="@Url.Content("~/home")" target="_blank" style="color: black;">Login</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <!-- Google Map -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA"></script>
+</body>
+</html>
+
+
+
+@Scripts.Render("~/WeddingScripts/scripts")
+
+

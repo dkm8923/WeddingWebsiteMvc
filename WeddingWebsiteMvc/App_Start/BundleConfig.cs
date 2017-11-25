@@ -26,6 +26,20 @@ namespace WeddingWebsiteMvc
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/WeddingCss/css").Include(
+                      "~/Content/animate.css",
+                      "~/Content/icomoon.css",
+                      "~/Content/bootstrap.css",
+                      "~/Content/superfish.css",
+                      "~/Content/magnific-popup.css",
+                      "~/Content/style.css"));
+
+            bundles.Add(new ScriptBundle("~/WeddingScripts/scripts").Include(
+                      "~/Scripts/modernizr-2.6.2.min.js",
+                      "~/js/scripts.js",
+                      "~/Scripts/bootstrap-notify.min.js",
+                      "~/js/app.js"));
         }
     }
 }
