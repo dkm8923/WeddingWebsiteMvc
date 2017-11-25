@@ -32,6 +32,8 @@ namespace WeddingWebsiteMvc.Models
         public System.DateTime CreatedOn { get; set; }
         public string UpdatedBy { get; set; }
         public System.DateTime UpdatedOn { get; set; }
+        public Nullable<bool> CheckedIn { get; set; }
+        public Nullable<int> GuestCount { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GuestDetail> GuestDetails { get; set; }

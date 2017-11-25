@@ -1,4 +1,5 @@
 ﻿(function () {
+    var _guestHeaderId = null;
 
     $("#liHome").addClass("active");
     window.location.href.split('#')[0];
@@ -105,7 +106,7 @@
     function _showError(msg) {
         $("#divErrorMsgContainer").empty();
         $("#divErrorMsgContainer").removeClass("hiddenVisibility");
-        $("#divErrorMsgContainer").append("<span class='errorMsg'>" + msg + "</span>");
+        $("#divErrorMsgContainer").append("<span class='errorMsg iconBounce'>" + msg + "</span>");
     }
 
     function _createNotification(msg, type) {
@@ -137,7 +138,7 @@
     function _RSVP(req) {
         return $.ajax({
             type: "POST",
-            url: 'Wedding/RSVp',
+            url: 'Wedding/RSVP',
             contentType: "application/json; charset=utf-8",
             dataType: 'json',
             data: JSON.stringify(req)
@@ -148,27 +149,30 @@
         //init RSVP form
         $("#btnSendConfirm").click(function (e) {
             e.preventDefault();
+            _guestHeaderId = null;
 
             //validate form
             $("#divErrorMsgContainer").addClass("hiddenVisibility");
             $("#divErrorMsgContainer").empty();
             var code = $("#confirmCode").val();
             if (code === null || code === "") {
-                //_showError("Please Enter Confirmation Code!");
-                _createNotification("Please Enter Confirmation Code!", 'danger');
+                _showError("Please Enter Confirmation Code!");
+                //_createNotification("Please Enter Confirmation Code!", "danger");
+                //_createNotification("Please Enter Confirmation Code!", "success");
             }
             else {
-                $.when(_validateConfirmCode(code)).done(function (ret) {
-                    //alert("success");
-                    console.log(ret);
-                    if (ret.length > 0) {
+                $.when(_validateConfirmCode(code)).done(function (guest) {
+                    console.log(guest);
+                    if (guest) {
+                        _guestHeaderId = guest.GuestHeaderId;
+                        guest.GuestCount = guest.GuestDetails.length;
+                        $("#guestCt").val(guest.GuestCount);
                         _resetForm1();
                         _showHideStep1(false);
                         _showHideStep2(true);
                     }
                     else {
                         _showError("Incorrect Confirmation Code Entered. Please Try Again!");
-                        _createNotification("Incorrect Confirmation Code Entered. Please Try Again!", 'danger');
                     }
                 })
                 .fail(function (e) {
@@ -204,19 +208,26 @@
 
                 var req = {
                     GuestCount: guestCt,
-                    Attending: $("#cbAttending").prop("checked")
+                    Attending: $("#cbAttending").prop("checked"),
+                    GuestHeaderId: _guestHeaderId
                 };
 
                 $.when(_RSVP(req)).done(function (ret) {
-                    var msg = "Thank You for the RSVP! We look forward to seeing you at the wedding!";
-                    if (!$("#cbAttending").prop("checked")) {
-                        msg = "Thank You for letting us know you can not attend! Hope to see you soon!";
+                    console.log(ret);
+                    if (ret) {
+                        var msg = "Thank You for the RSVP! We look forward to seeing you at the wedding!";
+                        if (!$("#cbAttending").prop("checked")) {
+                            msg = "Thank You for letting us know you can not attend! Hope to see you soon!";
+                        }
+                        _createNotification(msg, "success");
+                        _resetForm1();
+                        _resetForm2();
+                        _showHideStep1(true);
+                        _showHideStep2(false);
                     }
-                    _createNotification(msg, "sucess");
-                    _resetForm1();
-                    _resetForm2();
-                    _showHideStep1(true);
-                    _showHideStep2(false);
+                    else {
+                        _createNotification("Error Occurred While Saving Data. Please Try Again!", "danger");
+                    }
                 })
                 .fail(function (e) {
                     console.log(e);

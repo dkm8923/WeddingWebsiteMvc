@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Entities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Entities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="GuestDetail">
           <Key>
             <PropertyRef Name="GuestDetailId" />
@@ -30,11 +30,13 @@
           <Property Name="City" Type="varchar" MaxLength="64" />
           <Property Name="State" Type="varchar" MaxLength="64" />
           <Property Name="Zip" Type="varchar" MaxLength="64" />
+          <Property Name="CheckedIn" Type="bit" />
           <Property Name="Attending" Type="bit" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="UpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="GuestCount" Type="int" />
         </EntityType>
         <Association Name="FK_GuestDetail_GuestHeader">
           <End Role="GuestHeader" Type="Self.GuestHeader" Multiplicity="1" />
@@ -56,8 +58,7 @@
             <End Role="GuestDetail" EntitySet="GuestDetail" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Entities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -93,6 +94,8 @@
           <Property Name="UpdatedBy" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="GuestDetails" Relationship="Self.FK_GuestDetail_GuestHeader" FromRole="GuestHeader" ToRole="GuestDetail" />
+          <Property Name="CheckedIn" Type="Boolean" />
+          <Property Name="GuestCount" Type="Int32" />
         </EntityType>
         <Association Name="FK_GuestDetail_GuestHeader">
           <End Role="GuestHeader" Type="Self.GuestHeader" Multiplicity="1" />
@@ -138,6 +141,8 @@
           <EntitySetMapping Name="GuestHeaders">
             <EntityTypeMapping TypeName="Entities.GuestHeader">
               <MappingFragment StoreEntitySet="GuestHeader">
+                <ScalarProperty Name="GuestCount" ColumnName="GuestCount" />
+                <ScalarProperty Name="CheckedIn" ColumnName="CheckedIn" />
                 <ScalarProperty Name="GuestHeaderId" ColumnName="GuestHeaderId" />
                 <ScalarProperty Name="ConfirmationCode" ColumnName="ConfirmationCode" />
                 <ScalarProperty Name="Address1" ColumnName="Address1" />

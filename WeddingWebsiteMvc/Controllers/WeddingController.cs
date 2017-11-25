@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using WeddingWebsiteMvc.Models;
+using System.Data.Entity.Migrations;
 
 namespace WeddingWebsiteMvc.Controllers
 {
@@ -16,18 +15,31 @@ namespace WeddingWebsiteMvc.Controllers
             return View();
         }
 
-        public bool RSVP(RsvpRequest req)
+        public string RSVP(RsvpRequest req)
         {
+            var ret = false;
+
             try
             {
-
+                using (WeddingEntities context = new WeddingEntities())
+                {
+                    var guest = context.GuestHeaders.FirstOrDefault(q => q.GuestHeaderId == req.GuestHeaderId);
+                    guest.GuestCount = req.GuestCount;
+                    guest.Attending = req.Attending;
+                    guest.CheckedIn = true;
+                    guest.GuestDetails = null;
+                    guest.UpdatedOn = DateTime.Now;
+                    context.GuestHeaders.AddOrUpdate(guest);
+                    context.SaveChanges();
+                    ret = true;
+                }
             }
             catch(Exception ex)
             {
                 throw ex;
             }
 
-            return true;
+            return JsonConvert.SerializeObject(ret);
         }
 
         public string ValidateConfirmationCode(ConfirmCode req)
@@ -36,13 +48,12 @@ namespace WeddingWebsiteMvc.Controllers
             {
                 using (WeddingEntities context = new WeddingEntities())
                 {
-                    var guest = context.GuestHeaders.Where(q => q.ConfirmationCode == req.ConfirmationCode).ToList();
-
-                    //if (guest.Count > 0)
-                    //{
-
-                    //}
-                    return JsonConvert.SerializeObject(guest);
+                    var guest = context.GuestHeaders.FirstOrDefault(q => q.ConfirmationCode == req.ConfirmationCode);
+                    return JsonConvert.SerializeObject(guest, Formatting.None,
+                        new JsonSerializerSettings()
+                        {
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                        });
                 }
             }
             catch (Exception ex)
@@ -60,26 +71,7 @@ public class ConfirmCode
 
 public class RsvpRequest
 {
-    public int GuestId { get; set; }
+    public int GuestHeaderId { get; set; }
     public int GuestCount { get; set; }
     public bool Attending { get; set; }
 }
-
-//Guest Table
-
-//GuestId
-//ConfirmCode
-//FirstName
-//LastName
-//Email
-//Address1
-//Address2
-//City
-//State
-//Zip
-//Attending
-//GuestCount
-//CreatedOn
-//CreatedBy
-//UpdatedOn
-//UpdatedBy

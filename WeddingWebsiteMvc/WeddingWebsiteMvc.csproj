@@ -239,22 +239,22 @@
     <Content Include="Content\animate.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\style.css" />
     <Content Include="Content\icomoon.css" />
     <Content Include="Content\magnific-popup.css" />
-    <Content Include="Content\style.css" />
     <Content Include="Content\superfish.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="fonts\icomoon\icomoon.svg" />
-    <Content Include="fonts\icomoon\icomoon\demo-files\demo.css" />
-    <Content Include="fonts\icomoon\icomoon\demo-files\demo.js" />
-    <Content Include="fonts\icomoon\icomoon\demo.html" />
-    <Content Include="fonts\icomoon\icomoon\fonts\icomoon.svg" />
-    <Content Include="fonts\icomoon\icomoon\Read Me.txt" />
-    <Content Include="fonts\icomoon\icomoon\style.css" />
+    <Content Include="Content\fonts\icomoon\icomoon.svg" />
+    <Content Include="Content\fonts\icomoon\icomoon\demo-files\demo.css" />
+    <Content Include="Content\fonts\icomoon\icomoon\demo-files\demo.js" />
+    <Content Include="Content\fonts\icomoon\icomoon\demo.html" />
+    <Content Include="Content\fonts\icomoon\icomoon\fonts\icomoon.svg" />
+    <Content Include="Content\fonts\icomoon\icomoon\Read Me.txt" />
+    <Content Include="Content\fonts\icomoon\icomoon\style.css" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\css\Site.css" />
     <Content Include="images\bride.jpg" />
     <Content Include="images\brideGroom.ico" />
     <Content Include="images\bridesmaid-1.jpg" />
@@ -301,9 +301,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\style.css.map" />
     <Content Include="images\.DS_Store" />
-    <Content Include="less\style.less" />
+    <Content Include="Content\less\style.less" />
     <EntityDeploy Include="Models\WeddingModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>WeddingModel.Designer.cs</LastGenOutput>
@@ -315,15 +314,15 @@
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\icomoon\.DS_Store" />
-    <Content Include="fonts\icomoon\icomoon.eot" />
-    <Content Include="fonts\icomoon\icomoon.ttf" />
-    <Content Include="fonts\icomoon\icomoon.woff" />
-    <Content Include="fonts\icomoon\icomoon\.DS_Store" />
-    <Content Include="fonts\icomoon\icomoon\fonts\icomoon.eot" />
-    <Content Include="fonts\icomoon\icomoon\fonts\icomoon.ttf" />
-    <Content Include="fonts\icomoon\icomoon\fonts\icomoon.woff" />
-    <Content Include="fonts\icomoon\icomoon\selection.json" />
+    <Content Include="Content\fonts\icomoon\.DS_Store" />
+    <Content Include="Content\fonts\icomoon\icomoon.eot" />
+    <Content Include="Content\fonts\icomoon\icomoon.ttf" />
+    <Content Include="Content\fonts\icomoon\icomoon.woff" />
+    <Content Include="Content\fonts\icomoon\icomoon\.DS_Store" />
+    <Content Include="Content\fonts\icomoon\icomoon\fonts\icomoon.eot" />
+    <Content Include="Content\fonts\icomoon\icomoon\fonts\icomoon.ttf" />
+    <Content Include="Content\fonts\icomoon\icomoon\fonts\icomoon.woff" />
+    <Content Include="Content\fonts\icomoon\icomoon\selection.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\google_map.js" />
     <Content Include="Scripts\handlebars-v4.0.11.js" />
