@@ -106,7 +106,7 @@
     function _showError(msg) {
         $("#divErrorMsgContainer").empty();
         $("#divErrorMsgContainer").removeClass("hiddenVisibility");
-        $("#divErrorMsgContainer").append("<span class='errorMsg iconBounce'>" + msg + "</span>");
+        $("#divErrorMsgContainer").append("<span class='errorMsgWedding iconBounce'>" + msg + "</span>");
     }
 
     function _createNotification(msg, type) {

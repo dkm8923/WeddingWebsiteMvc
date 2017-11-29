@@ -1,0 +1,95 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.adminForm {
+    .k-dropdown {
+        width: 100%;
+    }
+}
+
+.divGuestGridContainer {
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+
+    .gridBtnContainer {
+        button {
+            margin-left: 2px;
+            margin-right: 2px;
+        }
+    }
+
+    .ulGridHdr {
+        list-style: none;
+        padding: 0;
+
+        li {
+            width: 48%;
+            display: inline-block;
+        }
+
+        .liLeft {
+            text-align: left;
+        }
+
+        .liRight {
+            text-align: right;
+
+            .form-control {
+                display: inline-block;
+            }
+        }
+    }
+}
+
+.divGuestCreateEditForm  {
+    margin-top: 20px;
+}
+
+.guestDeleteWindow {
+    width: 70%;
+    max-width: 500px;
+
+    .guestWindowContent {
+        text-align: center;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    ul {
+        list-style: none;
+        text-align: center;
+        padding: 0;
+        width: 98%;
+
+        li {
+            margin-top: 20px;
+        }
+
+        .liButtons {
+            text-align: right;
+        }
+    }
+}

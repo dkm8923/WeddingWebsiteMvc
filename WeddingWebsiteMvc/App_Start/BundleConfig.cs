@@ -25,21 +25,44 @@ namespace WeddingWebsiteMvc
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/css/site.css"));
-
+                      "~/Content/css/site.css",
+                      "~/Content/css/Common.css",
+                      "~/Content/font-awesome.min.css"//,
+                      //"~/Content/kendo.common.min.css",
+                      //"~/Content/kendo.rtl.min.css",
+                      //"~/Content/kendo.default.min.css",
+                      //"~/Content/kendo.dataviz.min.css",
+                      //"~/Content/kendo.dataviz.default.min.css"
+                      ));
+            
             bundles.Add(new StyleBundle("~/WeddingCss/css").Include(
                       "~/Content/animate.css",
                       "~/Content/icomoon.css",
                       "~/Content/bootstrap.css",
                       "~/Content/superfish.css",
                       "~/Content/magnific-popup.css",
-                      "~/Content/css/style.css"));
+                      "~/Content/css/style.css",
+                      "~/Content/css/Common.css"));
 
             bundles.Add(new ScriptBundle("~/WeddingScripts/scripts").Include(
                       "~/Scripts/modernizr-2.6.2.min.js",
                       "~/js/scripts.js",
                       "~/Scripts/bootstrap-notify.min.js",
                       "~/js/app.js"));
+
+            bundles.Add(new StyleBundle("~/KendoCss/css").Include(
+                      "~/Content/kendo.common.min.css",
+                      "~/Content/kendo.rtl.min.css",
+                      "~/Content/kendo.default.min.css",
+                      "~/Content/kendo.dataviz.min.css",
+                      "~/Content/kendo.dataviz.default.min.css"));
+
+            bundles.Add(new StyleBundle("~/KendoScripts/scripts").Include(
+                      "~/Scripts/kendo.all.min.js",
+                      "~/Scripts/kendo.dataviz.chart.min.js",
+                      "~/Scripts/console.js",
+                      "~/Scripts/jquery-migrate-3.0.0.min.js",
+                      "~/Scripts/handlebars-v4.0.11.js"));
         }
     }
 }

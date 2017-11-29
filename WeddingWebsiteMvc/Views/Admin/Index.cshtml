@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "Guest Maintenance";
+}
+
+<div id="divGuestCrudContainer">
+    <div class="divGuestGridContainer" id="divGuestGridContainer">
+        <ul class="ulGridHdr">
+            <li class="liLeft">
+                <button class="btn btn-success btnIcon" id="btnAddNewGuest"><i class="fa fa-plus" aria-hidden="true"></i>Add Guest</button>
+            </li>
+            <li class="liRight">
+                <input class="form-control" type="text" id="txtSearchGuestGrid" placeholder="Search Grid">
+            </li>
+        </ul>
+        <div id="tblGuestList"></div>
+    </div>
+    <div id="divGuestCreateEditForm" class="form-horizontal divGuestCreateEditForm hidden">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 id="createEditGuestPanelTitle" class="panel-title">Create Guest</h3>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="form-group">
+                        <div id="divErrorMsgContainer" class="hidden"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="txtFirstName">First Name: <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" id="txtFirstName" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="txtLastName">Last Name: <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" id="txtLastName" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="txtEmail">Email: <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" id="txtEmail" maxlength="255">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="txtAddress1">Address 1:</label>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" id="txtAddress1" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="txtAddress2">Address 2:</label>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" id="txtAddress2" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="txtCity">City:</label>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" id="txtCity" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="txtState">State:</label>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" id="txtState" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="txtZip">Zip:</label>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" id="txtZip" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="txtZip">Confirmation Code:</label>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" id="txtConfirmationCode">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="txtZip">Family:</label>
+                        <div class="col-md-10">
+                            <label class="radio-inline"><input type="radio" name="rbFamily">Bride</label>
+                            <label class="radio-inline"><input type="radio" name="rbFamily">Groom</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="txtZip">Attach to Guest?:</label>
+                        <div class="col-md-10">
+                            <select id="ddlAttachToGuest"></select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <div class="pull-right">
+                            <button class="btn btn-danger btnIcon" id="btnCancel"><i class="fa fa-times" aria-hidden="true"></i>Cancel</button>
+                            <button class="btn btn-success btnIcon" id="btnSubmit"><i class="fa fa-floppy-o" aria-hidden="true"></i>Save</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="divGuestDeleteWindow"></div>
+</div>
+
+<script id="guestWindowTemplate" type="text/x-handlebars-template">
+    <ul>
+        <li>
+            <div class='guestWindowContent'><span>Are you sure that you want to delete {{GuestName}} ?</span></div>
+        </li>
+        <li class="liButtons">
+            <button class="btn btn-danger btnIcon" id="btnCancelGuestDelete"><i class="fa fa-times" aria-hidden="true"></i>Cancel</button>
+            <button class="btn btn-success btnIcon" id="btnSaveGuestDelete"><i class="fa fa-floppy-o" aria-hidden="true"></i>Delete</button>
+        </li>
+    </ul>
+</script>
+
+@*<script src="~/js/admin.js"></script>*@
+
+
+
