@@ -14,6 +14,7 @@
           <Property Name="FirstName" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="LastName" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="64" />
+          <Property Name="Active" Type="bit" Nullable="false" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="64" Nullable="false" />
@@ -32,11 +33,13 @@
           <Property Name="Zip" Type="varchar" MaxLength="64" />
           <Property Name="CheckedIn" Type="bit" />
           <Property Name="Attending" Type="bit" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="GuestCount" Type="int" Nullable="false" />
+          <Property Name="Family" Type="tinyint" Nullable="false" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="UpdatedOn" Type="datetime" Nullable="false" />
-          <Property Name="GuestCount" Type="int" />
         </EntityType>
         <Association Name="FK_GuestDetail_GuestHeader">
           <End Role="GuestHeader" Type="Self.GuestHeader" Multiplicity="1" />
@@ -76,6 +79,7 @@
           <Property Name="UpdatedBy" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="GuestHeader" Relationship="Self.FK_GuestDetail_GuestHeader" FromRole="GuestDetail" ToRole="GuestHeader" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="GuestHeader">
           <Key>
@@ -95,7 +99,9 @@
           <Property Name="UpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="GuestDetails" Relationship="Self.FK_GuestDetail_GuestHeader" FromRole="GuestHeader" ToRole="GuestDetail" />
           <Property Name="CheckedIn" Type="Boolean" />
-          <Property Name="GuestCount" Type="Int32" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="GuestCount" Type="Int32" Nullable="false" />
+          <Property Name="Family" Type="Byte" Nullable="false" />
         </EntityType>
         <Association Name="FK_GuestDetail_GuestHeader">
           <End Role="GuestHeader" Type="Self.GuestHeader" Multiplicity="1" />
@@ -126,6 +132,7 @@
           <EntitySetMapping Name="GuestDetails">
             <EntityTypeMapping TypeName="Entities.GuestDetail">
               <MappingFragment StoreEntitySet="GuestDetail">
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="GuestHeaderId" ColumnName="GuestHeaderId" />
                 <ScalarProperty Name="GuestDetailId" ColumnName="GuestDetailId" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -141,7 +148,9 @@
           <EntitySetMapping Name="GuestHeaders">
             <EntityTypeMapping TypeName="Entities.GuestHeader">
               <MappingFragment StoreEntitySet="GuestHeader">
+                <ScalarProperty Name="Family" ColumnName="Family" />
                 <ScalarProperty Name="GuestCount" ColumnName="GuestCount" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="CheckedIn" ColumnName="CheckedIn" />
                 <ScalarProperty Name="GuestHeaderId" ColumnName="GuestHeaderId" />
                 <ScalarProperty Name="ConfirmationCode" ColumnName="ConfirmationCode" />

@@ -27,12 +27,7 @@ namespace WeddingWebsiteMvc
                       "~/Content/bootstrap.css",
                       "~/Content/css/site.css",
                       "~/Content/css/Common.css",
-                      "~/Content/font-awesome.min.css"//,
-                      //"~/Content/kendo.common.min.css",
-                      //"~/Content/kendo.rtl.min.css",
-                      //"~/Content/kendo.default.min.css",
-                      //"~/Content/kendo.dataviz.min.css",
-                      //"~/Content/kendo.dataviz.default.min.css"
+                      "~/Content/font-awesome.min.css"
                       ));
             
             bundles.Add(new StyleBundle("~/WeddingCss/css").Include(
@@ -62,7 +57,8 @@ namespace WeddingWebsiteMvc
                       "~/Scripts/kendo.dataviz.chart.min.js",
                       "~/Scripts/console.js",
                       "~/Scripts/jquery-migrate-3.0.0.min.js",
-                      "~/Scripts/handlebars-v4.0.11.js"));
+                      "~/Scripts/handlebars-v4.0.11.js",
+                      "~/Scripts/bootstrap-notify.min.js"));
         }
     }
 }

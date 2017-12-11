@@ -5,6 +5,28 @@
 
 <div id="divGuestCrudContainer">
     <div class="divGuestGridContainer" id="divGuestGridContainer">
+        <ul id="ulGuestStats" class="ulGuestStats">
+            <li>
+                <label>Total Guests:</label>
+                <span id="spnTotalGuests"></span>
+            </li>
+            <li>
+                <label>Bride Guests:</label>
+                <span id="spnTotalBrideGuests"></span>
+            </li>
+            <li>
+                <label>Groom Guests:</label>
+                <span id="spnTotalGroomGuests"></span>
+            </li>
+            <li>
+                <label>Checked In:</label>
+                <span id="spnTotalCheckedIn"></span>
+            </li>
+            <li>
+                <label>Attending:</label>
+                <span id="spnTotalAttending"></span>
+            </li>
+        </ul>
         <ul class="ulGridHdr">
             <li class="liLeft">
                 <button class="btn btn-success btnIcon" id="btnAddNewGuest"><i class="fa fa-plus" aria-hidden="true"></i>Add Guest</button>
@@ -26,6 +48,12 @@
                         <div id="divErrorMsgContainer" class="hidden"></div>
                     </div>
                     <div class="form-group">
+                        <label class="col-md-2 control-label" for="txtZip">Attach to Guest?:</label>
+                        <div class="col-md-10">
+                            <select id="ddlAttachToGuest"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-md-2 control-label" for="txtFirstName">First Name: <i class="fa fa-asterisk" aria-hidden="true"></i></label>
                         <div class="col-md-10">
                             <input class="form-control" type="text" id="txtFirstName" maxlength="50">
@@ -43,53 +71,48 @@
                             <input class="form-control" type="text" id="txtEmail" maxlength="255">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group attachToGuestHide">
                         <label class="col-md-2 control-label" for="txtAddress1">Address 1:</label>
                         <div class="col-md-10">
                             <input class="form-control" type="text" id="txtAddress1" maxlength="50">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group attachToGuestHide">
                         <label class="col-md-2 control-label" for="txtAddress2">Address 2:</label>
                         <div class="col-md-10">
                             <input class="form-control" type="text" id="txtAddress2" maxlength="50">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group attachToGuestHide">
                         <label class="col-md-2 control-label" for="txtCity">City:</label>
                         <div class="col-md-10">
                             <input class="form-control" type="text" id="txtCity" maxlength="50">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group attachToGuestHide">
                         <label class="col-md-2 control-label" for="txtState">State:</label>
                         <div class="col-md-10">
-                            <input class="form-control" type="text" id="txtState" maxlength="50">
+                            @*<input class="form-control" type="text" id="txtState" maxlength="50">*@
+                            <select id="ddlState"></select>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group attachToGuestHide">
                         <label class="col-md-2 control-label" for="txtZip">Zip:</label>
                         <div class="col-md-10">
                             <input class="form-control" type="text" id="txtZip" maxlength="50">
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group attachToGuestHide">
                         <label class="col-md-2 control-label" for="txtZip">Confirmation Code:</label>
                         <div class="col-md-10">
-                            <input class="form-control" type="text" id="txtConfirmationCode">
+                            <input class="form-control" type="text" id="txtConfirmationCode" disabled>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group attachToGuestHide">
                         <label class="col-md-2 control-label" for="txtZip">Family:</label>
                         <div class="col-md-10">
-                            <label class="radio-inline"><input type="radio" name="rbFamily">Bride</label>
-                            <label class="radio-inline"><input type="radio" name="rbFamily">Groom</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label" for="txtZip">Attach to Guest?:</label>
-                        <div class="col-md-10">
-                            <select id="ddlAttachToGuest"></select>
+                            <label class="radio-inline"><input type="radio" name="rbFamily" value="1" checked="checked">Bride</label>
+                            <label class="radio-inline"><input type="radio" name="rbFamily" value="2">Groom</label>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
@@ -118,7 +141,8 @@
     </ul>
 </script>
 
-@*<script src="~/js/admin.js"></script>*@
+<script src="~/js/admin.js"></script>
+
 
 
 

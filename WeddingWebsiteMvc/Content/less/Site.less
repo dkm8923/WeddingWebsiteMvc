@@ -16,56 +16,103 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
 .adminForm {
     .k-dropdown {
         width: 100%;
     }
 }
 
+@media screen and (max-width: 720px) 
+{
+    .ulGuestStats 
+    {
+        li 
+        {
+            display: block !important;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            width: 50% !important;
+
+            label 
+            {
+                display: inline-block;
+                width: 120px;
+                text-align: right;
+                margin-right: 10px;
+            }
+
+            span 
+            {
+                display: inline-block;
+            }
+        }
+    } 
+}
+
 .divGuestGridContainer {
     margin-top: 20px;
     text-align: center;
     width: 100%;
+    
+    .ulGuestStats 
+    {
+        list-style: none;
+        padding: 0;
 
-    .gridBtnContainer {
-        button {
+        li 
+        {
+            display: inline-block;
+            width: 18%;
+        }
+    } 
+    
+    .gridBtnContainer 
+    {
+        button 
+        {
             margin-left: 2px;
             margin-right: 2px;
         }
     }
 
-    .ulGridHdr {
+    .ulGridHdr 
+    {
         list-style: none;
         padding: 0;
 
-        li {
+        li 
+        {
             width: 48%;
             display: inline-block;
         }
 
-        .liLeft {
+        .liLeft 
+        {
             text-align: left;
         }
 
-        .liRight {
+        .liRight 
+        {
             text-align: right;
 
-            .form-control {
+            .form-control 
+            {
                 display: inline-block;
             }
         }
     }
 }
 
-.divGuestCreateEditForm  {
+.divGuestCreateEditForm 
+{
     margin-top: 20px;
+
+    .k-dropdown, input[type="text"] 
+    {
+        width: 100%;
+        max-width: 100%;
+    }
 }
 
 .guestDeleteWindow {
@@ -90,6 +137,44 @@ textarea {
 
         .liButtons {
             text-align: right;
+        }
+    }
+}
+
+.alert-success {
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.alert-danger {
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.divWebsiteMaintenanceForm {
+    margin-top: 20px;
+
+    .form-group {
+        textarea {
+            width: 100%;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            resize: none;
         }
     }
 }

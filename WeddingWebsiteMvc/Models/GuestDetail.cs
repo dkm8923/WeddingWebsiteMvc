@@ -23,6 +23,7 @@ namespace WeddingWebsiteMvc.Models
         public System.DateTime CreatedOn { get; set; }
         public string UpdatedBy { get; set; }
         public System.DateTime UpdatedOn { get; set; }
+        public bool Active { get; set; }
     
         public virtual GuestHeader GuestHeader { get; set; }
     }

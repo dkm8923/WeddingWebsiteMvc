@@ -431,6 +431,7 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Scripts\kendo.all.min.js.map" />
     <Content Include="Scripts\kendo.dataviz.chart.min.js.map" />
+    <Content Include="Views\Admin\WebsiteMaintenance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
