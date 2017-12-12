@@ -23,13 +23,13 @@ namespace WeddingWebsiteMvc
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/Content/cssdefault").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/css/site.css",
                       "~/Content/css/Common.css",
                       "~/Content/font-awesome.min.css"
                       ));
-            
+
             bundles.Add(new StyleBundle("~/WeddingCss/css").Include(
                       "~/Content/animate.css",
                       "~/Content/icomoon.css",
@@ -45,14 +45,14 @@ namespace WeddingWebsiteMvc
                       "~/Scripts/bootstrap-notify.min.js",
                       "~/js/app.js"));
 
-            bundles.Add(new StyleBundle("~/KendoCss/css").Include(
+            bundles.Add(new StyleBundle("~/Content/KendoCss").Include(
                       "~/Content/kendo.common.min.css",
                       "~/Content/kendo.rtl.min.css",
                       "~/Content/kendo.default.min.css",
                       "~/Content/kendo.dataviz.min.css",
                       "~/Content/kendo.dataviz.default.min.css"));
 
-            bundles.Add(new StyleBundle("~/KendoScripts/scripts").Include(
+            bundles.Add(new ScriptBundle("~/KendoScripts/scripts").Include(
                       "~/Scripts/kendo.all.min.js",
                       "~/Scripts/kendo.dataviz.chart.min.js",
                       "~/Scripts/console.js",
