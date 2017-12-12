@@ -38,6 +38,40 @@ namespace WeddingWebsiteMvc.Controllers
             }
         }
 
+        public string GetWeddingDescriptionData()
+        {
+            try
+            {
+                using (WeddingEntities context = new WeddingEntities())
+                {
+                    var descData = context.WeddingDescriptions.Where(q => q.Id == 1).ToList();
+                    return JsonConvert.SerializeObject(descData, Formatting.None);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string PostWeddingDescriptionData(WeddingDescription req)
+        {
+            try
+            {
+                using (WeddingEntities context = new WeddingEntities())
+                {
+                    req.Id = 1;
+                    context.WeddingDescriptions.AddOrUpdate(req);
+                    context.SaveChanges();
+                    return "true";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public string GetGuests()
         {
             try
@@ -72,8 +106,6 @@ namespace WeddingWebsiteMvc.Controllers
                 {
                     if (req.GuestHeaderId != 0)
                     {
-                        GuestHeader obj = context.GuestHeaders.FirstOrDefault(q => q.GuestHeaderId == req.GuestHeaderId);
-
                         //update
                         req.UpdatedBy = createdBy;
                         req.UpdatedOn = DateTime.Now;

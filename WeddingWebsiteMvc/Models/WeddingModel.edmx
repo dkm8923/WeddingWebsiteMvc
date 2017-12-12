@@ -41,6 +41,18 @@
           <Property Name="UpdatedBy" Type="varchar" MaxLength="64" Nullable="false" />
           <Property Name="UpdatedOn" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="WeddingDescription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroomDescription" Type="varchar" MaxLength="2000" />
+          <Property Name="BrideDescription" Type="varchar" MaxLength="2000" />
+          <Property Name="CeremonyDateTimeLocation" Type="varchar" MaxLength="2000" />
+          <Property Name="CeremonyDescription" Type="varchar" MaxLength="2000" />
+          <Property Name="ReceptionDateTimeLocation" Type="varchar" MaxLength="2000" />
+          <Property Name="ReceptionDescription" Type="varchar" MaxLength="2000" />
+        </EntityType>
         <Association Name="FK_GuestDetail_GuestHeader">
           <End Role="GuestHeader" Type="Self.GuestHeader" Multiplicity="1" />
           <End Role="GuestDetail" Type="Self.GuestDetail" Multiplicity="*" />
@@ -56,6 +68,7 @@
         <EntityContainer Name="EntitiesStoreContainer">
           <EntitySet Name="GuestDetail" EntityType="Self.GuestDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GuestHeader" EntityType="Self.GuestHeader" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WeddingDescription" EntityType="Self.WeddingDescription" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_GuestDetail_GuestHeader" Association="Self.FK_GuestDetail_GuestHeader">
             <End Role="GuestHeader" EntitySet="GuestHeader" />
             <End Role="GuestDetail" EntitySet="GuestDetail" />
@@ -122,7 +135,20 @@
             <End Role="GuestHeader" EntitySet="GuestHeaders" />
             <End Role="GuestDetail" EntitySet="GuestDetails" />
           </AssociationSet>
+          <EntitySet Name="WeddingDescriptions" EntityType="Entities.WeddingDescription" />
         </EntityContainer>
+        <EntityType Name="WeddingDescription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroomDescription" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="BrideDescription" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="CeremonyDateTimeLocation" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="CeremonyDescription" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="ReceptionDateTimeLocation" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="ReceptionDescription" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -164,6 +190,19 @@
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
                 <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeddingDescriptions">
+            <EntityTypeMapping TypeName="Entities.WeddingDescription">
+              <MappingFragment StoreEntitySet="WeddingDescription">
+                <ScalarProperty Name="ReceptionDescription" ColumnName="ReceptionDescription" />
+                <ScalarProperty Name="ReceptionDateTimeLocation" ColumnName="ReceptionDateTimeLocation" />
+                <ScalarProperty Name="CeremonyDescription" ColumnName="CeremonyDescription" />
+                <ScalarProperty Name="CeremonyDateTimeLocation" ColumnName="CeremonyDateTimeLocation" />
+                <ScalarProperty Name="BrideDescription" ColumnName="BrideDescription" />
+                <ScalarProperty Name="GroomDescription" ColumnName="GroomDescription" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
