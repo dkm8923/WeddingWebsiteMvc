@@ -5,7 +5,9 @@
         postGuest: postGuest,
         getEmailData: getEmailData,
         postEmailData: postEmailData,
+        deleteEmailData: deleteEmailData,
         sendEmail: sendEmail,
+        sendBulkEmail: sendBulkEmail,
         deleteGuest: deleteGuest,
         attachGuestToHeader: attachGuestToHeader,
         getWeddingDescriptionData: getWeddingDescriptionData,
@@ -37,7 +39,7 @@
     {
         return $.ajax({
             type: "GET",
-            url: 'admin/GetEmailData',
+            url: '/admin/GetEmailData',
             contentType: "application/json; charset=utf-8",
             dataType: 'json'
         });
@@ -47,7 +49,7 @@
     {
         return $.ajax({
             type: "POST",
-            url: 'admin/PostEmailData',
+            url: '/admin/PostEmailData',
             contentType: "application/json; charset=utf-8",
             dataType: 'json',
             data: JSON.stringify(req)
@@ -58,7 +60,7 @@
     {
         return $.ajax({
             type: "POST",
-            url: 'admin/DeleteEmailData',
+            url: '/admin/DeleteEmailData',
             contentType: "application/json; charset=utf-8",
             dataType: 'json',
             data: JSON.stringify(req)
@@ -70,6 +72,17 @@
         return $.ajax({
             type: "POST",
             url: 'admin/SendEmail',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: JSON.stringify(req)
+        });
+    }
+
+    function sendBulkEmail(req) 
+    {
+        return $.ajax({
+            type: "POST",
+            url: 'admin/SendBulkEmail',
             contentType: "application/json; charset=utf-8",
             dataType: 'json',
             data: JSON.stringify(req)

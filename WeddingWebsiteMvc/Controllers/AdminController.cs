@@ -20,7 +20,7 @@ namespace WeddingWebsiteMvc.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                return View();
+                return View("GuestMaintenance");
             }
             else
             {
@@ -147,6 +147,7 @@ namespace WeddingWebsiteMvc.Controllers
                 {
                     using (WeddingEntities context = new WeddingEntities())
                     {
+                        context.Emails.Attach(req);
                         context.Emails.Remove(req);
                         context.SaveChanges();
                         return "true";
@@ -357,43 +358,6 @@ namespace WeddingWebsiteMvc.Controllers
             }
         }
 
-        //public string SendEmail(SendEmail req)
-        //{
-        //    try
-        //    {
-        //        var message = new MailMessage();
-        //        message.To.Add(new MailAddress(req.EmailAddress));  // replace with valid value 
-        //        message.From = new MailAddress("donotreply@danielkevinmauk.com");  // replace with valid value
-        //                                                               //message.Subject = "Rachel Thompson / Dan Mauk Wedding - July 14th, 2018";
-        //        message.Subject = req.EmailSubject;
-        //        //message.Body = string.Format("Email Body.........");
-        //        message.Body = string.Format(req.EmailBody);
-        //        message.IsBodyHtml = true;
-
-        //        using (var smtp = new SmtpClient())
-        //        {
-        //            var credential = new NetworkCredential
-        //            {
-        //                UserName = "donotreply@danielkevinmauk.com",  // replace with valid value
-        //                Password = "bYn5y0@1"  // replace with valid value
-        //            };
-        //            smtp.Credentials = credential;
-        //            smtp.Host = "mail.danielkevinmauk.com";
-        //            smtp.Port = 587;
-        //            smtp.EnableSsl = true;
-        //            smtp.Send(message.From.ToString(), message.To.ToString(), message.Subject, message.Body);
-        //            //await smtp.SendMailAsync(message);
-        //            //return RedirectToAction("Sent");
-
-        //            return "true";
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
-
         public string SendEmail(SendEmail req)
         {
             try
@@ -405,7 +369,6 @@ namespace WeddingWebsiteMvc.Controllers
                     smtpClient.Credentials = new System.Net.NetworkCredential("donotreply@danielkevinmauk.com", "bYn5y0@1");
                     smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
 
-                    //MailMessage mailMessage = new MailMessage("donotreply@danielkevinmauk.com", req.EmailAddress);
                     MailMessage mailMessage = new MailMessage("DoNotReply@Wwedding.DanielKevinMauk.com", req.EmailAddress);
                     mailMessage.Subject = req.EmailSubject;
                     mailMessage.Body = req.EmailBody;
@@ -417,6 +380,23 @@ namespace WeddingWebsiteMvc.Controllers
                 {
                     throw new Exception();
                 }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string SendBulkEmail(List<SendEmail> req)
+        {
+            try
+            {
+                foreach (var email in req)
+                {
+                    this.SendEmail(email);
+                }
+
+                return "true";
             }
             catch (Exception ex)
             {

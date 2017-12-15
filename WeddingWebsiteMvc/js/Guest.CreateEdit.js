@@ -1,5 +1,7 @@
 ﻿var gce = (function ()
 {
+    var containerElem = "divGuestCrudContainer";
+
     return {
         init: init,
         addNewGuest: addNewGuest,
@@ -142,9 +144,6 @@
 
     function editGuest(guest) 
     {
-        console.log("edit guest ");
-        console.log(guest);
-
         $("#createEditGuestPanelTitle").text("Update Guest");
 
         _resetForm();
@@ -172,12 +171,6 @@
     function _validate() 
     {
         //create array of elements to validate
-        var req = [
-            { ElementId: "txtFirstName", ErrorType: "Required" },
-            { ElementId: "txtLastName", ErrorType: "Required" }//,
-            //{ ElementId: "txtEmail", ErrorType: "Required" }
-        ];
-
         var req = {
             RequiredFields: [
                 { ElementId: "txtFirstName", ErrorType: "Required" },
@@ -198,6 +191,7 @@
 
     function _resetForm() 
     {
+        fv.clearFormValidation({ErrorMsgContainer: "divErrorMsgContainer"});
         $("#ddlAttachToGuest").data("kendoDropDownList").dataSource.data(gb.getGuestHeaderData());
         $("#ddlAttachToGuest").data("kendoDropDownList").value(null);
         $("#ddlAttachToGuest").data("kendoDropDownList").dataSource.filter({});

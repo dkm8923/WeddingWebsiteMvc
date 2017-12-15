@@ -4,7 +4,7 @@
 }
 
 <div id="divGuestCrudContainer">
-    <div class="divGuestGridContainer" id="divGuestGridContainer">
+    <div class="divGridContainer divGuestGridContainer" id="divGuestGridContainer">
         <ul id="ulGuestStats" class="ulGuestStats">
             <li>
                 <label>Total Guests:</label>
@@ -29,13 +29,18 @@
         </ul>
         <ul class="ulGridHdr">
             <li class="liLeft">
-                <button class="btn btn-success btnIcon" id="btnAddNewGuest"><i class="fa fa-plus" aria-hidden="true"></i>Add Guest</button>
+                <div class="divSection">
+                    <button class="btn btn-success btnIcon" id="btnAddNewGuest"><i class="fa fa-plus" aria-hidden="true"></i>Add Guest</button>
+                </div>
+                <div class="divSection">
+                    <button class="btn btn-success btnIcon" id="btnSendMassEmail"><i class="fa fa-paper-plane" aria-hidden="true"></i>Send Email To All Guests</button>
+                </div>
             </li>
             <li class="liRight">
                 <input class="form-control" type="text" id="txtSearchGuestGrid" placeholder="Search Grid">
             </li>
         </ul>
-        <div id="tblGuestList"></div>
+        <div id="tblGuestList" class="defaultGrid singleGrid"></div>
     </div>
 
     <div id="divGuestCreateEditForm" class="form-horizontal divCrudForm divGuestCreateEditForm hidden">
@@ -144,22 +149,34 @@
                             <select id="ddlEmailTemplate"></select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="taEmailSubject">Email Subject: <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                    <div id="divEmailAddressGridContainer" class="form-group">
+                        <div id="divMsgContainer">
+                            <h4><i class="fa fa-asterisk" aria-hidden="true"></i> All Guests Displayed In Grid Will Be Emailed!</h4>
+                        </div>
+                        <div id="tblSendEmailToAllGuests" class="defaultGrid singleGrid"></div>
+                    </div>
+                    <div id="divEmailAddressContainer" class="form-group">
+                        <label class="col-md-4 control-label" for="txtEmailAddress">Email Address: <i class="fa fa-asterisk" aria-hidden="true"></i></label>
                         <div class="col-md-8">
-                            <textarea id="taEmailSubject"></textarea>
+                            <input class="form-control" type="text" id="txtEmailAddress" disabled>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group hideUnlessEmailSelected">
+                        <label class="col-md-4 control-label" for="taEmailSubject">Email Subject: <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtEmailSubject" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group hideUnlessEmailSelected">
                         <label class="col-md-4 control-label" for="taEmailBody">Email Body: <i class="fa fa-asterisk" aria-hidden="true"></i></label>
                         <div class="col-md-8">
-                            <textarea id="taEmailBody"></textarea>
+                            <textarea id="taEmailBody"  disabled></textarea>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <div class="pull-right">
                             <button class="btn btn-danger btnIcon" id="btnCancelEmail"><i class="fa fa-times" aria-hidden="true"></i>Cancel</button>
-                            <button class="btn btn-success btnIcon" id="btnSubmitEmail"><i class="fa fa-floppy-o" aria-hidden="true"></i>Save</button>
+                            <button class="btn btn-success btnIcon" id="btnSubmitEmail"><i class="fa fa-paper-plane" aria-hidden="true"></i>Send</button>
                         </div>
                     </div>
 
@@ -167,13 +184,14 @@
             </div>
         </div>
     </div>
+
     <div id="divGuestDeleteWindow"></div>
 </div>
 
 <script id="guestWindowTemplate" type="text/x-handlebars-template">
     <ul>
         <li>
-            <div class='guestWindowContent'><span>Are you sure that you want to delete {{GuestName}} ?</span></div>
+            <div class='deleteWindowContent'><span>Are you sure that you want to delete {{GuestName}} ?</span></div>
         </li>
         <li class="liButtons">
             <button class="btn btn-danger btnIcon" id="btnCancelGuestDelete"><i class="fa fa-times" aria-hidden="true"></i>Cancel</button>

@@ -47,23 +47,34 @@
                 display: inline-block;
             }
         }
-    } 
+    }
+
+    .ulGridHdr {
+
+        li {
+            width: 98% !important;
+            display: block !important;
+            margin-top: 5px !important;
+            margin-bottom: 5px !important;
+
+            .divSection {
+                display: block !important;
+                width: 100% !important;
+                margin-top: 5px !important;
+                margin-bottom: 5px !important;
+            }
+
+            button {
+                width: 100% !important;
+            }
+        }
+    }
 }
 
-.divGuestGridContainer {
+.divGridContainer {
     margin-top: 20px;
     text-align: center;
     width: 100%;
-
-    .ulGuestStats {
-        list-style: none;
-        padding: 0;
-
-        li {
-            display: inline-block;
-            width: 18%;
-        }
-    }
 
     .gridBtnContainer {
         button {
@@ -79,6 +90,11 @@
         li {
             width: 48%;
             display: inline-block;
+
+            .divSection {
+                display: inline-block;
+                width: 40%;
+            }
         }
 
         .liLeft {
@@ -95,6 +111,18 @@
     }
 }
 
+.divGuestGridContainer {
+    .ulGuestStats {
+        list-style: none;
+        padding: 0;
+
+        li {
+            display: inline-block;
+            width: 18%;
+        }
+    }
+}
+
 .divCrudForm {
     margin-top: 20px;
 
@@ -104,21 +132,13 @@
     }
 } 
 
-/*.divGuestCreateEditForm 
-{
-    .k-dropdown, input[type="text"] {
-        width: 100%;
-        max-width: 100%;
-    }
-}*/
-
-.guestDeleteWindow {
+.deleteWindowTemplate {
     width: 70%;
     max-width: 500px;
-
-    .guestWindowContent {
+    
+    .deleteWindowContent {
         text-align: center;
-        font-size: 16px;
+        font-size: 15px;
         font-weight: bold;
     }
 
@@ -177,4 +197,184 @@
         resize: none;
         height: 200px;
     }
+}
+
+@primaryColor1: #337ab7; /*BootStrap Green*/
+@gridHover: #FFECB0; /*Color Used for Grid Hover effect*/
+
+.defaultGrid {
+    font-size: 14px;
+
+    .k-grid-header, .k-header {
+        background-color: @primaryColor1;
+        color: white !important;
+
+        .k-link {
+            color: white !important;
+        }
+    }
+
+    .grdCheckbox {
+        text-align: center;
+    }
+
+    .k-grid-content {
+        table {
+            tbody {
+                .k-master-row {
+                    &:hover {
+                        background-color: @gridHover;
+                    }
+                }
+
+                .k-detail-row {
+                    .k-detail-cell {
+                        .k-grid {
+                            table {
+                                tr {
+                                    &:hover {
+                                        background-color: @gridHover;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                /*tr
+                {
+                    &:hover
+                    {
+                        background-color: @gridHover;
+                    }
+                }*/
+            }
+        }
+        /*overflow: hidden !important;*/ /*hide scroll bar in grid */
+    }
+
+    .grdRowSelected {
+        background-color: @gridHover;
+    }
+}
+
+.singleGrid {
+    .k-grid-content {
+        table {
+            tbody {
+                tr {
+                    &:hover {
+                        background-color: @gridHover;
+                    }
+                }
+            }
+        }
+    }
+}
+
+button {
+    .mixIn-Transition(background-color, .3s);
+}
+
+.btn {
+    .mixIn-Transition(background-color, .3s);
+    color: white;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+
+        i {
+            cursor: not-allowed;
+        }
+    }
+}
+
+.btn-danger {
+    border-color: #d43f3a;
+    background-color: #d9534f;
+
+    &:hover {
+        border-color: #d9534f !important;
+        background-color: white !important;
+        color: #d43f3a !important;
+    }
+
+    &:active {
+        background-color: #d43f3a !important;
+    }
+}
+
+.btn-warning {
+    border-color: #eea236 !important;
+    background-color: #f0ad4e !important;
+
+    &:hover {
+        border-color: #f0ad4e !important;
+        background-color: white !important;
+        color: #eea236 !important;
+    }
+
+    &:active {
+        background-color: #eea236 !important;
+    }
+}
+
+.btn-success {
+    border-color: #4cae4c !important;
+    background-color: #5cb85c !important;
+
+    &:hover {
+        border-color: #5cb85c !important;
+        background-color: white !important;
+        color: #4cae4c !important;
+    }
+
+    &:active {
+        background-color: #4cae4c !important;
+    }
+}
+
+.btn-info {
+    border-color: #46b8da !important;
+    background-color: #5bc0de !important;
+
+    &:hover {
+        border-color: #5bc0de !important;
+        background-color: white !important;
+        color: #46b8da !important;
+    }
+
+    &:active {
+        background-color: #46b8da !important;
+    }
+}
+
+.btn-primary {
+    border-color: #2e6da4 !important;
+    background-color: #337ab7 !important;
+
+    &:hover {
+        border-color: #337ab7 !important;
+        background-color: white !important;
+        color: #2e6da4 !important;
+    }
+
+    &:active {
+        background-color: #2e6da4 !important;
+    }
+}
+
+.mixIn-Transition(@property, @seconds) {
+    -webkit-transition: @property @seconds ease-out;
+    -moz-transition: @property @seconds ease-out;
+    -o-transition: @property @seconds ease-out;
+    transition: @property @seconds ease-out;
+}
+
+#divMsgContainer {
+    text-align: center;
+    color: #d9534f;
 }

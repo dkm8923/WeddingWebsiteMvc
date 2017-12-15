@@ -318,6 +318,9 @@
     <Content Include="images\Westfall3.jpg" />
     <Content Include="images\Westfall4.jpg" />
     <Content Include="images\WestfallOutdoorCeremony.png" />
+    <Content Include="js\Email.Base.js" />
+    <Content Include="js\Email.CreateEdit.js" />
+    <Content Include="js\Email.Delete.js" />
     <Content Include="js\Guest.Base.js" />
     <Content Include="js\Guest.CreateEdit.js" />
     <Content Include="js\Guest.Delete.js" />
@@ -457,7 +460,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Wedding\Index.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\GuestMaintenance.cshtml" />
     <Content Include="Scripts\kendo.all.min.js.map" />
     <Content Include="Scripts\kendo.dataviz.chart.min.js.map" />
     <Content Include="Views\Admin\WebsiteMaintenance.cshtml" />

@@ -1,52 +1,72 @@
-﻿//globals....GROSS...I KNOW
-var g = {};
-
-var gb = (function ()
+﻿var gb = (function ()
 {
+    var containerElem = "divGuestCrudContainer";
     console.log("admin.js loaded...");
     var guestHeaderData = [];
     var guestData = [];
+    var emailData = [];
 
     _init();
 
     return {
         refreshGuestBaseUi: refreshGuestBaseUi,
         getGuestHeaderData: getGuestHeaderData,
-        getGuestData: getGuestData
+        getGuestData: getGuestData,
+        getEmailData: getEmailData,
+        getGuestByGuestDetailId: getGuestByGuestDetailId
     };
 
     function _init() 
     {
-        cu.showHideSpinner(true, "divGuestCrudContainer")
+        cu.showHideSpinner(true, containerElem)
 
         //load guest data
         $.when(svc.getGuests()).done(function (response) 
         {
-            guestHeaderData = formatGuestHeaderData(response);
-            guestData = formatGuestData(response);
-
-            console.log("load guest header data");
-            console.log(guestHeaderData);
-
-            console.log("formatted data");
-            console.log(guestData);
-
-            $("#btnAddNewGuest").click(function ()
+            $.when(svc.getEmailData()).done(function (emailResponse)
             {
-                gce.addNewGuest();
-            });
+                emailData = emailResponse;
 
-            $("#txtSearchGuestGrid").keyup(function (e) 
+                guestHeaderData = formatGuestHeaderData(response);
+                guestData = formatGuestData(response);
+
+                console.log("load guest header data");
+                console.log(guestHeaderData);
+
+                console.log("formatted data");
+                console.log(guestData);
+
+                $("#btnAddNewGuest").click(function ()
+                {
+                    gce.addNewGuest();
+                });
+
+                $("#btnSendMassEmail").click(function ()
+                {
+                    ge.sendEmailToAllGuests();
+                });
+
+                $("#txtSearchGuestGrid").keyup(function (e) 
+                {
+                    cu.gridSearchLogic({SearchTextboxId: "txtSearchGuestGrid", GridId: "tblGuestList"});
+                });
+
+                setGuestTotalData(guestData);
+                _initGrid(guestData);
+                gce.init(response); //init guest create edit
+                ge.init(emailData); //init guest email
+
+                cu.showHideSpinner(false, containerElem)
+            })
+            .fail(function ()
             {
-                cu.gridSearchLogic({SearchTextboxId: "txtSearchGuestGrid", GridId: "tblGuestList"});
+                cu.showAjaxError({ElementId: containerElem});
             });
-
-            setGuestTotalData(guestData);
-            _initGrid(guestData);
-            gce.init(response);
-            ge.init();
-
-            cu.showHideSpinner(false, "divGuestCrudContainer")
+            
+        })
+        .fail(function ()
+        {
+            cu.showAjaxError({ElementId: containerElem});
         });
     }
 
@@ -60,6 +80,11 @@ var gb = (function ()
         return guestData;
     }
 
+    function getEmailData()
+    {
+        return emailData;
+    }
+
     function refreshGuestBaseUi(req)
     {
         guestHeaderData = formatGuestHeaderData(req);
@@ -68,7 +93,7 @@ var gb = (function ()
 
         setGuestTotalData(guestData);
 
-        bindAndRefreshGrid(guestData);
+        cu.bindAndRefreshGrid({GridId: "tblGuestList", Data: guestData});
 
         $("#txtSearchGuestGrid").val("");
         $("#tblGuestList").data("kendoGrid").dataSource.filter({});
@@ -123,7 +148,7 @@ var gb = (function ()
                 },
                 {
                     field: "FirstName",
-                    title: "FIrst Name",
+                    title: "First Name",
                     width: 100
                 }
                 , {
@@ -165,6 +190,15 @@ var gb = (function ()
                 , {
                     field: "State",
                     title: "State",
+                    template: function (data)
+                    {
+                        if (cu.isNullOrBlank(data.State))
+                        {
+                            return "";
+                        }
+
+                        return data.State;
+                    },
                     width: 80
                 }
                 , {
@@ -220,12 +254,6 @@ var gb = (function ()
         }
 
         return guestData;
-    }
-
-    function bindAndRefreshGrid(data)
-    {
-        $("#tblGuestList").data("kendoGrid").dataSource.data(data);
-        $("#tblGuestList").data("kendoGrid").refresh();
     }
 
     function setGuestTotalData(data)

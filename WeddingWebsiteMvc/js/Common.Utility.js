@@ -6,7 +6,8 @@
         createNotification: createNotification,
         loadStateDropDown: loadStateDropDown,
         showAjaxError: showAjaxError,
-        gridSearchLogic: gridSearchLogic
+        gridSearchLogic: gridSearchLogic,
+        bindAndRefreshGrid: bindAndRefreshGrid
     };
 
     function isNullOrBlank(value) 
@@ -36,9 +37,10 @@
                 type: type,
                 placement: {
                     from: "top",
-                    align: "right"
-                }//,
-                //delay: 9999999
+                    align: "right",
+                    offset:{x:50, y: 100}
+                }
+                //, delay: 9999999
             });
     }
 
@@ -111,7 +113,7 @@
 
     function showAjaxError(req)
     {
-        cu.createNotification("Error Loading Data. Please Try Again!", "danger");
+        cu.createNotification("Error Loading / Saving Data. Please Try Again!", "danger");
         cu.showHideSpinner(false, req.ElementId)
     }
 
@@ -132,13 +134,20 @@
         }
     }
 
+    function bindAndRefreshGrid(req)
+    {
+        $("#" + req.GridId).data("kendoGrid").dataSource.data(req.Data);
+        $("#" + req.GridId).data("kendoGrid").refresh();
+    }
+
 })();
 
 var fv = (function ()
 {
     return {
         validateFormBase: validateFormBase,
-        showError: showError
+        showError: showError,
+        clearFormValidation: clearFormValidation
     };
 
     function validateFormBase(req)
@@ -159,12 +168,32 @@ var fv = (function ()
             for (var i = 0; i < req.length; i++) 
             {
                 var element = $("#" + req[i].ElementId);
+
                 if (req[i].ErrorType === "Required") 
                 {
-                    if (cu.isNullOrBlank(element.val())) 
+                    if (req[i].ElementType)
                     {
-                        element.addClass("borderRed");
-                        error = true;
+                        if (cu.isNullOrBlank(element.data(req[i].ElementType).value())) 
+                        {
+                            var elemClass = null;
+
+                            if (req[i].ElementType === "kendoDropDownList")
+                            {
+                                elemClass = ".k-dropdown";
+                            }
+
+                            element.closest(elemClass).addClass("borderRed");
+                            
+                            error = true;
+                        }
+                    }
+                    else
+                    {
+                        if (cu.isNullOrBlank(element.val())) 
+                        {
+                            element.addClass("borderRed");
+                            error = true;
+                        }
                     }
                 }
             }
@@ -187,4 +216,10 @@ var fv = (function ()
         $("#" + req.ErrorMsgContainer).removeClass("hidden")
     }
 
+    function clearFormValidation(req)
+    {
+        $(".borderRed").removeClass("borderRed");
+        $("#" + req.ErrorMsgContainer).addClass("hidden");
+        $("#" + req.ErrorMsgContainer).empty();
+    }
 })();

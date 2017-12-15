@@ -8,9 +8,6 @@
 
     function deleteGuestLogic(guest)
     {
-        console.log("delete guest ");
-        console.log(guest);
-
         if (!$("#divGuestDeleteWindow").data("kendoWindow"))
         {
             $("#divGuestDeleteWindow").kendoWindow({
@@ -19,7 +16,7 @@
                 modal: true
             });
 
-            $("#divGuestDeleteWindow").data("kendoWindow").wrapper.addClass("guestDeleteWindow");
+            $("#divGuestDeleteWindow").data("kendoWindow").wrapper.addClass("deleteWindowTemplate");
         }
 
         $("#divGuestDeleteWindow").data("kendoWindow").content(guestWindowTemplate({ GuestName: guest.FirstName + " " + guest.LastName }));
@@ -33,9 +30,6 @@
         $("#btnSaveGuestDelete").data("GuestDetailId", guest.GuestDetailId);
         $("#btnSaveGuestDelete").click(function ()
         {
-
-            console.log("delete guest");
-                
             cu.showHideSpinner(true, "divGuestDeleteWindow")
 
             var guestDetailId = parseInt($(this).data("GuestDetailId"));
@@ -54,11 +48,8 @@
             }
 
             //set guest to inactive...
-            console.log("delete request");
-            console.log(req);
             $.when(svc.deleteGuest(req)).done(function ()
             {
-                console.log("guest deleted");
                 //update grid
                 $.when(svc.getGuests()).done(function (response)
                 {
@@ -67,6 +58,8 @@
                     $("#divGuestDeleteWindow").data("kendoWindow").close();
 
                     cu.showHideSpinner(false, "divGuestDeleteWindow")
+
+                    cu.createNotification("Guest Deleted Successfully!", "success");
                 })
                 .fail(function ()
                 {
