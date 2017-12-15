@@ -28,5 +28,6 @@ namespace WeddingWebsiteMvc.Models
         public virtual DbSet<GuestDetail> GuestDetails { get; set; }
         public virtual DbSet<GuestHeader> GuestHeaders { get; set; }
         public virtual DbSet<WeddingDescription> WeddingDescriptions { get; set; }
+        public virtual DbSet<Email> Emails { get; set; }
     }
 }

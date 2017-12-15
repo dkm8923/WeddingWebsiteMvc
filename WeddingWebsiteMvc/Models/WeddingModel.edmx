@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Entities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="2000" Nullable="false" />
+          <Property Name="Subject" Type="varchar" MaxLength="2000" Nullable="false" />
+          <Property Name="Body" Type="varchar" MaxLength="8000" Nullable="false" />
+        </EntityType>
         <EntityType Name="GuestDetail">
           <Key>
             <PropertyRef Name="GuestDetailId" />
@@ -66,6 +75,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="EntitiesStoreContainer">
+          <EntitySet Name="Email" EntityType="Self.Email" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GuestDetail" EntityType="Self.GuestDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GuestHeader" EntityType="Self.GuestHeader" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WeddingDescription" EntityType="Self.WeddingDescription" Schema="dbo" store:Type="Tables" />
@@ -136,6 +146,7 @@
             <End Role="GuestDetail" EntitySet="GuestDetails" />
           </AssociationSet>
           <EntitySet Name="WeddingDescriptions" EntityType="Entities.WeddingDescription" />
+          <EntitySet Name="Emails" EntityType="Entities.Email" />
         </EntityContainer>
         <EntityType Name="WeddingDescription">
           <Key>
@@ -148,6 +159,15 @@
           <Property Name="CeremonyDescription" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
           <Property Name="ReceptionDateTimeLocation" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
           <Property Name="ReceptionDescription" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="Body" Type="String" Nullable="false" MaxLength="8000" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -202,6 +222,16 @@
                 <ScalarProperty Name="CeremonyDateTimeLocation" ColumnName="CeremonyDateTimeLocation" />
                 <ScalarProperty Name="BrideDescription" ColumnName="BrideDescription" />
                 <ScalarProperty Name="GroomDescription" ColumnName="GroomDescription" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emails">
+            <EntityTypeMapping TypeName="Entities.Email">
+              <MappingFragment StoreEntitySet="Email">
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

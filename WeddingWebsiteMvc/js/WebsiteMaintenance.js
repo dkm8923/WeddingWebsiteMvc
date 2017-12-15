@@ -25,27 +25,27 @@
                     ReceptionDescription: $("#taReceptionDesc").val(),
                 };
 
-                showHideSpinner(true, "websiteMaintenanceContainer")
+                cu.showHideSpinner(true, "websiteMaintenanceContainer")
 
                 $.when(_postWeddingDescriptionData(req)).done(function (response)
                 {
-                    $.when(_getWeddingDescriptionData()).done(function (response)
+                    $.when(svc.getWeddingDescriptionData()).done(function (response)
                     {
                         defaultData = response[0];
                         _setFormData(defaultData);
-                        showHideSpinner(false, "websiteMaintenanceContainer")
+                        cu.showHideSpinner(false, "websiteMaintenanceContainer")
                     });
                 });
 
             });
 
-            showHideSpinner(true, "websiteMaintenanceContainer")
+            cu.showHideSpinner(true, "websiteMaintenanceContainer")
 
-            $.when(_getWeddingDescriptionData()).done(function (response)
+            $.when(svc.getWeddingDescriptionData()).done(function (response)
             {
                 defaultData = response[0];
                 _setFormData(defaultData);
-                showHideSpinner(false, "websiteMaintenanceContainer")
+                cu.showHideSpinner(false, "websiteMaintenanceContainer")
             });
 
             function _setFormData(defaultData)
@@ -56,39 +56,6 @@
                 $("#taCeremonyDesc").val(defaultData.CeremonyDescription);
                 $("#taReceptionDateTimeLoc").val(defaultData.ReceptionDateTimeLocation);
                 $("#taReceptionDesc").val(defaultData.ReceptionDescription);
-            }
-        }
-
-        function _getWeddingDescriptionData()
-        {
-            return $.ajax({
-                type: "GET",
-                url: '/admin/GetWeddingDescriptionData',
-                contentType: "application/json; charset=utf-8",
-                dataType: 'json'
-            });
-        }
-
-        function _postWeddingDescriptionData(req)
-        {
-            return $.ajax({
-                type: "POST",
-                url: '/admin/PostWeddingDescriptionData',
-                contentType: "application/json; charset=utf-8",
-                dataType: 'json',
-                data: JSON.stringify(req)
-            });
-        }
-
-        function showHideSpinner(show, element) 
-        {
-            if (show) 
-            {
-                kendo.ui.progress($("#" + element), true);
-            }
-            else 
-            {
-                kendo.ui.progress($("#" + element), false);
             }
         }
     })();

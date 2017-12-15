@@ -208,6 +208,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Email.cs">
+      <DependentUpon>WeddingModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GuestDetail.cs">
       <DependentUpon>WeddingModel.tt</DependentUpon>
     </Compile>
@@ -315,10 +318,14 @@
     <Content Include="images\Westfall3.jpg" />
     <Content Include="images\Westfall4.jpg" />
     <Content Include="images\WestfallOutdoorCeremony.png" />
-    <Content Include="js\admin.js" />
-    <Content Include="js\app.js" />
-    <Content Include="js\scripts.js" />
+    <Content Include="js\Guest.Base.js" />
+    <Content Include="js\Guest.CreateEdit.js" />
+    <Content Include="js\Guest.Delete.js" />
+    <Content Include="js\Guest.Email.js" />
+    <Content Include="js\Common.Service.js" />
+    <Content Include="js\Common.Utility.js" />
     <Content Include="js\WebsiteMaintenance.js" />
+    <Content Include="js\Wedding.Base.js" />
     <Content Include="Models\WeddingModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>WeddingModel.edmx</DependentUpon>
@@ -417,6 +424,7 @@
     <Content Include="Scripts\scripts.min.js" />
     <Content Include="Scripts\sticky.js" />
     <Content Include="Scripts\superfish.js" />
+    <Content Include="Scripts\wedding.template.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -453,6 +461,7 @@
     <Content Include="Scripts\kendo.all.min.js.map" />
     <Content Include="Scripts\kendo.dataviz.chart.min.js.map" />
     <Content Include="Views\Admin\WebsiteMaintenance.cshtml" />
+    <Content Include="Views\Admin\EmailMaintenance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

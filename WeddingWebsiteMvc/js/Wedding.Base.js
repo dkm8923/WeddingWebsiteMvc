@@ -21,6 +21,10 @@
             $("#pCeremonyDesc").text(defaultData.CeremonyDescription);
             $("#pReceptionDateTimeLoc").text(defaultData.ReceptionDateTimeLocation);
             $("#pReceptionDesc").text(defaultData.ReceptionDescription);
+        })
+        .fail(function ()
+        {
+            console.log("Failure Loading Init Data....");
         });
     }
 
@@ -128,22 +132,6 @@
         $("#divErrorMsgContainer").append("<span class='errorMsgWedding iconBounce'>" + msg + "</span>");
     }
 
-    function _createNotification(msg, type) 
-    {
-        $.notify({
-            // options
-            message: msg,
-        }, {
-                // settings
-                type: type,
-                placement: {
-                    from: "top",
-                    align: "center"
-                }//,
-                //delay: 9999999
-            });
-    }
-
     function _validateConfirmCode(code) 
     {
         var req = { ConfirmationCode: code };
@@ -171,7 +159,7 @@
     {
         return $.ajax({
             type: "GET",
-            url: 'admin/GetWeddingDescriptionData',
+            url: '/admin/GetWeddingDescriptionData',
             contentType: "application/json; charset=utf-8",
             dataType: 'json'
         });
@@ -192,8 +180,6 @@
             if (code === null || code === "") 
             {
                 _showError("Please Enter Confirmation Code!");
-                //_createNotification("Please Enter Confirmation Code!", "danger");
-                //_createNotification("Please Enter Confirmation Code!", "success");
             }
             else 
             {
@@ -263,11 +249,14 @@
                     if (ret) 
                     {
                         var msg = "Thank You for the RSVP! We look forward to seeing you at the wedding!";
+
                         if (!$("#cbAttending").prop("checked")) 
                         {
                             msg = "Thank You for letting us know you can not attend! Hope to see you soon!";
                         }
-                        _createNotification(msg, "success");
+
+                        cu.createNotification(msg, "success");
+
                         _resetForm1();
                         _resetForm2();
                         _showHideStep1(true);
@@ -275,7 +264,7 @@
                     }
                     else 
                     {
-                        _createNotification("Error Occurred While Saving Data. Please Try Again!", "danger");
+                        cu.createNotification("Error Occurred While Saving Data. Please Try Again!", "danger");
                     }
                 })
                 .fail(function (e) 

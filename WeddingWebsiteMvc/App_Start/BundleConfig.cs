@@ -41,9 +41,10 @@ namespace WeddingWebsiteMvc
 
             bundles.Add(new ScriptBundle("~/WeddingScripts/scripts").Include(
                       "~/Scripts/modernizr-2.6.2.min.js",
-                      "~/js/scripts.js",
+                      "~/Scripts/wedding.template.js",
                       "~/Scripts/bootstrap-notify.min.js",
-                      "~/js/app.js"));
+                      "~/js/Common.Utility.js",
+                      "~/js/Wedding.Base.js"));
 
             bundles.Add(new StyleBundle("~/Content/KendoCss").Include(
                       "~/Content/kendo.common.min.css",
@@ -59,6 +60,16 @@ namespace WeddingWebsiteMvc
                       "~/Scripts/jquery-migrate-3.0.0.min.js",
                       "~/Scripts/handlebars-v4.0.11.js",
                       "~/Scripts/bootstrap-notify.min.js"));
+
+            bundles.Add(new ScriptBundle("~/AppLogic/scripts").Include(
+                      "~/js/Common.Service.js",
+                      "~/js/Common.Utility.js"));
+
+            bundles.Add(new ScriptBundle("~/Guest/scripts").Include(
+                      "~/js/Guest.Base.js",
+                      "~/js/Guest.CreateEdit.js",
+                      "~/js/Guest.Delete.js",
+                      "~/js/Guest.Email.js"));
         }
     }
 }

@@ -1,0 +1,81 @@
+﻿var gd = (function ()
+{
+    var guestWindowTemplate = Handlebars.compile(document.getElementById("guestWindowTemplate").innerHTML);
+
+    return {
+        deleteGuestLogic: deleteGuestLogic
+    };
+
+    function deleteGuestLogic(guest)
+    {
+        console.log("delete guest ");
+        console.log(guest);
+
+        if (!$("#divGuestDeleteWindow").data("kendoWindow"))
+        {
+            $("#divGuestDeleteWindow").kendoWindow({
+                title: "Delete Guest",
+                actions: ["Close"],
+                modal: true
+            });
+
+            $("#divGuestDeleteWindow").data("kendoWindow").wrapper.addClass("guestDeleteWindow");
+        }
+
+        $("#divGuestDeleteWindow").data("kendoWindow").content(guestWindowTemplate({ GuestName: guest.FirstName + " " + guest.LastName }));
+
+        $("#btnCancelGuestDelete").unbind();
+        $("#btnCancelGuestDelete").click(function () {
+            $("#divGuestDeleteWindow").data("kendoWindow").close();
+        });
+
+        $("#btnSaveGuestDelete").unbind();
+        $("#btnSaveGuestDelete").data("GuestDetailId", guest.GuestDetailId);
+        $("#btnSaveGuestDelete").click(function ()
+        {
+
+            console.log("delete guest");
+                
+            cu.showHideSpinner(true, "divGuestDeleteWindow")
+
+            var guestDetailId = parseInt($(this).data("GuestDetailId"));
+
+            var req = {};
+
+            var gd = gb.getGuestData();
+
+            for (var i = 0; i < gd.length; i++) 
+            {
+                if (parseInt(gd[i].GuestDetailId) === guestDetailId) 
+                {
+                    req = gd[i];
+                    break;
+                }
+            }
+
+            //set guest to inactive...
+            console.log("delete request");
+            console.log(req);
+            $.when(svc.deleteGuest(req)).done(function ()
+            {
+                console.log("guest deleted");
+                //update grid
+                $.when(svc.getGuests()).done(function (response)
+                {
+                    gb.refreshGuestBaseUi(response);
+
+                    $("#divGuestDeleteWindow").data("kendoWindow").close();
+
+                    cu.showHideSpinner(false, "divGuestDeleteWindow")
+                })
+                .fail(function ()
+                {
+                    cu.showAjaxError({ElementId: "divGuestCrudContainer"});
+                });
+            });
+        });
+
+        $("#divGuestDeleteWindow").data("kendoWindow").center().open();
+    }
+
+})();
