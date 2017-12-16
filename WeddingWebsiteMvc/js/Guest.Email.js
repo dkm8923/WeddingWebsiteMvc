@@ -173,7 +173,7 @@
                 var req = {
                         EmailAddress: guest.Email,
                         EmailSubject: email.Subject,
-                        EmailBody: email.Body
+                        EmailBody: cu.createEmailBody({EmailBody: email.Body})
                 };
 
                 return req;

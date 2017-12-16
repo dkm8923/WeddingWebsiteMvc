@@ -18,7 +18,7 @@
     {
         return $.ajax({
             type: "GET",
-            url: 'admin/GetGuests',
+            url: '/admin/GetGuests',
             contentType: "application/json; charset=utf-8",
             dataType: 'json'
         });
@@ -28,7 +28,7 @@
     {
         return $.ajax({
             type: "POST",
-            url: 'admin/PostGuest',
+            url: '/admin/PostGuest',
             contentType: "application/json; charset=utf-8",
             dataType: 'json',
             data: JSON.stringify(req)
@@ -71,7 +71,7 @@
     {
         return $.ajax({
             type: "POST",
-            url: 'admin/SendEmail',
+            url: '/admin/SendEmail',
             contentType: "application/json; charset=utf-8",
             dataType: 'json',
             data: JSON.stringify(req)
@@ -82,7 +82,7 @@
     {
         return $.ajax({
             type: "POST",
-            url: 'admin/SendBulkEmail',
+            url: '/admin/SendBulkEmail',
             contentType: "application/json; charset=utf-8",
             dataType: 'json',
             data: JSON.stringify(req)
@@ -93,7 +93,7 @@
     {
         return $.ajax({
             type: "POST",
-            url: 'admin/DeleteGuest',
+            url: '/admin/DeleteGuest',
             contentType: "application/json; charset=utf-8",
             dataType: 'json',
             data: JSON.stringify(req)
@@ -104,7 +104,7 @@
     {
         return $.ajax({
             type: "POST",
-            url: 'admin/AttachGuestToHeader',
+            url: '/admin/AttachGuestToHeader',
             contentType: "application/json; charset=utf-8",
             dataType: 'json',
             data: JSON.stringify(req)

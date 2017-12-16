@@ -17,7 +17,8 @@
         gridSearchLogic: gridSearchLogic,
         bindAndRefreshGrid: bindAndRefreshGrid,
         showFormHideGrid: showFormHideGrid,
-        createKendoWindow: createKendoWindow
+        createKendoWindow: createKendoWindow,
+        createEmailBody: createEmailBody
     };
 
     function isNullOrBlank(value) 
@@ -267,6 +268,12 @@
         {
             $("#" + req.WindowElement).data("kendoWindow").wrapper.addClass("deleteWindowTemplate");
         }
+    }
+
+    function createEmailBody(req)
+    {
+        var styledEmailTemplate = Handlebars.compile(document.getElementById("styledEmailTemplate").innerHTML);
+        return styledEmailTemplate({ EmailBody: req.EmailBody });
     }
 
 })();

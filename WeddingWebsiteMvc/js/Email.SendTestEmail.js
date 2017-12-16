@@ -60,7 +60,7 @@
             var req = {
                 EmailAddress: $("#ddlSendTestEmailEmailAddress").data("kendoDropDownList").value(),
                 EmailSubject: $("#txtSendTestEmailSubject").val(),
-                EmailBody: $("#taSendTestEmailBody").val()
+                EmailBody: cu.createEmailBody({EmailBody: $("#taSendTestEmailBody").val()})
             };
 
             $.when(svc.sendEmail(req)).done(function (ret)

@@ -371,6 +371,7 @@ namespace WeddingWebsiteMvc.Controllers
 
                     MailMessage mailMessage = new MailMessage("DoNotReply@Wedding.DanielKevinMauk.com", req.EmailAddress);
                     mailMessage.Subject = req.EmailSubject;
+                    mailMessage.IsBodyHtml = true;
                     mailMessage.Body = req.EmailBody;
 
                     smtpClient.Send(mailMessage);
