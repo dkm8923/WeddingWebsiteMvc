@@ -18,7 +18,8 @@
         bindAndRefreshGrid: bindAndRefreshGrid,
         showFormHideGrid: showFormHideGrid,
         createKendoWindow: createKendoWindow,
-        createEmailBody: createEmailBody
+        createEmailBody: createEmailBody,
+        disableKendoEditor: disableKendoEditor
     };
 
     function isNullOrBlank(value) 
@@ -52,7 +53,7 @@
 	        // settings
             type: req.Type,
             offset:{x:50, y: 100}
-            ,delay: 99000
+            //,delay: 99000
         });
     }
 
@@ -276,6 +277,13 @@
         return styledEmailTemplate({ EmailBody: req.EmailBody });
     }
 
+    function disableKendoEditor(req)
+    {
+        var editor = $("#" + req.ElementId).data().kendoEditor;
+        var editorBody = $(editor.body)
+        editorBody.attr("contenteditable", false);
+    }
+
 })();
 
 var fv = (function ()
@@ -316,6 +324,10 @@ var fv = (function ()
                             if (req[i].ElementType === "kendoDropDownList")
                             {
                                 elemClass = ".k-dropdown";
+                            }
+                            else if (req[i].ElementType === "kendoEditor")
+                            {
+                                elemClass = ".k-editor";
                             }
 
                             element.closest(elemClass).addClass("borderRed");

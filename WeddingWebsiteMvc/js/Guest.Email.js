@@ -10,6 +10,10 @@
 
     function init(emailData)
     {
+        $("#taEmailBody").kendoEditor({
+            tools: []
+        });
+
         $("#ddlEmailTemplate").kendoDropDownList({
             dataTextField: "Description",
             dataValueField: "Id",
@@ -30,7 +34,7 @@
 
                     //populate form with email data
                     $("#txtEmailSubject").val(email.Subject);
-                    $("#taEmailBody").val(email.Body);
+                    $("#taEmailBody").data("kendoEditor").value(email.Body)
                 }
                 else
                 {
@@ -199,7 +203,7 @@
         $(".hideUnlessEmailSelected").addClass("hidden");
         $("#ddlEmailTemplate").data("kendoDropDownList").value(null);
         $("#txtEmailSubject").val("");
-        $("#taEmailBody").val("");
+        $("#taEmailBody").data("kendoEditor").value(null)
         $("#btnSubmitEmail").data("GuestDetailId", null);
     }
 

@@ -9,6 +9,12 @@
 
     function init(emailData)
     {
+        $("#taSendTestEmailBody").kendoEditor({
+            tools: []
+        });
+
+        cu.disableKendoEditor({ ElementId: "taSendTestEmailBody" });
+
         $("#ddlSendTestEmailEmailAddress").kendoDropDownList({
             dataTextField: "Description",
             dataValueField: "Id",
@@ -48,7 +54,7 @@
 
         $("#txtSendTestEmailDesription").val(email.Description);
         $("#txtSendTestEmailSubject").val(email.Subject);
-        $("#taSendTestEmailBody").val(email.Body);
+        $("#taSendTestEmailBody").data("kendoEditor").value(email.Body)
     }
 
     function sendEmail()
@@ -60,7 +66,7 @@
             var req = {
                 EmailAddress: $("#ddlSendTestEmailEmailAddress").data("kendoDropDownList").value(),
                 EmailSubject: $("#txtSendTestEmailSubject").val(),
-                EmailBody: cu.createEmailBody({EmailBody: $("#taSendTestEmailBody").val()})
+                EmailBody: cu.createEmailBody({EmailBody: $("#taSendTestEmailBody").data("kendoEditor").value()})
             };
 
             $.when(svc.sendEmail(req)).done(function (ret)
@@ -84,7 +90,7 @@
         $("#ddlSendTestEmailEmailAddress").data("kendoDropDownList").value(null);
         $("#txtSendTestEmailDesription").val("");
         $("#txtSendTestEmailSubject").val("");
-        $("#taSendTestEmailBody").val("");
+        $("#taSendTestEmailBody").data("kendoEditor").value(null)
     }
 
     function validate()

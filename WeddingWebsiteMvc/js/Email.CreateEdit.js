@@ -10,6 +10,13 @@
 
     function init(data)
     {
+        $("#taEmailBody").kendoEditor({
+            resizable: {
+                        content: true,
+                        toolbar: true
+            }
+        });
+
         $("#btnCancelEmail").click(function ()
         {
             showHideCreateEditEmailForm(false);
@@ -31,7 +38,7 @@
             var req = {
                 Description: $("#txtEmailDescription").val(),
                 Subject: $("#txtEmailSubject").val(),
-                Body: $("#taEmailBody").val()
+                Body: $("#taEmailBody").data("kendoEditor").value()
             }
             
             if (!cu.isNullOrBlank(id))
@@ -82,8 +89,8 @@
 
         $("#txtEmailDescription").val(email.Description);
         $("#txtEmailSubject").val(email.Subject);
-        $("#taEmailBody").val(email.Body);
-        
+        $("#taEmailBody").data("kendoEditor").value(email.Body);
+
         $("#btnSubmitEmail").data("EmailId", email.Id);
        
         showHideCreateEditEmailForm(true);
@@ -95,7 +102,7 @@
             RequiredFields: [
                 { ElementId: "txtEmailDescription", ErrorType: "Required" },
                 { ElementId: "txtEmailSubject", ErrorType: "Required" },
-                { ElementId: "taEmailBody", ErrorType: "Required" }
+                { ElementId: "taEmailBody", ElementType: "kendoEditor", ErrorType: "Required" }
             ],
             ErrorMsgContainer: "divEmailErrorMsgContainer"
         }
@@ -116,7 +123,7 @@
         fv.clearFormValidation({ErrorMsgContainer: "divEmailErrorMsgContainer"});
         $("#txtEmailDescription").val("");
         $("#txtEmailSubject").val("");
-        $("#taEmailBody").val("");
+        $("#taEmailBody").data("kendoEditor").value(null);
 
         $("#btnSubmitEmail").data("EmailId", null);
     }
