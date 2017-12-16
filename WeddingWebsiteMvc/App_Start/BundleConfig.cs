@@ -75,7 +75,8 @@ namespace WeddingWebsiteMvc
             bundles.Add(new ScriptBundle("~/Email/scripts").Include(
                       "~/js/Email.Base.js",
                       "~/js/Email.CreateEdit.js",
-                      "~/js/Email.Delete.js"));
+                      "~/js/Email.Delete.js",
+                      "~/js/Email.SendTestEmail.js"));
         }
     }
 }

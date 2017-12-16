@@ -225,16 +225,7 @@
 
     function showHideEmailForm(show) 
     {
-        if (show) 
-        {
-            $("#divGuestEmailForm").removeClass("hidden");
-            $("#divGuestGridContainer").addClass("hidden");
-        }
-        else 
-        {
-            $("#divGuestEmailForm").addClass("hidden");
-            $("#divGuestGridContainer").removeClass("hidden");
-        }
+        cu.showFormHideGrid({ Show: show, MainPage: "divGuestGridContainer", Form: "divGuestEmailForm"});
     }
 
     function getEmailById(id)

@@ -1,6 +1,7 @@
 ﻿var ed = (function ()
 {
     var containerElem = "divEmailCrudContainer";
+    var headerTitleTemplate = Handlebars.compile(document.getElementById("headerTitleTemplate").innerHTML);
     var emailWindowTemplate = Handlebars.compile(document.getElementById("emailWindowTemplate").innerHTML);
 
     return {
@@ -11,13 +12,11 @@
     {
         if (!$("#divEmailDeleteWindow").data("kendoWindow"))
         {
-            $("#divEmailDeleteWindow").kendoWindow({
-                title: "Delete Email",
-                actions: ["Close"],
-                modal: true
+            cu.createKendoWindow({
+                WindowElement: "divEmailDeleteWindow",
+                WindowTitle: headerTitleTemplate({ IconClass: "fa-trash", HeaderTitle: "Delete Email"}),
+                WindowType: "Delete"
             });
-
-            $("#divEmailDeleteWindow").data("kendoWindow").wrapper.addClass("deleteWindowTemplate");
         }
 
         $("#divEmailDeleteWindow").data("kendoWindow").content(emailWindowTemplate({ EmailDescription: email.Description }));

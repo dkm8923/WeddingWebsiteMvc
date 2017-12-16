@@ -1,4 +1,7 @@
-﻿body {
+﻿@primaryColor1: #337ab7; /*BootStrap Green*/
+@gridHover: #FFECB0; /*Color Used for Grid Hover effect*/
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -83,6 +86,11 @@
     .errorMsg {
         width: 90% !important;
     }
+
+    [data-notify="container"] {
+        left: 5% !important;
+        right: 5% !important;
+    }
 }
 
 .divGridContainer {
@@ -143,12 +151,28 @@
         width: 100%;
         max-width: 100%;
     }
-} 
+}
+
+.defaultWindowTemplate {
+    .k-window-titlebar {
+        background-color: @primaryColor1;
+        color: white;
+        font-size: 17px;
+    }
+}
+
+.divHdrTitle {
+    margin-left: 5px;
+
+    i {
+        margin-right: 5px;
+    }
+}
 
 .deleteWindowTemplate {
     width: 70%;
     max-width: 500px;
-    
+
     .deleteWindowContent {
         text-align: center;
         font-size: 15px;
@@ -221,9 +245,6 @@
         height: 200px;
     }
 }
-
-@primaryColor1: #337ab7; /*BootStrap Green*/
-@gridHover: #FFECB0; /*Color Used for Grid Hover effect*/
 
 .defaultGrid {
     font-size: 14px;

@@ -352,16 +352,7 @@
 
     function showHideCreateEditForm(show) 
     {
-        if (show) 
-        {
-            $("#divGuestGridContainer").addClass("hidden");
-            $("#divGuestCreateEditForm").removeClass("hidden");
-        }
-        else 
-        {
-            $("#divGuestGridContainer").removeClass("hidden");
-            $("#divGuestCreateEditForm").addClass("hidden");
-        }
+        cu.showFormHideGrid({ Show: show, MainPage: "divGuestGridContainer", Form: "divGuestCreateEditForm"});
     }
 
     //function resetConfirmationCode()

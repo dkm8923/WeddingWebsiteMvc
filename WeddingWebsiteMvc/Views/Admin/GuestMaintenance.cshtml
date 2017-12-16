@@ -3,6 +3,8 @@
     ViewBag.Title = "Guest Maintenance";
 }
 
+@Html.Partial("../Shared/_Templates")
+
 <div id="divGuestCrudContainer">
     <div class="divGridContainer divGuestGridContainer" id="divGuestGridContainer">
         <ul id="ulGuestStats" class="ulGuestStats">
@@ -145,7 +147,7 @@
                         <div id="divEmailErrorMsgContainer" class="hidden"></div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="txtZip">Use Existing Template?:</label>
+                        <label class="col-md-4 control-label" for="txtZip">Email Template:</label>
                         <div class="col-md-8">
                             <select id="ddlEmailTemplate"></select>
                         </div>
@@ -198,6 +200,14 @@
             <button class="btn btn-success btnIcon" id="btnSaveGuestDelete"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>
         </li>
     </ul>
+</script>
+
+<script id="guestGridActionsTemplate" type="text/x-handlebars-template">
+    <div class='gridBtnContainer'>
+        <button id="btnEditGuest{{GuestDetailId}}" data-guestdetailid="{{GuestDetailId}}" class='btn btn-warning'><i class='fa fa-pencil' aria-hidden='true'></i></button>
+        <button id="btnDeleteGuest{{GuestDetailId}}" data-guestdetailid="{{GuestDetailId}}" class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button>
+        <button id="btnSendRsvpEmailToGuest{{GuestDetailId}}" data-guestdetailid="{{GuestDetailId}}" class='btn btn-info'><i class='fa fa-envelope-o' aria-hidden='true'></i></button>
+    </div>
 </script>
 
 @Scripts.Render("~/Guest/scripts")

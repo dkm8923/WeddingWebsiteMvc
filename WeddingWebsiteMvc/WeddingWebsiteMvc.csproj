@@ -321,6 +321,7 @@
     <Content Include="js\Email.Base.js" />
     <Content Include="js\Email.CreateEdit.js" />
     <Content Include="js\Email.Delete.js" />
+    <Content Include="js\Email.SendTestEmail.js" />
     <Content Include="js\Guest.Base.js" />
     <Content Include="js\Guest.CreateEdit.js" />
     <Content Include="js\Guest.Delete.js" />
@@ -465,6 +466,7 @@
     <Content Include="Scripts\kendo.dataviz.chart.min.js.map" />
     <Content Include="Views\Admin\WebsiteMaintenance.cshtml" />
     <Content Include="Views\Admin\EmailMaintenance.cshtml" />
+    <Content Include="Views\Shared\_Templates.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,6 +1,7 @@
 ﻿var eb = (function ()
 {
     var containerElem = "divEmailCrudContainer";
+    var emailGridActionsTemplate = Handlebars.compile(document.getElementById("emailGridActionsTemplate").innerHTML);
     var emailData = null;
 
     init();
@@ -32,7 +33,9 @@
             initGrid(emailData);
 
             ece.init(response);
-            
+
+            et.init();
+
             cu.showHideSpinner(false, containerElem)
         })
         .fail(function ()
@@ -81,13 +84,20 @@
                         var id = parseInt($(this).data("id"));
                         ed.deleteEmail(getEmailById(emailData, id));
                     });
+
+                    $("#btnSendTestEmail" + gridData[i].Id).click(function () 
+                    {
+                        var id = parseInt($(this).data("id"));
+                        et.sendTestEmail(getEmailById(emailData, id));
+                    });
                 }
             },
             columns: [
                 {
                     title: "Actions",
-                    template: function (data) {
-                        return "<div class='gridBtnContainer'><button id='btnEditEmail" + data.Id + "' data-id='" + data.Id + "' class='btn btn-warning'><i class='fa fa-pencil' aria-hidden='true'></i></button><button id='btnDeleteEmail" + data.Id + "' data-id='" + data.Id + "' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button><div>";
+                    template: function (data) 
+                    {
+                        return emailGridActionsTemplate({Id: data.Id});
                     },
                     width: 170
                 },

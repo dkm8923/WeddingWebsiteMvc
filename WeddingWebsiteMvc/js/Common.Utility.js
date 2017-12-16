@@ -15,7 +15,9 @@
         loadStateDropDown: loadStateDropDown,
         showAjaxError: showAjaxError,
         gridSearchLogic: gridSearchLogic,
-        bindAndRefreshGrid: bindAndRefreshGrid
+        bindAndRefreshGrid: bindAndRefreshGrid,
+        showFormHideGrid: showFormHideGrid,
+        createKendoWindow: createKendoWindow
     };
 
     function isNullOrBlank(value) 
@@ -49,7 +51,7 @@
 	        // settings
             type: req.Type,
             offset:{x:50, y: 100}
-            //,delay: 99000
+            ,delay: 99000
         });
     }
 
@@ -235,6 +237,36 @@
     {
         $("#" + req.GridId).data("kendoGrid").dataSource.data(req.Data);
         $("#" + req.GridId).data("kendoGrid").refresh();
+    }
+
+    function showFormHideGrid(req)
+    {
+        if (req.Show)
+        {
+            $("#" + req.MainPage).addClass("hidden");
+            $("#" + req.Form).removeClass("hidden");
+        }
+        else
+        {
+            $("#" + req.MainPage).removeClass("hidden");
+            $("#" + req.Form).addClass("hidden");
+        }
+    }
+
+    function createKendoWindow(req)
+    {
+        $("#" + req.WindowElement).kendoWindow({
+            title: req.WindowTitle,
+            actions: ["Close"],
+            modal: true
+        });
+
+        $("#" + req.WindowElement).data("kendoWindow").wrapper.addClass("defaultWindowTemplate");
+
+        if (req.WindowType === "Delete")
+        {
+            $("#" + req.WindowElement).data("kendoWindow").wrapper.addClass("deleteWindowTemplate");
+        }
     }
 
 })();

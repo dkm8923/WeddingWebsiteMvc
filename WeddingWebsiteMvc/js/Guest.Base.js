@@ -1,7 +1,7 @@
 ﻿var gb = (function ()
 {
     var containerElem = "divGuestCrudContainer";
-    console.log("admin.js loaded...");
+    var guestGridActionsTemplate = Handlebars.compile(document.getElementById("guestGridActionsTemplate").innerHTML);
     var guestHeaderData = [];
     var guestData = [];
     var emailData = [];
@@ -141,8 +141,9 @@
             columns: [
                 {
                     title: "Actions",
-                    template: function (data) {
-                        return "<div class='gridBtnContainer'><button id='btnEditGuest" + data.GuestDetailId + "' data-guestdetailid='" + data.GuestDetailId + "' class='btn btn-warning'><i class='fa fa-pencil' aria-hidden='true'></i></button><button id='btnDeleteGuest" + data.GuestDetailId + "' data-guestdetailid='" + data.GuestDetailId + "' class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button><button id='btnSendRsvpEmailToGuest" + data.GuestDetailId + "' data-guestdetailid='" + data.GuestDetailId + "' class='btn btn-info'><i class='fa fa-envelope-o' aria-hidden='true'></i></button><div>";
+                    template: function (data) 
+                    {
+                        return guestGridActionsTemplate({ GuestDetailId: data.GuestDetailId });
                     },
                     width: 170
                 },

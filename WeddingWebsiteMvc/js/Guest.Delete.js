@@ -1,5 +1,6 @@
 ﻿var gd = (function ()
 {
+    var headerTitleTemplate = Handlebars.compile(document.getElementById("headerTitleTemplate").innerHTML);
     var guestWindowTemplate = Handlebars.compile(document.getElementById("guestWindowTemplate").innerHTML);
 
     return {
@@ -10,13 +11,11 @@
     {
         if (!$("#divGuestDeleteWindow").data("kendoWindow"))
         {
-            $("#divGuestDeleteWindow").kendoWindow({
-                title: "Delete Guest",
-                actions: ["Close"],
-                modal: true
+            cu.createKendoWindow({
+                WindowElement: "divGuestDeleteWindow",
+                WindowTitle: headerTitleTemplate({ IconClass: "fa-trash", HeaderTitle: "Delete Guest"}),
+                WindowType: "Delete"
             });
-
-            $("#divGuestDeleteWindow").data("kendoWindow").wrapper.addClass("deleteWindowTemplate");
         }
 
         $("#divGuestDeleteWindow").data("kendoWindow").content(guestWindowTemplate({ GuestName: guest.FirstName + " " + guest.LastName }));

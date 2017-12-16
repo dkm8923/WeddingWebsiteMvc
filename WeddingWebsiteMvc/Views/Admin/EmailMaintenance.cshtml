@@ -3,6 +3,8 @@
     ViewBag.Title = "Email Maintenance";
 }
 
+@Html.Partial("../Shared/_Templates")
+
 <div id="divEmailCrudContainer">
     <div class="divGridContainer" id="divEmailGridContainer">
         <ul class="ulGridHdr">
@@ -29,7 +31,7 @@
                         <div id="divEmailErrorMsgContainer" class="hidden"></div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="taEmailSubject">Description: <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                        <label class="col-md-4 control-label" for="txtEmailDescription">Description: <i class="fa fa-asterisk" aria-hidden="true"></i></label>
                         <div class="col-md-8">
                             <input class="form-control" type="text" id="txtEmailDescription">
                         </div>
@@ -60,6 +62,51 @@
 
     <div id="divEmailDeleteWindow"></div>
 
+    <div id="divSendTestEmailForm" class="form-horizontal divCrudForm divGuestEmailForm hidden">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Send Test Email</h3>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="form-group">
+                        <div id="divSendTestEmailErrorMsgContainer" class="hidden"></div>
+                    </div>
+                    <div id="divEmailAddressContainer" class="form-group">
+                        <label class="col-md-4 control-label" for="txtEmailAddress">Email Address: <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                        <div class="col-md-8">
+                            <select id="ddlSendTestEmailEmailAddress"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="txtSendTestEmailDesription">Description: <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtSendTestEmailDesription" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group hideUnlessEmailSelected">
+                        <label class="col-md-4 control-label" for="txtSendTestEmailSubject">Email Subject: <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="txtSendTestEmailSubject" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group hideUnlessEmailSelected">
+                        <label class="col-md-4 control-label" for="taSendTestEmailBody">Email Body: <i class="fa fa-asterisk" aria-hidden="true"></i></label>
+                        <div class="col-md-8">
+                            <textarea id="taSendTestEmailBody" disabled></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <div class="pull-right divFormBtnContainer">
+                            <button class="btn btn-danger btnIcon" id="btnCancelTestEmail"><i class="fa fa-times" aria-hidden="true"></i>Cancel</button>
+                            <button class="btn btn-success btnIcon" id="btnSubmitTestEmail"><i class="fa fa-paper-plane" aria-hidden="true"></i>Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <script id="emailWindowTemplate" type="text/x-handlebars-template">
@@ -72,6 +119,14 @@
             <button class="btn btn-success btnIcon" id="btnSaveEmailDelete"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>
         </li>
     </ul>
+</script>
+
+<script id="emailGridActionsTemplate" type="text/x-handlebars-template">
+    <div class='gridBtnContainer'>
+        <button id="btnEditEmail{{Id}}" data-id="{{Id}}" class='btn btn-warning'><i class='fa fa-pencil' aria-hidden='true'></i></button>
+        <button id="btnDeleteEmail{{Id}}" data-id="{{Id}}" class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button>
+        <button id="btnSendTestEmail{{Id}}" data-id="{{Id}}" class='btn btn-primary'><i class='fa fa-share-square' aria-hidden='true'></i></button>
+    </div>
 </script>
 
 @Scripts.Render("~/Email/scripts")
