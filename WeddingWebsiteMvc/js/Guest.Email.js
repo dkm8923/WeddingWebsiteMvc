@@ -174,7 +174,9 @@
                         EmailAddress: guest.Email,
                         EmailSubject: email.Subject,
                         EmailBody: email.Body
-                    };
+                };
+
+                return req;
             }
         }
     }

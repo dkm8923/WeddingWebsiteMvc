@@ -70,6 +70,8 @@
         _resetForm();
             
         showHideCreateEditEmailForm(true);
+
+        $("#txtEmailDescription").focus();
     }
 
     function editEmail(email) 
@@ -124,7 +126,6 @@
         {
             $("#divEmailGridContainer").addClass("hidden");
             $("#divEmailCreateEditForm").removeClass("hidden");
-            $("#txtEmailDescription").focus();
         }
         else 
         {

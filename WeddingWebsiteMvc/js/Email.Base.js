@@ -93,16 +93,37 @@
                 },
                 {
                     field: "Description",
-                    title: "Description"
+                    title: "Description",
+                    width: 200
                 }
                 , {
 
                     field: "Subject",
-                    title: "Subject"
+                    title: "Subject",
+                    template: function (data)
+                    {
+                        if (data.Subject.length > 100)
+                        {
+                            return data.Subject.substring(0, 100) + "...";
+                        }
+
+                        return data.Subject;
+                    },
+                    width: 300
                 }
                 , {
                     field: "Body",
-                    title: "Body"
+                    title: "Body",
+                    template: function (data)
+                    {
+                        if (data.Body.length > 100)
+                        {
+                            return data.Body.substring(0, 100) + "...";
+                        }
+
+                        return data.Body;
+                    },
+                    width: 400
                 }
             ]
         });

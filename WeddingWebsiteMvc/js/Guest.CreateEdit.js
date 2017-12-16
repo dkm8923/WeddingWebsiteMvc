@@ -53,6 +53,11 @@
             }
         });
 
+        //$("#btnResetAllConfirmCodes").click(function ()
+        //{
+        //    resetConfirmationCode();
+        //});
+
         $("#btnCancel").click(function ()
         {
             showHideCreateEditForm(false);
@@ -140,6 +145,8 @@
         _resetForm();
             
         showHideCreateEditForm(true);
+
+        $("#txtFirstName").focus();
     }
 
     function editGuest(guest) 
@@ -336,7 +343,7 @@
 
     function createConfirmationCode(lastName) 
     {
-        var randomInt = Math.random() * 20;
+        var randomInt = (Math.random() * 20) * 10000;
         randomInt = Math.floor(randomInt);
         var code = lastName.toString() + randomInt.toString();
         return code;
@@ -348,7 +355,6 @@
         {
             $("#divGuestGridContainer").addClass("hidden");
             $("#divGuestCreateEditForm").removeClass("hidden");
-            $("#txtFirstName").focus();
         }
         else 
         {
@@ -356,5 +362,20 @@
             $("#divGuestCreateEditForm").addClass("hidden");
         }
     }
+
+    //function resetConfirmationCode()
+    //{
+    //    cu.showHideSpinner(true, "divGuestCrudContainer")
+
+    //    var guestHeaderData = gb.getGuestHeaderData();
+    //    for (var i = 0; i < guestHeaderData.length; i++)
+    //    {
+    //        guestHeaderData[i].ConfirmationCode = createConfirmationCode(guestHeaderData[i].GuestDetails[0].LastName); 
+    //        guestHeaderData[i].GuestDetails = [];
+    //        console.log(guestHeaderData[i].ConfirmationCode);
+    //        console.log(guestHeaderData[i]);
+    //        svc.postGuest(guestHeaderData[i]);
+    //    }
+    //}
 
 })();
