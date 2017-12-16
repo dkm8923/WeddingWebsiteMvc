@@ -59,7 +59,7 @@
 
                     cu.showHideSpinner(false, "divGuestDeleteWindow")
 
-                    cu.createNotification("Guest Deleted Successfully!", "success");
+                    cu.showDeleteSuccessNotification();
                 })
                 .fail(function ()
                 {

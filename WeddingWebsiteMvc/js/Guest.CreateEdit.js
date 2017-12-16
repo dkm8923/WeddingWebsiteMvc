@@ -118,7 +118,7 @@
 
                     $.when(svc.postGuest(req)).done(function (ret) 
                     {
-                        cu.createNotification("Data Saved Successfully!", "success");
+                        cu.showSaveSuccessNotification();
 
                         $.when(svc.getGuests()).done(function (response) 
                         {
@@ -190,7 +190,8 @@
 
         if (errorArr.length > 0) 
         {
-            fv.showError({ErrorArr: errorArr, ErrorMsgContainer: "divErrorMsgContainer"});
+            fv.showError({ ErrorArr: errorArr, ErrorMsgContainer: "divErrorMsgContainer" });
+            cu.showFormValidationErrorNotification();
         }
 
         return errorArr.length > 0 ? false : true;
@@ -278,7 +279,7 @@
 
         $.when(svc.attachGuestToHeader(req)).done(function (ret) 
         {
-            cu.createNotification("Data Saved Successfully!", "success");
+            cu.showSaveSuccessNotification();
 
             $.when(svc.getGuests()).done(function (response) 
             {
@@ -295,7 +296,7 @@
         })
         .fail(function ()
         {
-            cu.createNotification("Error Saving Data. Please Try Again!", "danger");
+            cu.showSaveErrorNotification();
             cu.showHideSpinner(false, "divGuestCrudContainer")
         });
     }

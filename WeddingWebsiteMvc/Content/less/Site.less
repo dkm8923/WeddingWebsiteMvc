@@ -79,6 +79,10 @@
             font-size: 16px;
         }
     }
+
+    .errorMsg {
+        width: 90% !important;
+    }
 }
 
 .divGridContainer {
@@ -92,7 +96,7 @@
             margin-right: 2px;
         }
     }
-    
+
     .ulGridHdr {
         list-style: none;
         padding: 0;
@@ -102,8 +106,19 @@
 
             .divSection {
                 display: inline-block;
-                width: 32%;
                 text-align: left;
+            }
+        }
+
+        .divSection2 {
+            .divSection {
+                width: 48%;
+            }
+        }
+
+        .divSection3 {
+            .divSection {
+                width: 32%;
             }
         }
     }
@@ -156,6 +171,14 @@
     }
 }
 
+.divNotification {
+    font-size: 16px;
+
+    i {
+        margin-right: 10px;
+    }
+}
+
 .alert-success {
     background-color: #5cb85c;
     border-color: #4cae4c;
@@ -165,6 +188,8 @@
 }
 
 .alert-danger {
+    background-color: #d9534f !important;
+    border-color: #d43f3a !important;
     color: white;
     font-weight: bold;
     font-size: 16px;

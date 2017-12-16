@@ -135,7 +135,7 @@
                     cu.showHideSpinner(false, containerElem);
 
                     //show notification that guest was emailed
-                    cu.createNotification("<i class='fa fa-envelope-o' aria-hidden='true'></i>Guest Was Emailed Successfully! Email May Take A few Moments To Be Recieved!", "success");
+                    cu.showEmailSuccessNotification();
                 })
                 .fail(function ()
                 {
@@ -160,7 +160,7 @@
                     cu.showHideSpinner(false, containerElem);
 
                     //show notification that guest was emailed
-                    cu.createNotification("<i class='fa fa-envelope-o' aria-hidden='true'></i>Guests Emailed Successfully! Email May Take A few Moments To Be Recieved!", "success");
+                    cu.showEmailSuccessNotification();
                 })
                 .fail(function ()
                 {
@@ -216,7 +216,8 @@
 
         if (errorArr.length > 0) 
         {
-            fv.showError({ErrorArr: errorArr, ErrorMsgContainer: "divEmailErrorMsgContainer"});
+            fv.showError({ ErrorArr: errorArr, ErrorMsgContainer: "divEmailErrorMsgContainer" });
+            cu.showFormValidationErrorNotification();
         }
 
         return errorArr.length > 0 ? false : true;

@@ -248,15 +248,15 @@
                     console.log(ret);
                     if (ret) 
                     {
-                        var msg = "Thank You for the RSVP! We look forward to seeing you at the wedding!";
-
                         if (!$("#cbAttending").prop("checked")) 
                         {
-                            msg = "Thank You for letting us know you can not attend! Hope to see you soon!";
+                            cu.showWeddingRsvpDeclineMessage();
                         }
-
-                        cu.createNotification(msg, "success");
-
+                        else
+                        {
+                            cu.showWeddingRsvpAcceptMessage();
+                        }
+                        
                         _resetForm1();
                         _resetForm2();
                         _showHideStep1(true);
@@ -264,7 +264,7 @@
                     }
                     else 
                     {
-                        cu.createNotification("Error Occurred While Saving Data. Please Try Again!", "danger");
+                        cu.showSaveErrorNotification();
                     }
                 })
                 .fail(function (e) 

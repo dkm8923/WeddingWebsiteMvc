@@ -4,6 +4,14 @@
         isNullOrBlank: isNullOrBlank,
         showHideSpinner: showHideSpinner,
         createNotification: createNotification,
+        showSaveSuccessNotification: showSaveSuccessNotification,
+        showDeleteSuccessNotification: showDeleteSuccessNotification,
+        showFormValidationErrorNotification: showFormValidationErrorNotification,
+        showSaveErrorNotification: showSaveErrorNotification,
+        showEmailSuccessNotification: showEmailSuccessNotification,
+        showWeddingRsvpAcceptMessage: showWeddingRsvpAcceptMessage,
+        showWeddingRsvpDeclineMessage: showWeddingRsvpDeclineMessage,
+        showAjaxErrorNotification: showAjaxErrorNotification,
         loadStateDropDown: loadStateDropDown,
         showAjaxError: showAjaxError,
         gridSearchLogic: gridSearchLogic,
@@ -27,21 +35,110 @@
         }
     }
 
-    function createNotification(msg, type) 
+    function createNotification(req) 
     {
+        //close previous notifcations
+        $.notifyClose();
+
+        var msg = "<div class='divNotification animated slideInDown'><i class='" + req.Icon + "' aria-hidden='true'></i>" + req.Msg + "</div>";
+
         $.notify({
             // options
-            message: msg,
-        }, {
-                // settings
-                type: type,
-                placement: {
-                    from: "top",
-                    align: "right",
-                    offset:{x:50, y: 100}
-                }
-                //, delay: 9999999
-            });
+            message: msg
+        },{
+	        // settings
+            type: req.Type,
+            offset:{x:50, y: 100}
+            //,delay: 99000
+        });
+    }
+
+    function showSaveSuccessNotification() 
+    {
+        var req = {
+            Icon: "fa fa-floppy-o",
+            Msg: "Data Saved Successfully!",
+            Type: "success"
+        };
+
+        createNotification(req);
+    };
+
+    function showDeleteSuccessNotification() 
+    {
+        var req = {
+            Icon: "fa fa-trash",
+            Msg: "Data Deleted Successfully!",
+            Type: "success"
+        };
+
+        createNotification(req);
+    };
+
+    function showFormValidationErrorNotification() 
+    {
+        var req = {
+            Icon: "fa fa-exclamation-triangle",
+            Msg: "Form Validation Error Occurred, Please Try Again!",
+            Type: "danger"
+        };
+
+        createNotification(req);
+    };
+
+    function showSaveErrorNotification() 
+    {
+        var req = {
+            Icon: "fa fa-exclamation-triangle",
+            Msg: "Error Occurred While Saving Data, Please Try Again!",
+            Type: "danger"
+        };
+
+        createNotification(req);
+    };
+
+    function showEmailSuccessNotification() 
+    {
+        var req = {
+            Icon: "fa fa-envelope-oe",
+            Msg: "Email(s) Sent Successfully! Please Allow A Few Moments For Emails To Be Received!",
+            Type: "success"
+        };
+
+        createNotification(req);
+    };
+
+    function showWeddingRsvpAcceptMessage()
+    {
+        var req = {
+            Icon: "fa fa-smile-o",
+            Msg: "Thank You for the RSVP! We look forward to seeing you at the wedding!",
+            Type: "success"
+        };
+
+        createNotification(req);
+    }
+
+    function showWeddingRsvpDeclineMessage()
+    {
+        var req = {
+            Icon: "fa fa-frown-o",
+            Msg: "Thank You for letting us know you can not attend! Hope to see you soon!",
+            Type: "success"
+        };
+
+        createNotification(req);
+    }
+
+    function showAjaxErrorNotification()
+    {
+        var req = {
+            Icon: "fa fa-exclamation-triangle",
+            Msg: "Error Loading / Saving Data. Please Try Again!",
+            Type: "danger"
+        };
+
+        createNotification(req);
     }
 
     function loadStateDropDown()
@@ -113,7 +210,7 @@
 
     function showAjaxError(req)
     {
-        cu.createNotification("Error Loading / Saving Data. Please Try Again!", "danger");
+        showAjaxErrorNotification();
         cu.showHideSpinner(false, req.ElementId)
     }
 
@@ -221,5 +318,6 @@ var fv = (function ()
         $(".borderRed").removeClass("borderRed");
         $("#" + req.ErrorMsgContainer).addClass("hidden");
         $("#" + req.ErrorMsgContainer).empty();
+        $.notifyClose();
     }
 })();

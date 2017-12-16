@@ -41,7 +41,7 @@
 
             $.when(svc.postEmailData(req)).done(function (ret) 
             {
-                cu.createNotification("Data Saved Successfully!", "success");
+                cu.showSaveSuccessNotification();
 
                 $.when(svc.getEmailData()).done(function (response) 
                 {
@@ -104,7 +104,8 @@
 
         if (errorArr.length > 0) 
         {
-            fv.showError({ErrorArr: errorArr, ErrorMsgContainer: "divEmailErrorMsgContainer"});
+            fv.showError({ ErrorArr: errorArr, ErrorMsgContainer: "divEmailErrorMsgContainer" });
+            cu.showFormValidationErrorNotification();
         }
 
         return errorArr.length > 0 ? false : true;

@@ -60,7 +60,7 @@
 
                     cu.showHideSpinner(false, "divEmailDeleteWindow")
 
-                    cu.createNotification("Email Deleted Successfully!", "success");
+                    cu.showDeleteSuccessNotification();
                 })
                 .fail(function ()
                 {

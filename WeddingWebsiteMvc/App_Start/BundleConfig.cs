@@ -51,7 +51,8 @@ namespace WeddingWebsiteMvc
                       "~/Content/kendo.rtl.min.css",
                       "~/Content/kendo.default.min.css",
                       "~/Content/kendo.dataviz.min.css",
-                      "~/Content/kendo.dataviz.default.min.css"));
+                      "~/Content/kendo.dataviz.default.min.css",
+                      "~/Content/animate.css"));
 
             bundles.Add(new ScriptBundle("~/KendoScripts/scripts").Include(
                       "~/Scripts/kendo.all.min.js",
