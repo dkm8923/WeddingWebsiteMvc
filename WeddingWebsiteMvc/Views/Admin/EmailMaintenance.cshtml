@@ -123,9 +123,9 @@
 
 <script id="emailGridActionsTemplate" type="text/x-handlebars-template">
     <div class='gridBtnContainer'>
-        <button id="btnEditEmail{{Id}}" data-id="{{Id}}" class='btn btn-warning'><i class='fa fa-pencil' aria-hidden='true'></i></button>
-        <button id="btnDeleteEmail{{Id}}" data-id="{{Id}}" class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button>
-        <button id="btnSendTestEmail{{Id}}" data-id="{{Id}}" class='btn btn-primary'><i class='fa fa-share-square' aria-hidden='true'></i></button>
+        <button data-editEmailButton data-id="{{Id}}" class='btn btn-warning'><i class='fa fa-pencil' aria-hidden='true'></i></button>
+        <button data-deleteEmailButton data-id="{{Id}}" class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button>
+        <button data-sendTestEmailButton data-id="{{Id}}" class='btn btn-primary'><i class='fa fa-share-square' aria-hidden='true'></i></button>
     </div>
 </script>
 

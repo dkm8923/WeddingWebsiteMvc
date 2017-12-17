@@ -19,7 +19,8 @@
         showFormHideGrid: showFormHideGrid,
         createKendoWindow: createKendoWindow,
         createEmailBody: createEmailBody,
-        disableKendoEditor: disableKendoEditor
+        disableKendoEditor: disableKendoEditor,
+        createKendoGrid: createKendoGrid
     };
 
     function isNullOrBlank(value) 
@@ -275,6 +276,7 @@
     {
         var styledEmailTemplate = Handlebars.compile(document.getElementById("styledEmailTemplate").innerHTML);
         return styledEmailTemplate({ EmailBody: req.EmailBody });
+        //return styledEmailTemplate({ EmailBody: $.parseHTML(req.EmailBody) });
     }
 
     function disableKendoEditor(req)
@@ -282,6 +284,18 @@
         var editor = $("#" + req.ElementId).data().kendoEditor;
         var editorBody = $(editor.body)
         editorBody.attr("contenteditable", false);
+    }
+
+    function createKendoGrid(req)
+    {
+        $("#" + req.GridId).kendoGrid({
+            dataSource: req.Data,
+            //groupable: true,
+            sortable: true,
+            resizable: true,
+            dataBound: cu.isNullOrBlank(req.DataBound) ? null : req.DataBound,
+            columns: req.Columns
+        });
     }
 
 })();

@@ -102,48 +102,35 @@
     function _initGrid(data) 
     {
         setGridHeight();
-        $("#tblGuestList").kendoGrid({
-            dataSource: data,
-            //groupable: true,
-            sortable: true,
-            resizable: true,
-            dataBound: function () 
+        cu.createKendoGrid({
+            GridId: "tblGuestList",
+            Data: data,
+            DataBound: function () 
             {
-                var gridData = $("#tblGuestList").data("kendoGrid").dataSource.data();
-                for (var i = 0; i < gridData.length; i++) 
+                $("[data-editGuestButton]").click(function ()
                 {
-                        
-                    $("#btnEditGuest" + gridData[i].GuestDetailId).click(function () 
-                    {
-                        var guestDetailId = parseInt($(this).data("guestdetailid"));
-                        gce.editGuest(getGuestByGuestDetailId(guestData, guestDetailId));
-                    });
+                    var guestDetailId = parseInt($(this).data("guestdetailid"));
+                    gce.editGuest(getGuestByGuestDetailId(guestData, guestDetailId));
+                });
 
-                    $("#btnDeleteGuest" + gridData[i].GuestDetailId).click(function () 
-                    {
-                        var guestDetailId = parseInt($(this).data("guestdetailid"));
-                        gd.deleteGuestLogic(getGuestByGuestDetailId(guestData, guestDetailId));
-                    });
+                $("[data-deleteGuestButton]").click(function ()
+                {
+                    var guestDetailId = parseInt($(this).data("guestdetailid"));
+                    gd.deleteGuestLogic(getGuestByGuestDetailId(guestData, guestDetailId));
+                });
 
-                    $("#btnSendRsvpEmailToGuest" + gridData[i].GuestDetailId).click(function () 
-                    {
-                        var guestDetailId = parseInt($(this).data("guestdetailid"));
+                $("[data-sendRsvpEmailGuestButton]").click(function ()
+                {
+                    var guestDetailId = parseInt($(this).data("guestdetailid"));
                         ge.sendEmailToGuest(getGuestByGuestDetailId(guestData, guestDetailId));
-                    });
-
-                    if (cu.isNullOrBlank(guestData[i].Email))
-                    {
-                        $("#btnSendRsvpEmailToGuest" + gridData[i].GuestDetailId).prop("disabled", true);
-                    }
-
-                }
+                });
             },
-            columns: [
+            Columns: [
                 {
                     title: "Actions",
                     template: function (data) 
                     {
-                        return guestGridActionsTemplate({ GuestDetailId: data.GuestDetailId });
+                        return guestGridActionsTemplate({ GuestDetailId: data.GuestDetailId, EmailDisabled: cu.isNullOrBlank(data.Email) ? true : false});
                     },
                     width: 170
                 },

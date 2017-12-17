@@ -62,37 +62,30 @@
     function initGrid(data)
     {
         setGridHeight();
-        $("#tblEmailList").kendoGrid({
-            dataSource: data,
-            //groupable: true,
-            sortable: true,
-            resizable: true,
-            dataBound: function () 
+        cu.createKendoGrid({
+            GridId: "tblEmailList",
+            Data: data,
+            DataBound: function () 
             {
-                var gridData = $("#tblEmailList").data("kendoGrid").dataSource.data();
-                for (var i = 0; i < gridData.length; i++) 
+                $("[data-editEmailButton]").click(function ()
                 {
-                        
-                    $("#btnEditEmail" + gridData[i].Id).click(function () 
-                    {
-                        var id = parseInt($(this).data("id"));
-                        ece.editEmail(getEmailById(emailData, id));
-                    });
+                    var id = parseInt($(this).data("id"));
+                    ece.editEmail(getEmailById(emailData, id));
+                });
 
-                    $("#btnDeleteEmail" + gridData[i].Id).click(function () 
-                    {
-                        var id = parseInt($(this).data("id"));
-                        ed.deleteEmail(getEmailById(emailData, id));
-                    });
+                $("[data-deleteEmailButton]").click(function ()
+                {
+                    var id = parseInt($(this).data("id"));
+                    ed.deleteEmail(getEmailById(emailData, id));
+                });
 
-                    $("#btnSendTestEmail" + gridData[i].Id).click(function () 
-                    {
-                        var id = parseInt($(this).data("id"));
-                        et.sendTestEmail(getEmailById(emailData, id));
-                    });
-                }
+                $("[data-sendTestEmailButton]").click(function ()
+                {
+                    var id = parseInt($(this).data("id"));
+                    et.sendTestEmail(getEmailById(emailData, id));
+                });
             },
-            columns: [
+            Columns: [
                 {
                     title: "Actions",
                     template: function (data) 
