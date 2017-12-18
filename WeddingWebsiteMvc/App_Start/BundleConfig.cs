@@ -37,7 +37,8 @@ namespace WeddingWebsiteMvc
                       "~/Content/superfish.css",
                       "~/Content/magnific-popup.css",
                       "~/Content/css/style.css",
-                      "~/Content/css/Common.css"));
+                      "~/Content/css/Common.css",
+                      "~/Content/font-awesome.min.css"));
 
             bundles.Add(new ScriptBundle("~/WeddingScripts/scripts").Include(
                       "~/Scripts/modernizr-2.6.2.min.js",
