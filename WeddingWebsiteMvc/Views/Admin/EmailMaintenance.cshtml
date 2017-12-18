@@ -6,20 +6,37 @@
 @Html.Partial("../Shared/_Templates")
 
 <div id="divEmailCrudContainer">
-    <div class="divGridContainer" id="divEmailGridContainer">
-        <ul class="ulGridHdr">
-            <li class="divSection2">
-                <div class="divSection">
-                    <button class="btn btn-success btnIcon" id="btnAddNewEmail"><i class="fa fa-plus" aria-hidden="true"></i>Add Email</button>
-                </div>
-                <div class="divSection">
-                    <input class="form-control" type="text" id="txtSearchEmailGrid" placeholder="Search Grid">
-                </div>
+    <div id="emailTabstrip" class="reportTabstrip">
+        <ul>
+            <li class="k-state-active">
+                Email Maintenance
+            </li>
+            <li>
+                Sent Email Log
             </li>
         </ul>
-        <div id="tblEmailList" class="defaultGrid singleGrid"></div>
+        <div>
+            <div class="divGridContainer divEmailGridContainer" id="divEmailGridContainer">
+                <ul class="ulGridHdr">
+                    <li class="divSection2">
+                        <div class="divSection">
+                            <button class="btn btn-success btnIcon" id="btnAddNewEmail"><i class="fa fa-plus" aria-hidden="true"></i>Add Email</button>
+                        </div>
+                        <div class="divSection">
+                            <input class="form-control" type="text" id="txtSearchEmailGrid" placeholder="Search Grid">
+                        </div>
+                    </li>
+                </ul>
+                <div id="tblEmailList" class="defaultGrid singleGrid"></div>
+            </div>
+        </div>
+        <div>
+            <div class="divGridContainer">
+                <div id="tblEmailLog" class="defaultGrid singleGrid"></div>
+            </div>
+        </div>
     </div>
-
+    
     <div id="divEmailCreateEditForm" class="form-horizontal divCrudForm divGuestEmailForm hidden">
         <div class="panel panel-primary">
             <div class="panel-heading">

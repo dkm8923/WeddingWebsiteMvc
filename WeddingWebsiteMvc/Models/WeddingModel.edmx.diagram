@@ -10,6 +10,7 @@
         <AssociationConnector Association="Entities.FK_GuestDetail_GuestHeader" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Entities.WeddingDescription" Width="1.5" PointX="5.625" PointY="2.375" />
         <EntityTypeShape EntityType="Entities.Email" Width="1.5" PointX="3.375" PointY="5.75" />
+        <EntityTypeShape EntityType="Entities.EmailLog" Width="1.5" PointX="5.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

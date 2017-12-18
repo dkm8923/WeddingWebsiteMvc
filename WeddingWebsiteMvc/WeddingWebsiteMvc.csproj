@@ -211,6 +211,9 @@
     <Compile Include="Models\Email.cs">
       <DependentUpon>WeddingModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmailLog.cs">
+      <DependentUpon>WeddingModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GuestDetail.cs">
       <DependentUpon>WeddingModel.tt</DependentUpon>
     </Compile>

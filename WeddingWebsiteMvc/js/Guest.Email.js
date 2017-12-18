@@ -70,6 +70,29 @@
             ]
         });
 
+        $("#tblGuestEmailLog").kendoGrid({
+            dataSource: [],
+            //groupable: true,
+            sortable: true,
+            resizable: true,
+            columns: [
+                {
+                    field: "EmailDescription",
+                    title: "Email Desc",
+                    width: 300
+                }
+                , {
+                    field: "SentDate",
+                    title: "Sent Date",
+                    template: function (data)
+                    {
+                        return cu.convertDateToMMDDYY(data.SentDate);
+                    },
+                    width: 100
+                }
+            ]
+        });
+
         $("#btnCancelEmail").click(function ()
         {
             showHideEmailForm(false);
@@ -86,15 +109,37 @@
 
     function sendEmailToGuest(guest)
     {
-        showHideEmailForm(true); 
+        cu.showHideSpinner(true, containerElem);
 
-        resetForm();
+        var req = {
+            GuestDetailId: guest.GuestDetailId
+        };
 
-        setSingleEmailForm();
+        $.when(svc.getEmailLog(req)).done(function (logData)
+        {
+            console.log("logData");
+            console.log(logData);
+            showHideEmailForm(true); 
 
-        $("#txtEmailAddress").val(guest.Email);
+            resetForm();
 
-        $("#btnSubmitEmail").data("GuestDetailId", guest.GuestDetailId);
+            setSingleEmailForm();
+
+            $("#txtEmailAddress").val(guest.Email);
+
+            $("#btnSubmitEmail").data("GuestDetailId", guest.GuestDetailId);
+
+            //add email log data to grid
+            if (logData.length > 0)
+            {
+                $("#tblGuestEmailLog").data("kendoGrid").dataSource.data(logData);
+                $("#divEmailLogGridContainer").removeClass("hidden");
+            }
+            
+
+            cu.showHideSpinner(false, containerElem);
+        });
+        
     }
 
     function sendEmailToAllGuests()
@@ -175,9 +220,12 @@
             function _createEmailObj(guest, email)
             {
                 var req = {
-                        EmailAddress: guest.Email,
-                        EmailSubject: email.Subject,
-                        EmailBody: cu.createEmailBody({EmailBody: email.Body})
+                    EmailId: $("#ddlEmailTemplate").data("kendoDropDownList").value(),
+                    GuestDetailId: guest.GuestDetailId,
+                    IsTestEmail: false,
+                    EmailAddress: guest.Email,
+                    EmailSubject: email.Subject,
+                    EmailBody: cu.createEmailBody({EmailBody: email.Body})
                 };
 
                 return req;
@@ -195,6 +243,7 @@
     {
         $("#divEmailAddressContainer").addClass("hidden");
         $("#divEmailAddressGridContainer").removeClass("hidden");
+        $("#divEmailLogGridContainer").addClass("hidden");
     }
 
     function resetForm()

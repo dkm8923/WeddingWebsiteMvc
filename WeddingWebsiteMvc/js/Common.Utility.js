@@ -20,7 +20,8 @@
         createKendoWindow: createKendoWindow,
         createEmailBody: createEmailBody,
         disableKendoEditor: disableKendoEditor,
-        createKendoGrid: createKendoGrid
+        createKendoGrid: createKendoGrid,
+        convertDateToMMDDYY: convertDateToMMDDYY
     };
 
     function isNullOrBlank(value) 
@@ -54,7 +55,7 @@
 	        // settings
             type: req.Type,
             offset:{x:50, y: 100}
-            //,delay: 99000
+            ,delay: 99000
         });
     }
 
@@ -297,6 +298,12 @@
             columns: req.Columns
         });
     }
+
+    //convert date string to MM / DD / YYYY
+    function convertDateToMMDDYY(dateString)
+    {
+        return kendo.toString(kendo.parseDate(dateString), "MM/dd/yyyy");
+    };
 
 })();
 

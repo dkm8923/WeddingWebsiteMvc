@@ -130,7 +130,16 @@
 
     function showHideCreateEditEmailForm(show) 
     {
-        cu.showFormHideGrid({ Show: show, MainPage: "divEmailGridContainer", Form: "divEmailCreateEditForm"});
+        cu.showFormHideGrid({ Show: show, MainPage: "divEmailGridContainer", Form: "divEmailCreateEditForm" });
+
+        if (show)
+        {
+            $("#emailTabstrip").addClass("hidden");
+        }
+        else
+        {
+            $("#emailTabstrip").removeClass("hidden");
+        }
     }
 
 })();

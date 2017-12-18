@@ -175,8 +175,11 @@ namespace WeddingWebsiteMvc.Controllers
                         var guestHdr = context.GuestHeaders.Where(q => q.Active == true).ToList();
                         if (guestHdr.Count() > 0)
                         {
-                            var activeGuests = guestHdr[0].GuestDetails.Where(q => q.Active == true).ToList();
-                            guestHdr[0].GuestDetails = activeGuests;
+                            foreach (var hdr in guestHdr)
+                            {
+                                var activeGuests = hdr.GuestDetails.Where(q => q.Active == true).ToList();
+                                hdr.GuestDetails = activeGuests;
+                            }
                         }
 
                         return JsonConvert.SerializeObject(guestHdr, Formatting.None,
@@ -375,6 +378,12 @@ namespace WeddingWebsiteMvc.Controllers
                     mailMessage.Body = req.EmailBody;
 
                     smtpClient.Send(mailMessage);
+
+                    if (!req.IsTestEmail)
+                    {
+                        this.PostEmailLog(new EmailLog { EmailId = req.EmailId, GuestDetailId = req.GuestDetailId });
+                    }
+
                     return "true";
                 }
                 else
@@ -404,12 +413,111 @@ namespace WeddingWebsiteMvc.Controllers
                 throw ex;
             }
         }
+
+        public string GetEmailLog(EmailLog req)
+        {
+            try
+            {
+                if (Request.IsAuthenticated)
+                {
+                    using (WeddingEntities context = new WeddingEntities())
+                    {
+                        List<EmailLog> emailLogData;
+
+                        if (req.Id == 0)
+                        {
+                            emailLogData = context.EmailLogs.ToList();
+                        }
+                        else
+                        {
+                            emailLogData = context.EmailLogs.Where(q => q.Id == req.Id).ToList();
+                        }
+
+                        var ret = new List<EmailLogData>();
+
+                        if (emailLogData.Count() > 0)
+                        {
+                            var emailData = context.Emails.ToList();
+                            var guestDetailData = context.GuestDetails.Where(q => q.Active == true).ToList();
+
+                            foreach (var log in emailLogData)
+                            {
+                                log.SentDate = log.SentDate.ToLocalTime();
+
+                                var email = emailData.Where(q => q.Id == log.EmailId);
+                                var guestDetail = guestDetailData.Where(q => q.GuestDetailId == log.GuestDetailId).ToList();
+                                ret.Add(new EmailLogData {
+                                    GuestName = guestDetail[0].FirstName + " " + guestDetail[0].LastName,
+                                    GuestEmailAddress = guestDetail[0].Email,
+                                    EmailDescription = emailData[0].Description,
+                                    EmailSubject = emailData[0].Subject,
+                                    EmailBody = emailData[0].Body,
+                                    SentDate = log.SentDate,
+                                    GuestDetailId = log.GuestDetailId,
+                                    EmailId = log.EmailId,
+                                    Id = log.Id
+                                });
+                            }
+                        }
+                        
+                        return JsonConvert.SerializeObject(ret, Formatting.None);
+                    }
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string PostEmailLog(EmailLog req)
+        {
+            try
+            {
+                if (Request.IsAuthenticated)
+                {
+                    using (WeddingEntities context = new WeddingEntities())
+                    {
+                        req.SentDate = DateTime.Today.ToUniversalTime();
+                        req.SentBy = createdBy;
+                        context.EmailLogs.AddOrUpdate(req);
+                        context.SaveChanges();
+                        return "true";
+                    }
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
 
 public class SendEmail
 {
+    public int EmailId { get; set; }
+    public int GuestDetailId { get; set; }
+    public bool IsTestEmail { get; set; }
     public string EmailAddress { get; set; }
     public string EmailSubject { get; set; }
     public string EmailBody { get; set; }
 }
+
+public class EmailLogData : EmailLog
+{
+    public string GuestName { get; set; }
+    public string GuestEmailAddress { get; set; }
+    public string EmailDescription { get; set; }
+    public string EmailSubject { get; set; }
+    public string EmailBody { get; set; }
+}
+

@@ -15,28 +15,44 @@
     {
         cu.showHideSpinner(true, containerElem)
 
+        $("#emailTabstrip").kendoTabStrip({ animation: false });
+
         //load guest data
         $.when(svc.getEmailData()).done(function (response) 
         {
             emailData = formatEmailData(response);
 
-            $("#btnAddNewEmail").click(function ()
+            $.when(svc.getEmailLog()).done(function (logData)
             {
-                ece.addNewEmail();
-            });
+                console.log("logData");
+                console.log(logData);
 
-            $("#txtSearchEmailGrid").keyup(function (e) 
+                $("#btnAddNewEmail").click(function ()
+                {
+                    ece.addNewEmail();
+                });
+
+                $("#txtSearchEmailGrid").keyup(function (e) 
+                {
+                    cu.gridSearchLogic({SearchTextboxId: "txtSearchEmailGrid", GridId: "tblEmailList"});
+                });
+
+                initGrid(emailData);
+
+                initLogGrid(logData);
+
+                setGridHeight();
+
+                ece.init(response);
+
+                et.init();
+
+                cu.showHideSpinner(false, containerElem)
+            })
+            .fail(function ()
             {
-                cu.gridSearchLogic({SearchTextboxId: "txtSearchEmailGrid", GridId: "tblEmailList"});
+                cu.showAjaxError({ElementId: containerElem});
             });
-
-            initGrid(emailData);
-
-            ece.init(response);
-
-            et.init();
-
-            cu.showHideSpinner(false, containerElem)
         })
         .fail(function ()
         {
@@ -61,7 +77,6 @@
 
     function initGrid(data)
     {
-        setGridHeight();
         cu.createKendoGrid({
             GridId: "tblEmailList",
             Data: data,
@@ -132,9 +147,44 @@
         });
     }
 
+    function initLogGrid(data)
+    {
+        cu.createKendoGrid({
+            GridId: "tblEmailLog",
+            Data: data,
+            Columns: [
+                {
+                    field: "GuestName",
+                    title: "Guest",
+                    width: 100
+                }
+                , {
+                    field: "GuestEmailAddress",
+                    title: "Email",
+                    width: 200
+                }
+                , {
+                    field: "EmailDescription",
+                    title: "Email Desc",
+                    width: 300
+                }
+                , {
+                    field: "SentDate",
+                    title: "Sent Date",
+                    template: function (data)
+                    {
+                        return cu.convertDateToMMDDYY(data.SentDate);
+                    },
+                    width: 100
+                }
+            ]
+        });
+    }
+
     function setGridHeight()
     {
         $("#tblEmailList").height($(window).height() - 200 + "px");
+        $("#tblEmailLog").height($(window).height() - 200 + "px");
     }
 
     function getEmailById(emailData, id)
@@ -169,6 +219,7 @@
 
         setGridHeight();
         $("#tblEmailList").data("kendoGrid").resize(true);
+        $("#tblEmailLog").data("kendoGrid").resize(true);
     });
 
 })();

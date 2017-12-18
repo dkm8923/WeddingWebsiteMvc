@@ -143,6 +143,18 @@
             </div>
             <div class="panel-body">
                 <div class="col-md-10 col-md-offset-1">
+                    <div id="divEmailLogGridContainer" class="form-group">
+                        <div id="divMsgContainer">
+                            <h4 class="iconBounce"><i class="fa fa-asterisk" aria-hidden="true"></i> Grid Contains All Emails Previously Sent To Guest, Please Review!</h4>
+                        </div>
+                        <div id="tblGuestEmailLog" class="defaultGrid singleGrid"></div>
+                    </div>
+                    <div id="divEmailAddressGridContainer" class="form-group">
+                        <div id="divMsgContainer">
+                            <h4 class="iconBounce"><i class="fa fa-asterisk" aria-hidden="true"></i> All Guests Displayed In Grid Will Be Emailed, Please Review!</h4>
+                        </div>
+                        <div id="tblSendEmailToAllGuests" class="defaultGrid singleGrid"></div>
+                    </div>
                     <div class="form-group">
                         <div id="divEmailErrorMsgContainer" class="hidden"></div>
                     </div>
@@ -151,12 +163,6 @@
                         <div class="col-md-8">
                             <select id="ddlEmailTemplate"></select>
                         </div>
-                    </div>
-                    <div id="divEmailAddressGridContainer" class="form-group">
-                        <div id="divMsgContainer">
-                            <h4 class="iconBounce"><i class="fa fa-asterisk" aria-hidden="true"></i> All Guests Displayed In Grid Will Be Emailed, Please Review!</h4>
-                        </div>
-                        <div id="tblSendEmailToAllGuests" class="defaultGrid singleGrid"></div>
                     </div>
                     <div id="divEmailAddressContainer" class="form-group">
                         <label class="col-md-4 control-label" for="txtEmailAddress">Email Address: <i class="fa fa-asterisk" aria-hidden="true"></i></label>

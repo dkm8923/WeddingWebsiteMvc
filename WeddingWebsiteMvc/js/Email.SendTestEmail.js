@@ -64,6 +64,8 @@
             cu.showHideSpinner(true, containerElem);
 
             var req = {
+                EmailId: 0,
+                IsTestEmail: true,
                 EmailAddress: $("#ddlSendTestEmailEmailAddress").data("kendoDropDownList").value(),
                 EmailSubject: $("#txtSendTestEmailSubject").val(),
                 EmailBody: cu.createEmailBody({EmailBody: $("#taSendTestEmailBody").data("kendoEditor").value()})
@@ -115,7 +117,16 @@
 
     function showHideEmailForm(show) 
     {
-        cu.showFormHideGrid({ Show: show, MainPage: "divEmailGridContainer", Form: "divSendTestEmailForm"});
+        cu.showFormHideGrid({ Show: show, MainPage: "divEmailGridContainer", Form: "divSendTestEmailForm" });
+
+        if (show)
+        {
+            $("#emailTabstrip").addClass("hidden");
+        }
+        else
+        {
+            $("#emailTabstrip").removeClass("hidden");
+        }
     }
 
 })();

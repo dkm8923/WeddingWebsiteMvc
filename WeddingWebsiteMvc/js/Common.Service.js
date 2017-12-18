@@ -11,7 +11,8 @@
         deleteGuest: deleteGuest,
         attachGuestToHeader: attachGuestToHeader,
         getWeddingDescriptionData: getWeddingDescriptionData,
-        postWeddingDescriptionData: postWeddingDescriptionData
+        postWeddingDescriptionData: postWeddingDescriptionData,
+        getEmailLog: getEmailLog
     };
 
     function getGuests() 
@@ -132,4 +133,14 @@
         });
     }
 
+    function getEmailLog(req)
+    {
+        return $.ajax({
+            type: "POST",
+            url: '/admin/GetEmailLog',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: JSON.stringify(req)
+        });
+    }
 })();

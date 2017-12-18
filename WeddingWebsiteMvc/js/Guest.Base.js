@@ -5,6 +5,7 @@
     var guestHeaderData = [];
     var guestData = [];
     var emailData = [];
+    var emailLogData = [];
 
     _init();
 
@@ -29,7 +30,7 @@
 
                 guestHeaderData = formatGuestHeaderData(response);
                 guestData = formatGuestData(response);
-
+                
                 console.log("load guest header data");
                 console.log(guestHeaderData);
 
@@ -56,7 +57,8 @@
                 gce.init(response); //init guest create edit
                 ge.init(emailData); //init guest email
 
-                cu.showHideSpinner(false, containerElem)
+                cu.showHideSpinner(false, containerElem);
+                
             })
             .fail(function ()
             {
