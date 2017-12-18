@@ -55,7 +55,7 @@
 	        // settings
             type: req.Type,
             offset:{x:50, y: 100}
-            ,delay: 99000
+            //,delay: 99000
         });
     }
 
