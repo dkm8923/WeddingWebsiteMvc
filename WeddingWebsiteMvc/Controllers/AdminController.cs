@@ -56,10 +56,40 @@ namespace WeddingWebsiteMvc.Controllers
         {
             try
             {
+                if (Request.IsAuthenticated)
+                {
+                    using (WeddingEntities context = new WeddingEntities())
+                    {
+                        var descData = context.WeddingDescriptions.Where(q => q.Id == 1).ToList();
+                        return JsonConvert.SerializeObject(descData, Formatting.None);
+                    }
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string GetWeddingInitData()
+        {
+            try
+            {
                 using (WeddingEntities context = new WeddingEntities())
                 {
-                    var descData = context.WeddingDescriptions.Where(q => q.Id == 1).ToList();
-                    return JsonConvert.SerializeObject(descData, Formatting.None);
+                    var descData = context.WeddingDescriptions.Where(q => q.Id == 1).FirstOrDefault();
+                    var emailData = context.Emails.Where(q => q.Id == 11 || q.Id == 12).ToList();
+                    var ret = new WeddingInitData { WeddingDescriptionData = descData, EmailData = emailData };
+                    //return JsonConvert.SerializeObject(ret, Formatting.None);
+                    return JsonConvert.SerializeObject(ret, Formatting.None,
+                            new JsonSerializerSettings()
+                            {
+                                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                            });
                 }
             }
             catch (Exception ex)
@@ -539,4 +569,10 @@ public class EmailLogData : EmailLog
 public class EmailLogReq : EmailLog
 {
     public bool RsvpConfimationEmail { get; set; }
+}
+
+public class WeddingInitData
+{
+    public WeddingDescription WeddingDescriptionData { get; set; }
+    public List<Email> EmailData { get; set; }
 }

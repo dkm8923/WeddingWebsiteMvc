@@ -42,8 +42,10 @@ namespace WeddingWebsiteMvc
 
             bundles.Add(new ScriptBundle("~/WeddingScripts/scripts").Include(
                       "~/Scripts/modernizr-2.6.2.min.js",
+                      "~/Scripts/handlebars-v4.0.11.js",
                       "~/Scripts/wedding.template.js",
                       "~/Scripts/bootstrap-notify.min.js",
+                      "~/js/Common.Constants.js",
                       "~/js/Common.Utility.js",
                       "~/js/Common.Service.js",
                       "~/js/Wedding.Base.js"));

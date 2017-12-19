@@ -277,7 +277,6 @@
     {
         var styledEmailTemplate = Handlebars.compile(document.getElementById("styledEmailTemplate").innerHTML);
         return styledEmailTemplate({ EmailBody: req.EmailBody });
-        //return styledEmailTemplate({ EmailBody: $.parseHTML(req.EmailBody) });
     }
 
     function disableKendoEditor(req)

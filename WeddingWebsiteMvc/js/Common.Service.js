@@ -11,6 +11,7 @@
         deleteGuest: deleteGuest,
         attachGuestToHeader: attachGuestToHeader,
         getWeddingDescriptionData: getWeddingDescriptionData,
+        getWeddingInitData: getWeddingInitData,
         postWeddingDescriptionData: postWeddingDescriptionData,
         getEmailLog: getEmailLog,
         validateConfirmCode: validateConfirmCode,
@@ -124,6 +125,16 @@
         });
     }
 
+    function getWeddingInitData()
+    {
+        return $.ajax({
+            type: "GET",
+            url: '/admin/GetWeddingInitData',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json'
+        });
+    }
+
     function postWeddingDescriptionData(req)
     {
         return $.ajax({
@@ -167,4 +178,5 @@
             data: JSON.stringify(req)
         });
     }
+    
 })();

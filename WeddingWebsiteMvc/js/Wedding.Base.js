@@ -2,6 +2,7 @@
 {
     var _guestHeaderId = null;
     var defaultData = null;
+    var emailData = null;
 
     $("#liHome").addClass("active");
     window.location.href.split('#')[0];
@@ -12,9 +13,12 @@
 
     function _loadAndSetInitData()
     {
-        $.when(svc.getWeddingDescriptionData()).done(function (response)
+        $.when(svc.getWeddingInitData()).done(function (response)
         {
-            defaultData = response[0];
+            console.log(response);
+            defaultData = response.WeddingDescriptionData;
+            emailData = response.EmailData;
+
             $("#pGroomDesc").text(defaultData.GroomDescription);
             $("#pBrideDesc").text(defaultData.BrideDescription);
             $("#pCeremonyDateTimeLoc").text(defaultData.CeremonyDateTimeLocation);
@@ -26,6 +30,21 @@
         {
             console.log("Failure Loading Init Data....");
         });
+
+        //$.when(svc.getWeddingDescriptionData()).done(function (response)
+        //{
+        //    defaultData = response[0];
+        //    $("#pGroomDesc").text(defaultData.GroomDescription);
+        //    $("#pBrideDesc").text(defaultData.BrideDescription);
+        //    $("#pCeremonyDateTimeLoc").text(defaultData.CeremonyDateTimeLocation);
+        //    $("#pCeremonyDesc").text(defaultData.CeremonyDescription);
+        //    $("#pReceptionDateTimeLoc").text(defaultData.ReceptionDateTimeLocation);
+        //    $("#pReceptionDesc").text(defaultData.ReceptionDescription);
+        //})
+        //.fail(function ()
+        //{
+        //    console.log("Failure Loading Init Data....");
+        //});
     }
 
     function _initHtmlComponents() 
@@ -152,7 +171,6 @@
             {
                 $.when(svc.validateConfirmCode({ ConfirmationCode: code })).done(function (guest) 
                 {
-                    console.log(guest);
                     if (guest) 
                     {
                         _guestHeaderId = guest.GuestHeaderId;
@@ -203,19 +221,36 @@
             }
             else 
             {
+                var attending = $("#cbAttending").prop("checked");
+                var emailId = cst.confirmEmailSuccessId;
+                var emailBody = null;
+
+                if (!attending)
+                {
+                    emailId = cst.confirmEmailDeclineId;
+                }
+
+                for (var i = 0; i < emailData.length; i++)
+                {
+                    if (emailData[i].Id === emailId)
+                    {
+                        emailBody = emailData[i].Body;
+                        break;
+                    }
+                }
 
                 var req = {
                     GuestCount: guestCt,
-                    Attending: $("#cbAttending").prop("checked"),
-                    GuestHeaderId: _guestHeaderId
+                    Attending: attending,
+                    GuestHeaderId: _guestHeaderId,
+                    EmailBody: cu.createEmailBody({EmailBody: emailBody})
                 };
-
+                
                 $.when(svc.rsvp(req)).done(function (ret) 
                 {
-                    console.log(ret);
                     if (ret) 
                     {
-                        if (!$("#cbAttending").prop("checked")) 
+                        if (!attending) 
                         {
                             cu.showWeddingRsvpDeclineMessage();
                         }

@@ -39,7 +39,7 @@ namespace WeddingWebsiteMvc.Controllers
                             IsTestEmail = false,
                             EmailAddress = gd.Email,
                             EmailSubject = email.Subject,
-                            EmailBody = email.Body,
+                            EmailBody = req.EmailBody,
                             RsvpConfimationEmail = true
                         });
                     }
@@ -118,5 +118,6 @@ public class RsvpRequest
     public int GuestHeaderId { get; set; }
     public int GuestCount { get; set; }
     public bool Attending { get; set; }
+    public string EmailBody { get; set; }
 }
 
