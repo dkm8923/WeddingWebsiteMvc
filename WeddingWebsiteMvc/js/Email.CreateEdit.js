@@ -94,7 +94,7 @@
         $("#btnSubmitEmail").data("EmailId", email.Id);
 
         //disable elements if rsvp confirmation email selected
-        if (email.Id === cst.confirmEmailSuccessId || email.Id === cst.confirmEmailDeclineId)
+        if (cst.permanentEmailArray.indexOf(email.Id) > -1)
         {
             $("#txtEmailDescription").prop("disabled", true);
         }

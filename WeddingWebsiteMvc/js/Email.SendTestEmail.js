@@ -67,9 +67,17 @@
                 EmailId: 0,
                 IsTestEmail: true,
                 EmailAddress: $("#ddlSendTestEmailEmailAddress").data("kendoDropDownList").value(),
-                EmailSubject: $("#txtSendTestEmailSubject").val(),
-                EmailBody: cu.createEmailBody({EmailBody: $("#taSendTestEmailBody").data("kendoEditor").value()})
+                EmailSubject: $("#txtSendTestEmailSubject").val()
             };
+
+            if ($("#txtSendTestEmailDesription").val() == "Invitation Email" || $("#txtSendTestEmailDesription").val() == "Re-Send Confirmation Code To Guest")
+            {
+                req.EmailBody = cu.createEmailBodyWithConfirmCode({ EmailBody: $("#taSendTestEmailBody").data("kendoEditor").value(), ConfirmationCode: "TestCode1234" });
+            }
+            else
+            {
+                req.EmailBody = cu.createEmailBody({ EmailBody: $("#taSendTestEmailBody").data("kendoEditor").value() });
+            }
 
             $.when(svc.sendEmail(req)).done(function (ret)
             {

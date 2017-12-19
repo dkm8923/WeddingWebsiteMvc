@@ -33,15 +33,20 @@ namespace WeddingWebsiteMvc.Controllers
                     //set up email data
                     foreach (var gd in guest.GuestDetails)
                     {
-                        sendEmailReq.Add(new SendEmail {
-                            EmailId = email.Id,
-                            GuestDetailId = gd.GuestDetailId,
-                            IsTestEmail = false,
-                            EmailAddress = gd.Email,
-                            EmailSubject = email.Subject,
-                            EmailBody = req.EmailBody,
-                            RsvpConfimationEmail = true
-                        });
+                        //only add guests with email addresses to list
+                        if (gd.Email != null && gd.Email != "")
+                        {
+                            sendEmailReq.Add(new SendEmail
+                            {
+                                EmailId = email.Id,
+                                GuestDetailId = gd.GuestDetailId,
+                                IsTestEmail = false,
+                                EmailAddress = gd.Email,
+                                EmailSubject = email.Subject,
+                                EmailBody = req.EmailBody,
+                                RsvpConfimationEmail = true
+                            });
+                        }
                     }
 
                     guest.GuestCount = req.GuestCount;

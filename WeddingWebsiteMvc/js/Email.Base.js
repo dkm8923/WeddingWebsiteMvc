@@ -118,7 +118,7 @@
                 for (var i = 0; i < $("[data-deleteEmailButton]").length; i++)
                 {
                     var buttonId = parseInt($("[data-deleteEmailButton]")[i].dataset.id);
-                    if (buttonId === cst.confirmEmailSuccessId || buttonId === cst.confirmEmailDeclineId)
+                    if (cst.permanentEmailArray.indexOf(buttonId) > -1)
                     {
                         $("[data-deleteEmailButton]")[i].disabled = true;
                     }

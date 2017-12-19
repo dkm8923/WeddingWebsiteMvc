@@ -52,7 +52,8 @@
                     cu.gridSearchLogic({SearchTextboxId: "txtSearchGuestGrid", GridId: "tblGuestList"});
                 });
 
-                setGuestTotalData(guestData);
+                setGuestTotalData(guestHeaderData);
+                
                 _initGrid(guestData);
                 gce.init(response); //init guest create edit
                 ge.init(emailData); //init guest email
@@ -93,8 +94,8 @@
                             
         guestData = formatGuestData(guestHeaderData);
 
-        setGuestTotalData(guestData);
-
+        setGuestTotalData(guestHeaderData);
+        
         cu.bindAndRefreshGrid({GridId: "tblGuestList", Data: guestData});
 
         $("#txtSearchGuestGrid").val("");
@@ -124,8 +125,19 @@
                 $("[data-sendRsvpEmailGuestButton]").click(function ()
                 {
                     var guestDetailId = parseInt($(this).data("guestdetailid"));
-                        ge.sendEmailToGuest(getGuestByGuestDetailId(guestData, guestDetailId));
+                    ge.sendEmailToGuest(getGuestByGuestDetailId(guestData, guestDetailId));
                 });
+
+                var gridData = $("#tblGuestList").data("kendoGrid").dataSource.data();
+                for (var i = 0; i < gridData.length; i++)
+                {
+                    if (gridData[i].UnknownGuest)
+                    {
+                        //console.log("Unknown Guest");
+                        //console.log(gridData[i]);
+                        $("#divGuestGridActions" + gridData[i].GuestDetailId).parent().parent().addClass("gridColumnWarning");
+                    }
+                }
             },
             Columns: [
                 {
@@ -135,8 +147,13 @@
                         return guestGridActionsTemplate({ GuestDetailId: data.GuestDetailId, EmailDisabled: cu.isNullOrBlank(data.Email) ? true : false});
                     },
                     width: 170
-                },
-                {
+                }
+                , {
+                    field: "ConfirmationCode",
+                    title: "Code",
+                    width: 150
+                }
+                ,{
                     field: "FirstName",
                     title: "First Name",
                     width: 100
@@ -212,6 +229,13 @@
                 nameString += guest.FirstName + " " + guest.LastName + " ";
             }
 
+            guestHeaderData[i].UnknownGuest = false;
+
+            if ((parseInt(guestHeaderData[i].GuestCount) != guestHeaderData[i].GuestDetails.length) && guestHeaderData[i].CheckedIn && guestHeaderData[i].Attending)
+            {
+                guestHeaderData[i].UnknownGuest = true;
+            }
+
             guestHeaderData[i].NameString = nameString;
         }
 
@@ -236,7 +260,9 @@
                 guest.CheckedIn = guestHeaderData[i].CheckedIn;
                 guest.Attending = guestHeaderData[i].Attending;
                 guest.Family = guestHeaderData[i].Family;
+                guest.GuestCount = guestHeaderData[i].GuestCount
                 guest.ConfirmationCode = guestHeaderData[i].ConfirmationCode
+                guest.UnknownGuest = guestHeaderData[i].UnknownGuest
                 guest.GridSearchText = guest.FirstName + " " + guest.LastName + " " + guest.Email;
 
                 guestData.push(guest);
@@ -257,25 +283,25 @@
         {
             if (data[i].Family === 1)
             {
-                totalBrideGuestCt += 1;
+                totalBrideGuestCt += data[i].GuestDetails.length;
             }
             else
             {
-                totalGroomGuestCt += 1;
+                totalGroomGuestCt += data[i].GuestDetails.length;
             }
 
             if (data[i].CheckedIn == true)
             {
-                totalCheckedInCt += 1;
+                totalCheckedInCt += data[i].GuestDetails.length;
             }
 
             if (data[i].Attending == true)
             {
-                totalAttendingCt += 1;
+                totalAttendingCt += data[i].GuestCount;
             }
         }
 
-        $("#spnTotalGuests").text(data.length);
+        $("#spnTotalGuests").text(parseInt(totalBrideGuestCt) + parseInt(totalGroomGuestCt));
         $("#spnTotalBrideGuests").text(totalBrideGuestCt);
         $("#spnTotalGroomGuests").text(totalGroomGuestCt);
         $("#spnTotalCheckedIn").text(totalCheckedInCt);

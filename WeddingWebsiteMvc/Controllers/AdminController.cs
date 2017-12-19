@@ -395,7 +395,7 @@ namespace WeddingWebsiteMvc.Controllers
         {
             try
             {
-                if (req.RsvpConfimationEmail || Request.IsAuthenticated)
+                if ((req.RsvpConfimationEmail || Request.IsAuthenticated) && req.EmailAddress != null && req.EmailAddress != "")
                 {
                     SmtpClient smtpClient = new SmtpClient("wedding.danielkevinmauk.com", 25);
 

@@ -219,14 +219,24 @@
 
             function _createEmailObj(guest, email)
             {
+                var emailId = parseInt($("#ddlEmailTemplate").data("kendoDropDownList").value());
+
                 var req = {
-                    EmailId: $("#ddlEmailTemplate").data("kendoDropDownList").value(),
+                    EmailId: emailId,
                     GuestDetailId: guest.GuestDetailId,
                     IsTestEmail: false,
                     EmailAddress: guest.Email,
-                    EmailSubject: email.Subject,
-                    EmailBody: cu.createEmailBody({EmailBody: email.Body})
+                    EmailSubject: email.Subject
                 };
+
+                if (cst.sendConfirmCodeEmailArray.indexOf(emailId) > -1)
+                {
+                    req.EmailBody = cu.createEmailBodyWithConfirmCode({ EmailBody: email.Body, ConfirmationCode: guest.ConfirmationCode });
+                }
+                else
+                {
+                    req.EmailBody = cu.createEmailBody({ EmailBody: email.Body });
+                }
 
                 return req;
             }

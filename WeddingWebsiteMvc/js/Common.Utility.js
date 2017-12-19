@@ -19,6 +19,7 @@
         showFormHideGrid: showFormHideGrid,
         createKendoWindow: createKendoWindow,
         createEmailBody: createEmailBody,
+        createEmailBodyWithConfirmCode: createEmailBodyWithConfirmCode,
         disableKendoEditor: disableKendoEditor,
         createKendoGrid: createKendoGrid,
         convertDateToMMDDYY: convertDateToMMDDYY
@@ -276,7 +277,13 @@
     function createEmailBody(req)
     {
         var styledEmailTemplate = Handlebars.compile(document.getElementById("styledEmailTemplate").innerHTML);
-        return styledEmailTemplate({ EmailBody: req.EmailBody });
+        return styledEmailTemplate({ EmailBody: req.EmailBody, ShowConfirmCode: false });
+    }
+
+    function createEmailBodyWithConfirmCode(req)
+    {
+        var styledEmailTemplate = Handlebars.compile(document.getElementById("styledEmailTemplate").innerHTML);
+        return styledEmailTemplate({ EmailBody: req.EmailBody, ShowConfirmCode: true, ConfirmationCode: req.ConfirmationCode });
     }
 
     function disableKendoEditor(req)
@@ -290,7 +297,7 @@
     {
         $("#" + req.GridId).kendoGrid({
             dataSource: req.Data,
-            //groupable: true,
+            //groupable: req.Groupable ? true : false,
             sortable: true,
             resizable: true,
             dataBound: cu.isNullOrBlank(req.DataBound) ? null : req.DataBound,

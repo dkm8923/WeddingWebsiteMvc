@@ -163,6 +163,7 @@
         $("#txtCity").val(guest.City);
         $("#ddlState").data("kendoDropDownList").value(guest.State)
         $("#txtZip").val(guest.Zip);
+        $("#txtGuestCount").val(guest.GuestCount);
         $("#txtConfirmationCode").val(guest.ConfirmationCode);
         $("input[name=rbFamily][value=" + guest.Family + "]").prop('checked', true);
 
