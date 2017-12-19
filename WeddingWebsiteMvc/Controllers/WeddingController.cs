@@ -48,12 +48,30 @@ namespace WeddingWebsiteMvc.Controllers
             {
                 using (WeddingEntities context = new WeddingEntities())
                 {
-                    var guest = context.GuestHeaders.FirstOrDefault(q => q.ConfirmationCode == req.ConfirmationCode);
+                    var guest = context.GuestHeaders.Where(q => q.ConfirmationCode == req.ConfirmationCode && q.Active == true).FirstOrDefault();
+                    this.logConfirmationAttempt(new ConfirmationCodeLog {ConfirmationCode = req.ConfirmationCode });
                     return JsonConvert.SerializeObject(guest, Formatting.None,
                         new JsonSerializerSettings()
                         {
                             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                         });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void logConfirmationAttempt(ConfirmationCodeLog req)
+        {
+            try
+            {
+                using (WeddingEntities context = new WeddingEntities())
+                {
+                    req.AttemptDateTime = DateTime.UtcNow.ToUniversalTime();
+                    context.ConfirmationCodeLogs.AddOrUpdate(req);
+                    context.SaveChanges();
                 }
             }
             catch (Exception ex)

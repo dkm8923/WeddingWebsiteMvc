@@ -4,13 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bf8874055b4b412a8bd28ec8665918a5" Name="Diagram1" ZoomLevel="98">
+      <Diagram DiagramId="bf8874055b4b412a8bd28ec8665918a5" Name="Diagram1" ZoomLevel="77">
         <EntityTypeShape EntityType="Entities.GuestDetail" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Entities.GuestHeader" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="Entities.FK_GuestDetail_GuestHeader" ManuallyRouted="false" />
         <EntityTypeShape EntityType="Entities.WeddingDescription" Width="1.5" PointX="5.625" PointY="2.375" />
         <EntityTypeShape EntityType="Entities.Email" Width="1.5" PointX="3.375" PointY="5.75" />
         <EntityTypeShape EntityType="Entities.EmailLog" Width="1.5" PointX="5.375" PointY="5.75" />
+        <EntityTypeShape EntityType="Entities.ConfirmationCodeLog" Width="1.5" PointX="0.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -12,7 +12,7 @@
 
     function _loadAndSetInitData()
     {
-        $.when(_getWeddingDescriptionData()).done(function (response)
+        $.when(svc.getWeddingDescriptionData()).done(function (response)
         {
             defaultData = response[0];
             $("#pGroomDesc").text(defaultData.GroomDescription);
@@ -132,39 +132,6 @@
         $("#divErrorMsgContainer").append("<span class='errorMsgWedding iconBounce'>" + msg + "</span>");
     }
 
-    function _validateConfirmCode(code) 
-    {
-        var req = { ConfirmationCode: code };
-        return $.ajax({
-            type: "POST",
-            url: 'Wedding/ValidateConfirmationCode',
-            contentType: "application/json; charset=utf-8",
-            dataType: 'json',
-            data: JSON.stringify(req)
-        });
-    }
-
-    function _RSVP(req) 
-    {
-        return $.ajax({
-            type: "POST",
-            url: 'Wedding/RSVP',
-            contentType: "application/json; charset=utf-8",
-            dataType: 'json',
-            data: JSON.stringify(req)
-        });
-    }
-
-    function _getWeddingDescriptionData()
-    {
-        return $.ajax({
-            type: "GET",
-            url: '/admin/GetWeddingDescriptionData',
-            contentType: "application/json; charset=utf-8",
-            dataType: 'json'
-        });
-    }
-
     function _initRsvpForm() 
     {
         //init RSVP form
@@ -183,7 +150,7 @@
             }
             else 
             {
-                $.when(_validateConfirmCode(code)).done(function (guest) 
+                $.when(svc.validateConfirmCode({ ConfirmationCode: code })).done(function (guest) 
                 {
                     console.log(guest);
                     if (guest) 
@@ -243,7 +210,7 @@
                     GuestHeaderId: _guestHeaderId
                 };
 
-                $.when(_RSVP(req)).done(function (ret) 
+                $.when(svc.rsvp(req)).done(function (ret) 
                 {
                     console.log(ret);
                     if (ret) 

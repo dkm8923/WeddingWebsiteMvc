@@ -45,6 +45,7 @@ namespace WeddingWebsiteMvc
                       "~/Scripts/wedding.template.js",
                       "~/Scripts/bootstrap-notify.min.js",
                       "~/js/Common.Utility.js",
+                      "~/js/Common.Service.js",
                       "~/js/Wedding.Base.js"));
 
             bundles.Add(new StyleBundle("~/Content/KendoCss").Include(

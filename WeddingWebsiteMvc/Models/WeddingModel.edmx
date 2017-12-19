@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="Entities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ConfirmationCodeLog">
+          <Key>
+            <PropertyRef Name="AttemptId" />
+          </Key>
+          <Property Name="AttemptId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfirmationCode" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="AttemptDateTime" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Email">
           <Key>
             <PropertyRef Name="Id" />
@@ -85,6 +93,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="EntitiesStoreContainer">
+          <EntitySet Name="ConfirmationCodeLog" EntityType="Self.ConfirmationCodeLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Email" EntityType="Self.Email" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailLog" EntityType="Self.EmailLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GuestDetail" EntityType="Self.GuestDetail" Schema="dbo" store:Type="Tables" />
@@ -159,6 +168,7 @@
           <EntitySet Name="WeddingDescriptions" EntityType="Entities.WeddingDescription" />
           <EntitySet Name="Emails" EntityType="Entities.Email" />
           <EntitySet Name="EmailLogs" EntityType="Entities.EmailLog" />
+          <EntitySet Name="ConfirmationCodeLogs" EntityType="Entities.ConfirmationCodeLog" />
         </EntityContainer>
         <EntityType Name="WeddingDescription">
           <Key>
@@ -190,6 +200,14 @@
           <Property Name="SentDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="SentBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="GuestDetailId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConfirmationCodeLog">
+          <Key>
+            <PropertyRef Name="AttemptId" />
+          </Key>
+          <Property Name="AttemptId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfirmationCode" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AttemptDateTime" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -266,6 +284,15 @@
                 <ScalarProperty Name="SentDate" ColumnName="SentDate" />
                 <ScalarProperty Name="EmailId" ColumnName="EmailId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConfirmationCodeLogs">
+            <EntityTypeMapping TypeName="Entities.ConfirmationCodeLog">
+              <MappingFragment StoreEntitySet="ConfirmationCodeLog">
+                <ScalarProperty Name="AttemptDateTime" ColumnName="AttemptDateTime" />
+                <ScalarProperty Name="ConfirmationCode" ColumnName="ConfirmationCode" />
+                <ScalarProperty Name="AttemptId" ColumnName="AttemptId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

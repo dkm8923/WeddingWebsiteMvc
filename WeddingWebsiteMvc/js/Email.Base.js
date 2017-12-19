@@ -26,6 +26,7 @@
             {
                 console.log("logData");
                 console.log(logData);
+                var logData = formatEmailLogData(logData);
 
                 $("#btnAddNewEmail").click(function ()
                 {
@@ -35,6 +36,11 @@
                 $("#txtSearchEmailGrid").keyup(function (e) 
                 {
                     cu.gridSearchLogic({SearchTextboxId: "txtSearchEmailGrid", GridId: "tblEmailList"});
+                });
+
+                $("#txtSearchEmailLogGrid").keyup(function (e) 
+                {
+                    cu.gridSearchLogic({SearchTextboxId: "txtSearchEmailLogGrid", GridId: "tblEmailLog"});
                 });
 
                 initGrid(emailData);
@@ -65,6 +71,16 @@
         for (var i = 0; i < data.length; i++)
         {
             data[i].GridSearchText = data[i].Description + " " + data[i].Subject + " " + data[i].Body;
+        }
+
+        return data;
+    }
+
+    function formatEmailLogData(data)
+    {
+        for (var i = 0; i < data.length; i++)
+        {
+            data[i].GridSearchText = data[i].EmailBody + " " + data[i].EmailDescription + " " + data[i].EmailSubject + " " + data[i].GuestEmailAddress + " " + data[i].GuestName + " " + data[i].SentDate;
         }
 
         return data;
@@ -163,9 +179,14 @@
                     title: "Email",
                     width: 200
                 }
+                ,{
+                    field: "EmailSubject",
+                    title: "Subject",
+                    width: 300
+                }
                 , {
                     field: "EmailDescription",
-                    title: "Email Desc",
+                    title: "Description",
                     width: 300
                 }
                 , {

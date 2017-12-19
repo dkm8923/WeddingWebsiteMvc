@@ -401,12 +401,20 @@ namespace WeddingWebsiteMvc.Controllers
         {
             try
             {
-                foreach (var email in req)
+                if (Request.IsAuthenticated)
                 {
-                    this.SendEmail(email);
+                    foreach (var email in req)
+                    {
+                        this.SendEmail(email);
+                    }
+
+                    return "true";
+                }
+                else
+                {
+                    throw new Exception();
                 }
 
-                return "true";
             }
             catch (Exception ex)
             {
@@ -482,7 +490,7 @@ namespace WeddingWebsiteMvc.Controllers
                 {
                     using (WeddingEntities context = new WeddingEntities())
                     {
-                        req.SentDate = DateTime.Today.ToUniversalTime();
+                        req.SentDate = DateTime.UtcNow.ToUniversalTime();
                         req.SentBy = createdBy;
                         context.EmailLogs.AddOrUpdate(req);
                         context.SaveChanges();

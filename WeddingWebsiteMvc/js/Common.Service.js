@@ -12,7 +12,9 @@
         attachGuestToHeader: attachGuestToHeader,
         getWeddingDescriptionData: getWeddingDescriptionData,
         postWeddingDescriptionData: postWeddingDescriptionData,
-        getEmailLog: getEmailLog
+        getEmailLog: getEmailLog,
+        validateConfirmCode: validateConfirmCode,
+        rsvp: rsvp
     };
 
     function getGuests() 
@@ -138,6 +140,28 @@
         return $.ajax({
             type: "POST",
             url: '/admin/GetEmailLog',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: JSON.stringify(req)
+        });
+    }
+
+    function validateConfirmCode(req) 
+    {
+        return $.ajax({
+            type: "POST",
+            url: '/Wedding/ValidateConfirmationCode',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: JSON.stringify(req)
+        });
+    }
+
+    function rsvp(req) 
+    {
+        return $.ajax({
+            type: "POST",
+            url: '/Wedding/RSVP',
             contentType: "application/json; charset=utf-8",
             dataType: 'json',
             data: JSON.stringify(req)
