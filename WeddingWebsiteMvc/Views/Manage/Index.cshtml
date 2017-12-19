@@ -10,6 +10,13 @@
     <h4>Change your account settings</h4>
     <hr />
     <dl class="dl-horizontal">
+        @if (Context.User.Identity.Name == "dkm8923@gmail.com")
+        {
+            <dt>Register New Account:</dt>
+            <dd>
+                @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+            </dd>
+        }
         <dt>Password:</dt>
         <dd>
             [

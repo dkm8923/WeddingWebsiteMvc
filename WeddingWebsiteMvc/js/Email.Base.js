@@ -21,11 +21,10 @@
         $.when(svc.getEmailData()).done(function (response) 
         {
             emailData = formatEmailData(response);
+            console.log(emailData);
 
             $.when(svc.getEmailLog()).done(function (logData)
             {
-                console.log("logData");
-                console.log(logData);
                 var logData = formatEmailLogData(logData);
 
                 $("#btnAddNewEmail").click(function ()
@@ -115,6 +114,15 @@
                     var id = parseInt($(this).data("id"));
                     et.sendTestEmail(getEmailById(emailData, id));
                 });
+
+                for (var i = 0; i < $("[data-deleteEmailButton]").length; i++)
+                {
+                    var buttonId = parseInt($("[data-deleteEmailButton]")[i].dataset.id);
+                    if (buttonId === cst.confirmEmailSuccessId || buttonId === cst.confirmEmailDeclineId)
+                    {
+                        $("[data-deleteEmailButton]")[i].disabled = true;
+                    }
+                }
             },
             Columns: [
                 {
@@ -178,11 +186,6 @@
                     field: "GuestEmailAddress",
                     title: "Email",
                     width: 200
-                }
-                ,{
-                    field: "EmailSubject",
-                    title: "Subject",
-                    width: 300
                 }
                 , {
                     field: "EmailDescription",

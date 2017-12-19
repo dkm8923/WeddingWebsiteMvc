@@ -365,7 +365,7 @@ namespace WeddingWebsiteMvc.Controllers
         {
             try
             {
-                if (Request.IsAuthenticated)
+                if (req.RsvpConfimationEmail || Request.IsAuthenticated)
                 {
                     SmtpClient smtpClient = new SmtpClient("wedding.danielkevinmauk.com", 25);
 
@@ -381,7 +381,7 @@ namespace WeddingWebsiteMvc.Controllers
 
                     if (!req.IsTestEmail)
                     {
-                        this.PostEmailLog(new EmailLog { EmailId = req.EmailId, GuestDetailId = req.GuestDetailId });
+                        this.PostEmailLog(new EmailLogReq { EmailId = req.EmailId, GuestDetailId = req.GuestDetailId, RsvpConfimationEmail = req.RsvpConfimationEmail });
                     }
 
                     return "true";
@@ -452,14 +452,14 @@ namespace WeddingWebsiteMvc.Controllers
                             {
                                 log.SentDate = log.SentDate.ToLocalTime();
 
-                                var email = emailData.Where(q => q.Id == log.EmailId);
+                                var email = emailData.Where(q => q.Id == log.EmailId).FirstOrDefault();
                                 var guestDetail = guestDetailData.Where(q => q.GuestDetailId == log.GuestDetailId).ToList();
                                 ret.Add(new EmailLogData {
                                     GuestName = guestDetail[0].FirstName + " " + guestDetail[0].LastName,
                                     GuestEmailAddress = guestDetail[0].Email,
-                                    EmailDescription = emailData[0].Description,
-                                    EmailSubject = emailData[0].Subject,
-                                    EmailBody = emailData[0].Body,
+                                    EmailDescription = email.Description,
+                                    EmailSubject = email.Subject,
+                                    EmailBody = email.Body,
                                     SentDate = log.SentDate,
                                     GuestDetailId = log.GuestDetailId,
                                     EmailId = log.EmailId,
@@ -482,17 +482,23 @@ namespace WeddingWebsiteMvc.Controllers
             }
         }
 
-        public string PostEmailLog(EmailLog req)
+        public string PostEmailLog(EmailLogReq req)
         {
             try
             {
-                if (Request.IsAuthenticated)
+                if (req.RsvpConfimationEmail || Request.IsAuthenticated)
                 {
                     using (WeddingEntities context = new WeddingEntities())
                     {
-                        req.SentDate = DateTime.UtcNow.ToUniversalTime();
-                        req.SentBy = createdBy;
-                        context.EmailLogs.AddOrUpdate(req);
+                        var logReq = new EmailLog
+                        {
+                            EmailId = req.EmailId,
+                            GuestDetailId = req.GuestDetailId,
+                            SentDate = DateTime.UtcNow.ToUniversalTime(),
+                            SentBy = createdBy
+                        };
+                        
+                        context.EmailLogs.AddOrUpdate(logReq);
                         context.SaveChanges();
                         return "true";
                     }
@@ -518,6 +524,7 @@ public class SendEmail
     public string EmailAddress { get; set; }
     public string EmailSubject { get; set; }
     public string EmailBody { get; set; }
+    public bool RsvpConfimationEmail { get; set; }
 }
 
 public class EmailLogData : EmailLog
@@ -529,3 +536,7 @@ public class EmailLogData : EmailLog
     public string EmailBody { get; set; }
 }
 
+public class EmailLogReq : EmailLog
+{
+    public bool RsvpConfimationEmail { get; set; }
+}

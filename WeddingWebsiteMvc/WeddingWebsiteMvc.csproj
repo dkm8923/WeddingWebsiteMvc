@@ -332,6 +332,7 @@
     <Content Include="images\Westfall3.jpg" />
     <Content Include="images\Westfall4.jpg" />
     <Content Include="images\WestfallOutdoorCeremony.png" />
+    <Content Include="js\Common.Constants.js" />
     <Content Include="js\Email.Base.js" />
     <Content Include="js\Email.CreateEdit.js" />
     <Content Include="js\Email.Delete.js" />
@@ -412,6 +413,7 @@
     <Content Include="fonts\icomoon\icomoon.ttf" />
     <Content Include="fonts\icomoon\icomoon.woff" />
     <Content Include="Content\less\Login.less" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\DanielKevinMauk.com.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />

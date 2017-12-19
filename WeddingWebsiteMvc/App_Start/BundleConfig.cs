@@ -65,6 +65,7 @@ namespace WeddingWebsiteMvc
                       "~/Scripts/bootstrap-notify.min.js"));
 
             bundles.Add(new ScriptBundle("~/AppLogic/scripts").Include(
+                      "~/js/Common.Constants.js",
                       "~/js/Common.Service.js",
                       "~/js/Common.Utility.js"));
 

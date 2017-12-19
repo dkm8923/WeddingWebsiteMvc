@@ -92,7 +92,13 @@
         $("#taEmailBody").data("kendoEditor").value(email.Body);
 
         $("#btnSubmitEmail").data("EmailId", email.Id);
-       
+
+        //disable elements if rsvp confirmation email selected
+        if (email.Id === cst.confirmEmailSuccessId || email.Id === cst.confirmEmailDeclineId)
+        {
+            $("#txtEmailDescription").prop("disabled", true);
+        }
+        
         showHideCreateEditEmailForm(true);
     }
 
@@ -120,7 +126,8 @@
 
     function _resetForm() 
     {
-        fv.clearFormValidation({ErrorMsgContainer: "divEmailErrorMsgContainer"});
+        fv.clearFormValidation({ ErrorMsgContainer: "divEmailErrorMsgContainer" });
+        $("#txtEmailDescription").prop("disabled", false);
         $("#txtEmailDescription").val("");
         $("#txtEmailSubject").val("");
         $("#taEmailBody").data("kendoEditor").value(null);
