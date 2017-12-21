@@ -399,7 +399,7 @@ namespace WeddingWebsiteMvc.Controllers
                 {
                     SmtpClient smtpClient = new SmtpClient("wedding.danielkevinmauk.com", 25);
 
-                    smtpClient.Credentials = new System.Net.NetworkCredential("donotreply@danielkevinmauk.com", "bYn5y0@1");
+                    smtpClient.Credentials = new System.Net.NetworkCredential("donotreply@danielkevinmauk.com", "E8su?s63");
                     smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
 
                     MailMessage mailMessage = new MailMessage("DoNotReply@Wedding.DanielKevinMauk.com", req.EmailAddress);

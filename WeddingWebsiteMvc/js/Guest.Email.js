@@ -129,6 +129,8 @@
 
             $("#btnSubmitEmail").data("GuestDetailId", guest.GuestDetailId);
 
+            $("#divEmailLogGridContainer").addClass("hidden");
+
             //add email log data to grid
             if (logData.length > 0)
             {
