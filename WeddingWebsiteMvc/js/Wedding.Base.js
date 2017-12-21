@@ -15,7 +15,7 @@
     {
         $.when(svc.getWeddingInitData()).done(function (response)
         {
-            console.log(response);
+            //console.log(response);
             defaultData = response.WeddingDescriptionData;
             emailData = response.EmailData;
 
@@ -30,21 +30,6 @@
         {
             console.log("Failure Loading Init Data....");
         });
-
-        //$.when(svc.getWeddingDescriptionData()).done(function (response)
-        //{
-        //    defaultData = response[0];
-        //    $("#pGroomDesc").text(defaultData.GroomDescription);
-        //    $("#pBrideDesc").text(defaultData.BrideDescription);
-        //    $("#pCeremonyDateTimeLoc").text(defaultData.CeremonyDateTimeLocation);
-        //    $("#pCeremonyDesc").text(defaultData.CeremonyDescription);
-        //    $("#pReceptionDateTimeLoc").text(defaultData.ReceptionDateTimeLocation);
-        //    $("#pReceptionDesc").text(defaultData.ReceptionDescription);
-        //})
-        //.fail(function ()
-        //{
-        //    console.log("Failure Loading Init Data....");
-        //});
     }
 
     function _initHtmlComponents() 
