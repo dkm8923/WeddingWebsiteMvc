@@ -80,6 +80,12 @@ namespace WeddingWebsiteMvc.Controllers
                 using (WeddingEntities context = new WeddingEntities())
                 {
                     var guest = context.GuestHeaders.Where(q => q.ConfirmationCode == req.ConfirmationCode && q.Active == true).FirstOrDefault();
+
+                    if (guest.GuestDetails.Count > 0)
+                    {
+
+                    }
+
                     this.LogConfirmationAttempt(new ConfirmationCodeLog {ConfirmationCode = req.ConfirmationCode });
                     return JsonConvert.SerializeObject(guest, Formatting.None,
                         new JsonSerializerSettings()

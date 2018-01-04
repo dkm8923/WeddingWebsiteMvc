@@ -42,6 +42,11 @@
                     gce.addNewGuest();
                 });
 
+                //$("#btnExportToExcel").click(function ()
+                //{
+                //    cu.exportGrid("tblGuestList", "Guest Data", false, false);
+                //});
+
                 $("#btnSendMassEmail").click(function ()
                 {
                     ge.sendEmailToAllGuests();
@@ -142,6 +147,7 @@
             Columns: [
                 {
                     title: "Actions",
+                    //columnMenu: false,
                     template: function (data) 
                     {
                         return guestGridActionsTemplate({ GuestDetailId: data.GuestDetailId, EmailDisabled: cu.isNullOrBlank(data.Email) ? true : false});

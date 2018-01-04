@@ -140,6 +140,10 @@
             
 
             cu.showHideSpinner(false, containerElem);
+        })
+        .fail(function ()
+        {
+            cu.showAjaxError({ElementId: containerElem});
         });
         
     }

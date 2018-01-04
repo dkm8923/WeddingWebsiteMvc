@@ -22,7 +22,8 @@
         createEmailBodyWithConfirmCode: createEmailBodyWithConfirmCode,
         disableKendoEditor: disableKendoEditor,
         createKendoGrid: createKendoGrid,
-        convertDateToMMDDYY: convertDateToMMDDYY
+        convertDateToMMDDYY: convertDateToMMDDYY,
+        exportGrid: exportGrid
     };
 
     function isNullOrBlank(value) 
@@ -301,6 +302,7 @@
             sortable: true,
             resizable: true,
             dataBound: cu.isNullOrBlank(req.DataBound) ? null : req.DataBound,
+            //columnMenu: true,
             columns: req.Columns
         });
     }
@@ -310,6 +312,30 @@
     {
         return kendo.toString(kendo.parseDate(dateString), "MM/dd/yyyy");
     };
+
+    //Exports a given Kendo Grid to Excel
+    function exportGrid(gridname, fileName, dateStamp, filterable)
+    {
+        if ($("#" + gridname).data("kendoGrid"))
+        {
+            var grid = $("#" + gridname).data("kendoGrid");
+
+            if (fileName)
+            {
+                if (dateStamp)
+                {
+                    grid.options.excel.fileName = fileName + kendo.toString(new Date(), " yyyy-MM-dd HH.mm.ss") + ".xlsx";
+                }
+                else
+                {
+                    grid.options.excel.fileName = fileName + ".xlsx";
+                }
+            }
+
+            grid.options.excel.filterable = filterable;
+            grid.saveAsExcel();
+        }
+    }
 
 })();
 

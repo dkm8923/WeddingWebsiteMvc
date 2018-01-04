@@ -461,14 +461,19 @@ namespace WeddingWebsiteMvc.Controllers
                     using (WeddingEntities context = new WeddingEntities())
                     {
                         List<EmailLog> emailLogData;
+                        List<GuestDetail> guestDetailData;
 
-                        if (req.Id == 0)
+                        if (req.GuestDetailId == 0)
                         {
+                            //entire email log
                             emailLogData = context.EmailLogs.ToList();
+                            guestDetailData = context.GuestDetails.Where(q => q.Active == true).ToList();
                         }
                         else
                         {
-                            emailLogData = context.EmailLogs.Where(q => q.Id == req.Id).ToList();
+                            //email log for specific guest
+                            emailLogData = context.EmailLogs.Where(q => q.GuestDetailId == req.GuestDetailId).ToList();
+                            guestDetailData = context.GuestDetails.Where(q => q.Active == true && q.GuestDetailId == req.GuestDetailId).ToList();
                         }
 
                         var ret = new List<EmailLogData>();
@@ -476,14 +481,14 @@ namespace WeddingWebsiteMvc.Controllers
                         if (emailLogData.Count() > 0)
                         {
                             var emailData = context.Emails.ToList();
-                            var guestDetailData = context.GuestDetails.Where(q => q.Active == true).ToList();
-
+                            
                             foreach (var log in emailLogData)
                             {
                                 log.SentDate = log.SentDate.ToLocalTime();
 
                                 var email = emailData.Where(q => q.Id == log.EmailId).FirstOrDefault();
                                 var guestDetail = guestDetailData.Where(q => q.GuestDetailId == log.GuestDetailId).ToList();
+
                                 ret.Add(new EmailLogData {
                                     GuestName = guestDetail[0].FirstName + " " + guestDetail[0].LastName,
                                     GuestEmailAddress = guestDetail[0].Email,
