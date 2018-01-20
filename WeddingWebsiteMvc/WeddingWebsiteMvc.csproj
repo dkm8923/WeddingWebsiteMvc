@@ -225,6 +225,12 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\UsaState.cs">
+      <DependentUpon>WeddingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UsaZipCode.cs">
+      <DependentUpon>WeddingModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\WeddingDescription.cs">
       <DependentUpon>WeddingModel.tt</DependentUpon>
     </Compile>
@@ -449,7 +455,9 @@
     <Content Include="Scripts\sticky.js" />
     <Content Include="Scripts\superfish.js" />
     <Content Include="Scripts\wedding.template.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

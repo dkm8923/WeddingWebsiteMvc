@@ -15,7 +15,9 @@
         postWeddingDescriptionData: postWeddingDescriptionData,
         getEmailLog: getEmailLog,
         validateConfirmCode: validateConfirmCode,
-        rsvp: rsvp
+        rsvp: rsvp,
+        getUsStates: getUsStates,
+        getAddressDataByZip: getAddressDataByZip
     };
 
     function getGuests() 
@@ -178,5 +180,26 @@
             data: JSON.stringify(req)
         });
     }
-    
+
+    function getUsStates() 
+    {
+        return $.ajax({
+            type: "GET",
+            url: '/admin/GetUsStates',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json'
+        });
+    }
+
+    function getAddressDataByZip(req) 
+    {
+        return $.ajax({
+            type: "POST",
+            url: '/admin/GetAddressDataByZip',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: JSON.stringify(req)
+        });
+    }
+
 })();

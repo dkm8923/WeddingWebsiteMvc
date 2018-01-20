@@ -31,5 +31,7 @@ namespace WeddingWebsiteMvc.Models
         public virtual DbSet<Email> Emails { get; set; }
         public virtual DbSet<EmailLog> EmailLogs { get; set; }
         public virtual DbSet<ConfirmationCodeLog> ConfirmationCodeLogs { get; set; }
+        public virtual DbSet<UsaState> UsaStates { get; set; }
+        public virtual DbSet<UsaZipCode> UsaZipCodes { get; set; }
     }
 }

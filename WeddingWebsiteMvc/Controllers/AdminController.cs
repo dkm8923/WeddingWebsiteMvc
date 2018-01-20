@@ -52,6 +52,8 @@ namespace WeddingWebsiteMvc.Controllers
             }
         }
 
+        #region Get
+
         public string GetWeddingDescriptionData()
         {
             try
@@ -98,31 +100,6 @@ namespace WeddingWebsiteMvc.Controllers
             }
         }
 
-        public string PostWeddingDescriptionData(WeddingDescription req)
-        {
-            try
-            {
-                if (Request.IsAuthenticated)
-                {
-                    using (WeddingEntities context = new WeddingEntities())
-                    {
-                        req.Id = 1;
-                        context.WeddingDescriptions.AddOrUpdate(req);
-                        context.SaveChanges();
-                        return "true";
-                    }
-                }
-                else
-                {
-                    throw new Exception();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
         public string GetEmailData()
         {
             try
@@ -132,55 +109,6 @@ namespace WeddingWebsiteMvc.Controllers
                     using (WeddingEntities context = new WeddingEntities())
                     {
                         return JsonConvert.SerializeObject(context.Emails.ToList(), Formatting.None);
-                    }
-                }
-                else
-                {
-                    throw new Exception();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public string PostEmailData(Email req)
-        {
-            try
-            {
-                if (Request.IsAuthenticated)
-                {
-                    using (WeddingEntities context = new WeddingEntities())
-                    {
-                        context.Emails.AddOrUpdate(req);
-                        context.SaveChanges();
-                        return "true";
-                    }
-                }
-                else
-                {
-                    throw new Exception();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public string DeleteEmailData(Email req)
-        {
-            try
-            {
-                if (Request.IsAuthenticated)
-                {
-                    using (WeddingEntities context = new WeddingEntities())
-                    {
-                        context.Emails.Attach(req);
-                        context.Emails.Remove(req);
-                        context.SaveChanges();
-                        return "true";
                     }
                 }
                 else
@@ -217,6 +145,169 @@ namespace WeddingWebsiteMvc.Controllers
                             {
                                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                             });
+                    }
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string GetEmailLog(EmailLog req)
+        {
+            try
+            {
+                if (Request.IsAuthenticated)
+                {
+                    using (WeddingEntities context = new WeddingEntities())
+                    {
+                        List<EmailLog> emailLogData;
+                        List<GuestDetail> guestDetailData;
+
+                        if (req.GuestDetailId == 0)
+                        {
+                            //entire email log
+                            emailLogData = context.EmailLogs.ToList();
+                            guestDetailData = context.GuestDetails.Where(q => q.Active == true).ToList();
+                        }
+                        else
+                        {
+                            //email log for specific guest
+                            emailLogData = context.EmailLogs.Where(q => q.GuestDetailId == req.GuestDetailId).ToList();
+                            guestDetailData = context.GuestDetails.Where(q => q.Active == true && q.GuestDetailId == req.GuestDetailId).ToList();
+                        }
+
+                        var ret = new List<EmailLogData>();
+
+                        if (emailLogData.Count() > 0)
+                        {
+                            var emailData = context.Emails.ToList();
+
+                            foreach (var log in emailLogData)
+                            {
+                                log.SentDate = log.SentDate.ToLocalTime();
+
+                                var email = emailData.Where(q => q.Id == log.EmailId).FirstOrDefault();
+                                var guestDetail = guestDetailData.Where(q => q.GuestDetailId == log.GuestDetailId).ToList();
+
+                                ret.Add(new EmailLogData
+                                {
+                                    GuestName = guestDetail[0].FirstName + " " + guestDetail[0].LastName,
+                                    GuestEmailAddress = guestDetail[0].Email,
+                                    EmailDescription = email.Description,
+                                    EmailSubject = email.Subject,
+                                    EmailBody = email.Body,
+                                    SentDate = log.SentDate,
+                                    GuestDetailId = log.GuestDetailId,
+                                    EmailId = log.EmailId,
+                                    Id = log.Id
+                                });
+                            }
+                        }
+
+                        return JsonConvert.SerializeObject(ret, Formatting.None);
+                    }
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string GetUsStates()
+        {
+            try
+            {
+                if (Request.IsAuthenticated)
+                {
+                    using (WeddingEntities context = new WeddingEntities())
+                    {
+                        return JsonConvert.SerializeObject(context.UsaStates.ToList(), Formatting.None);
+                    }
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string GetAddressDataByZip(ZipCodeSearchReq req)
+        {
+            try
+            {
+                if (Request.IsAuthenticated)
+                {
+                    using (WeddingEntities context = new WeddingEntities())
+                    {
+                        return JsonConvert.SerializeObject(context.UsaZipCodes.Where(q => q.Zip == req.ZipCode).ToList(), Formatting.None);
+                    }
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
+
+        #region Post
+
+        public string PostWeddingDescriptionData(WeddingDescription req)
+        {
+            try
+            {
+                if (Request.IsAuthenticated)
+                {
+                    using (WeddingEntities context = new WeddingEntities())
+                    {
+                        req.Id = 1;
+                        context.WeddingDescriptions.AddOrUpdate(req);
+                        context.SaveChanges();
+                        return "true";
+                    }
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string PostEmailData(Email req)
+        {
+            try
+            {
+                if (Request.IsAuthenticated)
+                {
+                    using (WeddingEntities context = new WeddingEntities())
+                    {
+                        context.Emails.AddOrUpdate(req);
+                        context.SaveChanges();
+                        return "true";
                     }
                 }
                 else
@@ -284,6 +375,38 @@ namespace WeddingWebsiteMvc.Controllers
             }
         }
 
+        public string PostEmailLog(EmailLogReq req)
+        {
+            try
+            {
+                if (req.RsvpConfimationEmail || Request.IsAuthenticated)
+                {
+                    using (WeddingEntities context = new WeddingEntities())
+                    {
+                        var logReq = new EmailLog
+                        {
+                            EmailId = req.EmailId,
+                            GuestDetailId = req.GuestDetailId,
+                            SentDate = DateTime.UtcNow.ToUniversalTime(),
+                            SentBy = createdBy
+                        };
+
+                        context.EmailLogs.AddOrUpdate(logReq);
+                        context.SaveChanges();
+                        return "true";
+                    }
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public string AttachGuestToHeader(GuestHeader req)
         {
             try
@@ -328,6 +451,10 @@ namespace WeddingWebsiteMvc.Controllers
 
             return "true";
         }
+
+        #endregion
+
+        #region Delete
 
         public string DeleteGuest(GuestDetail req)
         {
@@ -391,6 +518,33 @@ namespace WeddingWebsiteMvc.Controllers
             }
         }
 
+        public string DeleteEmailData(Email req)
+        {
+            try
+            {
+                if (Request.IsAuthenticated)
+                {
+                    using (WeddingEntities context = new WeddingEntities())
+                    {
+                        context.Emails.Attach(req);
+                        context.Emails.Remove(req);
+                        context.SaveChanges();
+                        return "true";
+                    }
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
+
         public string SendEmail(SendEmail req)
         {
             try
@@ -452,102 +606,6 @@ namespace WeddingWebsiteMvc.Controllers
             }
         }
 
-        public string GetEmailLog(EmailLog req)
-        {
-            try
-            {
-                if (Request.IsAuthenticated)
-                {
-                    using (WeddingEntities context = new WeddingEntities())
-                    {
-                        List<EmailLog> emailLogData;
-                        List<GuestDetail> guestDetailData;
-
-                        if (req.GuestDetailId == 0)
-                        {
-                            //entire email log
-                            emailLogData = context.EmailLogs.ToList();
-                            guestDetailData = context.GuestDetails.Where(q => q.Active == true).ToList();
-                        }
-                        else
-                        {
-                            //email log for specific guest
-                            emailLogData = context.EmailLogs.Where(q => q.GuestDetailId == req.GuestDetailId).ToList();
-                            guestDetailData = context.GuestDetails.Where(q => q.Active == true && q.GuestDetailId == req.GuestDetailId).ToList();
-                        }
-
-                        var ret = new List<EmailLogData>();
-
-                        if (emailLogData.Count() > 0)
-                        {
-                            var emailData = context.Emails.ToList();
-                            
-                            foreach (var log in emailLogData)
-                            {
-                                log.SentDate = log.SentDate.ToLocalTime();
-
-                                var email = emailData.Where(q => q.Id == log.EmailId).FirstOrDefault();
-                                var guestDetail = guestDetailData.Where(q => q.GuestDetailId == log.GuestDetailId).ToList();
-
-                                ret.Add(new EmailLogData {
-                                    GuestName = guestDetail[0].FirstName + " " + guestDetail[0].LastName,
-                                    GuestEmailAddress = guestDetail[0].Email,
-                                    EmailDescription = email.Description,
-                                    EmailSubject = email.Subject,
-                                    EmailBody = email.Body,
-                                    SentDate = log.SentDate,
-                                    GuestDetailId = log.GuestDetailId,
-                                    EmailId = log.EmailId,
-                                    Id = log.Id
-                                });
-                            }
-                        }
-                        
-                        return JsonConvert.SerializeObject(ret, Formatting.None);
-                    }
-                }
-                else
-                {
-                    throw new Exception();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public string PostEmailLog(EmailLogReq req)
-        {
-            try
-            {
-                if (req.RsvpConfimationEmail || Request.IsAuthenticated)
-                {
-                    using (WeddingEntities context = new WeddingEntities())
-                    {
-                        var logReq = new EmailLog
-                        {
-                            EmailId = req.EmailId,
-                            GuestDetailId = req.GuestDetailId,
-                            SentDate = DateTime.UtcNow.ToUniversalTime(),
-                            SentBy = createdBy
-                        };
-                        
-                        context.EmailLogs.AddOrUpdate(logReq);
-                        context.SaveChanges();
-                        return "true";
-                    }
-                }
-                else
-                {
-                    throw new Exception();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
     }
 }
 
@@ -580,4 +638,9 @@ public class WeddingInitData
 {
     public WeddingDescription WeddingDescriptionData { get; set; }
     public List<Email> EmailData { get; set; }
+}
+
+public class ZipCodeSearchReq
+{
+    public int ZipCode { get; set; }
 }

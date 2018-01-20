@@ -12,6 +12,8 @@
         <EntityTypeShape EntityType="Entities.Email" Width="1.5" PointX="3.375" PointY="5.75" />
         <EntityTypeShape EntityType="Entities.EmailLog" Width="1.5" PointX="5.375" PointY="5.75" />
         <EntityTypeShape EntityType="Entities.ConfirmationCodeLog" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="Entities.UsaState" Width="1.5" PointX="7.375" PointY="5.75" />
+        <EntityTypeShape EntityType="Entities.UsaZipCode" Width="1.5" PointX="8.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

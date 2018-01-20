@@ -58,6 +58,44 @@
         //    resetConfirmationCode();
         //});
 
+        enableDisableAddressFields(true);
+
+        $("#txtZip").blur(function ()
+        {
+            //determine if address data can be defaulted
+            if ($("#txtZip").val().length > 0)
+            {
+                cu.showHideSpinner(true, "divGuestCrudContainer")
+
+                $.when(svc.getAddressDataByZip({ ZipCode: $("#txtZip").val() })).done(function (ret)
+                {
+                    console.log("getAddressDataByZip");
+                    console.log(ret);
+
+                    if (ret.length > 0)
+                    {
+                        console.log("default address data");
+                        $("#txtCity").val(ret[0].City)
+                        $("#ddlState").data("kendoDropDownList").value(ret[0].State);
+                    }
+                    else
+                    {
+                        var req = {
+                            Icon: "fa fa-exclamation-triangle",
+                            Msg: "Zip Code Entered Could Not Be Found, Please Enter Address Data Manually!",
+                            Type: "danger"
+                        };
+
+                        cu.createNotification(req);
+                    }
+
+                    enableDisableAddressFields(false);
+
+                    cu.showHideSpinner(false, "divGuestCrudContainer")
+                });
+            }
+        });
+
         $("#btnCancel").click(function ()
         {
             showHideCreateEditForm(false);
@@ -138,12 +176,22 @@
         });
     }
 
+    function enableDisableAddressFields(action)
+    {
+        $("#txtAddress1").prop("disabled", action);
+        $("#txtAddress2").prop("disabled", action);
+        $("#txtCity").prop("disabled", action);
+        $("#ddlState").data("kendoDropDownList").enable(!action);
+    }
+
     function addNewGuest() 
     {
         $("#createEditGuestPanelTitle").text("Create Guest");
 
         _resetForm();
-            
+
+        enableDisableAddressFields(true);
+
         showHideCreateEditForm(true);
 
         $("#txtFirstName").focus();
@@ -154,6 +202,8 @@
         $("#createEditGuestPanelTitle").text("Update Guest");
 
         _resetForm();
+
+        enableDisableAddressFields(false);
 
         $("#txtFirstName").val(guest.FirstName);
         $("#txtLastName").val(guest.LastName);

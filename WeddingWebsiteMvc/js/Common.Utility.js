@@ -23,7 +23,8 @@
         disableKendoEditor: disableKendoEditor,
         createKendoGrid: createKendoGrid,
         convertDateToMMDDYY: convertDateToMMDDYY,
-        exportGrid: exportGrid
+        exportGrid: exportGrid,
+        createKendoEditor: createKendoEditor
     };
 
     function isNullOrBlank(value) 
@@ -335,6 +336,16 @@
             grid.options.excel.filterable = filterable;
             grid.saveAsExcel();
         }
+    }
+
+    function createKendoEditor(id)
+    {
+        $("#" + id).kendoEditor({
+            resizable: {
+                content: true,
+                toolbar: true
+            }
+        });
     }
 
 })();

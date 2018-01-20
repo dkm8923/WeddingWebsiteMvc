@@ -10,12 +10,7 @@
 
     function init(data)
     {
-        $("#taEmailBody").kendoEditor({
-            resizable: {
-                        content: true,
-                        toolbar: true
-            }
-        });
+        cu.createKendoEditor("taEmailBody");
 
         $("#btnCancelEmail").click(function ()
         {
