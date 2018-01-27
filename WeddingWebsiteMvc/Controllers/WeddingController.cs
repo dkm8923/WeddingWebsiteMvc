@@ -16,6 +16,28 @@ namespace WeddingWebsiteMvc.Controllers
             return View();
         }
 
+        public string PostGuestBookEntry(GuestBookEntry req)
+        {
+            try
+            {
+                using (WeddingEntities context = new WeddingEntities())
+                {
+                    req.Approved = false;
+                    req.CreatedOn = DateTime.Now.ToUniversalTime();
+                    context.GuestBookEntries.AddOrUpdate(req);
+                    context.SaveChanges();
+
+                    AdminController ac = new AdminController();
+                    ac.SendGuestBookApproveEmail(req);
+                    return "true";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public string RSVP(RsvpRequest req)
         {
             var ret = false;

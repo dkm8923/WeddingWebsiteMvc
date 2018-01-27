@@ -52,6 +52,18 @@ namespace WeddingWebsiteMvc.Controllers
             }
         }
 
+        public ActionResult GuestBookMaintenance()
+        {
+            if (Request.IsAuthenticated)
+            {
+                return View("GuestBookMaintenance");
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
         #region Get
 
         public string GetWeddingDescriptionData()
@@ -85,13 +97,36 @@ namespace WeddingWebsiteMvc.Controllers
                 {
                     var descData = context.WeddingDescriptions.Where(q => q.Id == 1).FirstOrDefault();
                     var emailData = context.Emails.Where(q => q.Id == 11 || q.Id == 12).ToList();
-                    var ret = new WeddingInitData { WeddingDescriptionData = descData, EmailData = emailData };
+                    var guestBookEntries = context.GuestBookEntries.Where(q => q.Approved == true).ToList();
+                    var ret = new WeddingInitData { WeddingDescriptionData = descData, EmailData = emailData, GuestBookEntries = guestBookEntries };
                     //return JsonConvert.SerializeObject(ret, Formatting.None);
                     return JsonConvert.SerializeObject(ret, Formatting.None,
                             new JsonSerializerSettings()
                             {
                                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                             });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string GetGuestBookEntry()
+        {
+            try
+            {
+                if (Request.IsAuthenticated)
+                {
+                    using (WeddingEntities context = new WeddingEntities())
+                    {
+                        return JsonConvert.SerializeObject(context.GuestBookEntries.ToList(), Formatting.None);
+                    }
+                }
+                else
+                {
+                    throw new Exception();
                 }
             }
             catch (Exception ex)
@@ -333,12 +368,12 @@ namespace WeddingWebsiteMvc.Controllers
                         {
                             //update
                             req.UpdatedBy = createdBy;
-                            req.UpdatedOn = DateTime.Now;
+                            req.UpdatedOn = DateTime.Now.ToUniversalTime();
 
                             foreach (var guest in req.GuestDetails)
                             {
                                 guest.UpdatedBy = createdBy;
-                                guest.UpdatedOn = DateTime.Now;
+                                guest.UpdatedOn = DateTime.Now.ToUniversalTime();
                                 context.GuestDetails.AddOrUpdate(guest);
                             }
                         }
@@ -347,15 +382,15 @@ namespace WeddingWebsiteMvc.Controllers
                             //insert
                             req.CreatedBy = createdBy;
                             req.UpdatedBy = createdBy;
-                            req.CreatedOn = DateTime.Now;
-                            req.UpdatedOn = DateTime.Now;
+                            req.CreatedOn = DateTime.Now.ToUniversalTime();
+                            req.UpdatedOn = DateTime.Now.ToUniversalTime();
 
                             foreach (var guest in req.GuestDetails)
                             {
                                 guest.CreatedBy = createdBy;
                                 guest.UpdatedBy = createdBy;
-                                guest.CreatedOn = DateTime.Now;
-                                guest.UpdatedOn = DateTime.Now;
+                                guest.CreatedOn = DateTime.Now.ToUniversalTime();
+                                guest.UpdatedOn = DateTime.Now.ToUniversalTime();
                             }
                         }
 
@@ -492,7 +527,7 @@ namespace WeddingWebsiteMvc.Controllers
                                 {
                                     guestHdr[0].Active = false;
                                     guestHdr[0].UpdatedBy = createdBy;
-                                    guestHdr[0].UpdatedOn = DateTime.Now;
+                                    guestHdr[0].UpdatedOn = DateTime.Now.ToUniversalTime();
                                     context.GuestHeaders.AddOrUpdate(guestHdr[0]);
                                 }
                             }
@@ -500,7 +535,7 @@ namespace WeddingWebsiteMvc.Controllers
 
                         req.Active = false;
                         req.UpdatedBy = createdBy;
-                        req.UpdatedOn = DateTime.Now;
+                        req.UpdatedOn = DateTime.Now.ToUniversalTime();
 
                         context.GuestDetails.AddOrUpdate(req);
                         context.SaveChanges();
@@ -543,6 +578,59 @@ namespace WeddingWebsiteMvc.Controllers
             }
         }
 
+        public string DeleteGuestBookEntry(GuestBookEntry req)
+        {
+            try
+            {
+                if (Request.IsAuthenticated)
+                {
+                    using (WeddingEntities context = new WeddingEntities())
+                    {
+                        context.GuestBookEntries.Attach(req);
+                        context.GuestBookEntries.Remove(req);
+                        context.SaveChanges();
+                        return "true";
+                    }
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public string ApproveGuestBookEntry(GuestBookEntry req)
+        {
+            try
+            {
+                if (Request.IsAuthenticated)
+                {
+                    using (WeddingEntities context = new WeddingEntities())
+                    {
+                        var entryToApprove = context.GuestBookEntries.Where(q => q.Id == req.Id).ToList();
+                        entryToApprove[0].Approved = true;
+                        entryToApprove[0].ApprovedOn = DateTime.Now.ToUniversalTime();
+                        context.GuestBookEntries.AddOrUpdate(entryToApprove[0]);
+                        context.SaveChanges();
+
+                        return "true";
+                    }
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         #endregion
 
         public string SendEmail(SendEmail req)
@@ -551,28 +639,61 @@ namespace WeddingWebsiteMvc.Controllers
             {
                 if ((req.RsvpConfimationEmail || Request.IsAuthenticated) && req.EmailAddress != null && req.EmailAddress != "")
                 {
-                    SmtpClient smtpClient = new SmtpClient("wedding.danielkevinmauk.com", 25);
-
-                    smtpClient.Credentials = new System.Net.NetworkCredential("donotreply@danielkevinmauk.com", "E8su?s63");
-                    smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-
-                    MailMessage mailMessage = new MailMessage("DoNotReply@Wedding.DanielKevinMauk.com", req.EmailAddress);
-                    mailMessage.Subject = req.EmailSubject;
-                    mailMessage.IsBodyHtml = true;
-                    mailMessage.Body = req.EmailBody;
-
-                    smtpClient.Send(mailMessage);
-
-                    if (!req.IsTestEmail)
-                    {
-                        this.PostEmailLog(new EmailLogReq { EmailId = req.EmailId, GuestDetailId = req.GuestDetailId, RsvpConfimationEmail = req.RsvpConfimationEmail });
-                    }
+                    this.SendEmailLogic(req);
 
                     return "true";
                 }
                 else
                 {
                     throw new Exception();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool SendGuestBookApproveEmail(GuestBookEntry req)
+        {
+            string emailBody = "A Guest Book Entry Was Added - Name: " + req.Name + " Entry: " + req.Entry;
+            emailBody += "<br /> <a href='https://Wedding.DanielKevinMauk.com/Admin/ApproveGuestBookEntryFromEmail" + req.Id + "'>Click Here To Approve Guest Book Entry</a>";
+
+            this.SendEmailLogic(new SendEmail {
+                EmailId = 0,
+                GuestDetailId = 0,
+                IsTestEmail = false,
+                EmailAddress = "dkm8923@gmail.com",
+                EmailSubject = "Guest Book Entry Approval",
+                EmailBody = emailBody
+            });
+
+            return true;
+        }
+
+        public string ApproveGuestBookEntryFromEmail(GuestBookEntry req)
+        {
+            try
+            {
+                using (WeddingEntities context = new WeddingEntities())
+                {
+                    var entryToApprove = context.GuestBookEntries.Where(q => q.Id == req.Id).ToList();
+                    entryToApprove[0].Approved = true;
+                    entryToApprove[0].ApprovedOn = DateTime.Now.ToUniversalTime();
+                    context.GuestBookEntries.AddOrUpdate(entryToApprove[0]);
+                    context.SaveChanges();
+
+                    this.SendEmailLogic(new SendEmail
+                    {
+                        EmailId = 0,
+                        GuestDetailId = 0,
+                        IsTestEmail = false,
+                        EmailAddress = "dkm8923@gmail.com",
+                        EmailSubject = "Guest Book Entry Approval Succes",
+                        EmailBody = "Guest Book Entry Was Approved Successfully!"
+                    });
+
+                    return "true";
                 }
             }
             catch (Exception ex)
@@ -599,6 +720,35 @@ namespace WeddingWebsiteMvc.Controllers
                     throw new Exception();
                 }
 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private bool SendEmailLogic(SendEmail req)
+        {
+            try
+            {
+                SmtpClient smtpClient = new SmtpClient("wedding.danielkevinmauk.com", 25);
+
+                smtpClient.Credentials = new System.Net.NetworkCredential("donotreply@danielkevinmauk.com", "E8su?s63");
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+
+                MailMessage mailMessage = new MailMessage("DoNotReply@Wedding.DanielKevinMauk.com", req.EmailAddress);
+                mailMessage.Subject = req.EmailSubject;
+                mailMessage.IsBodyHtml = true;
+                mailMessage.Body = req.EmailBody;
+
+                smtpClient.Send(mailMessage);
+
+                if (!req.IsTestEmail)
+                {
+                    this.PostEmailLog(new EmailLogReq { EmailId = req.EmailId, GuestDetailId = req.GuestDetailId, RsvpConfimationEmail = req.RsvpConfimationEmail });
+                }
+
+                return true;
             }
             catch (Exception ex)
             {
@@ -638,6 +788,7 @@ public class WeddingInitData
 {
     public WeddingDescription WeddingDescriptionData { get; set; }
     public List<Email> EmailData { get; set; }
+    public List<GuestBookEntry> GuestBookEntries { get; set; }
 }
 
 public class ZipCodeSearchReq

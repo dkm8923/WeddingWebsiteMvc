@@ -23,6 +23,7 @@
         disableKendoEditor: disableKendoEditor,
         createKendoGrid: createKendoGrid,
         convertDateToMMDDYY: convertDateToMMDDYY,
+        jsConvertDateToMMDDYY: jsConvertDateToMMDDYY,
         exportGrid: exportGrid,
         createKendoEditor: createKendoEditor
     };
@@ -313,6 +314,11 @@
     {
         return kendo.toString(kendo.parseDate(dateString), "MM/dd/yyyy");
     };
+
+    function jsConvertDateToMMDDYY(dateString)
+    {
+        return dateString.getMonth() + 1 + "/" + dateString.getDate() + "/" + dateString.getFullYear();
+    }
 
     //Exports a given Kendo Grid to Excel
     function exportGrid(gridname, fileName, dateStamp, filterable)

@@ -82,6 +82,10 @@ namespace WeddingWebsiteMvc
                       "~/js/Email.CreateEdit.js",
                       "~/js/Email.Delete.js",
                       "~/js/Email.SendTestEmail.js"));
+
+            bundles.Add(new ScriptBundle("~/GuestBook/scripts").Include(
+                      "~/js/GuestBook.Base.js",
+                      "~/js/GuestBook.Delete.js"));
         }
     }
 }

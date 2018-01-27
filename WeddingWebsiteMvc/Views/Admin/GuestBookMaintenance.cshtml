@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Email Maintenance";
+}
+
+@Html.Partial("../Shared/_Templates")
+
+<div id="divGuestBookCrudContainer">
+    <div id="guestBookTabstrip" class="reportTabstrip">
+        <ul>
+            <li class="k-state-active">
+                Guest Book Maintenance
+            </li>
+        </ul>
+        <div>
+            <div class="divGridContainer divGuestBookGridContainer" id="divGuestBookGridContainer">
+                <ul class="ulGridHdr">
+                    <li class="divSection1">
+                        <div class="divSection">
+                            <input class="form-control" type="text" id="txtSearchGuestBookGrid" placeholder="Search Guest Book Data">
+                        </div>
+                    </li>
+                </ul>
+                <div id="tblGuestBookList" class="defaultGrid singleGrid"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="divGuestBookDeleteWindow"></div>
+
+<script id="guestBookWindowTemplate" type="text/x-handlebars-template">
+    <ul>
+        <li>
+            <div class='deleteWindowContent'><span>Are you sure that you want to delete {{Entry}} ?</span></div>
+        </li>
+        <li class="liButtons">
+            <button class="btn btn-danger btnIcon" id="btnCancelGuestBookDelete"><i class="fa fa-times" aria-hidden="true"></i>Cancel</button>
+            <button class="btn btn-success btnIcon" id="btnSaveGuestBookDelete"><i class="fa fa-trash-o" aria-hidden="true"></i>Delete</button>
+        </li>
+    </ul>
+</script>
+
+<script id="guestBookGridActionsTemplate" type="text/x-handlebars-template">
+    <div class='gridBtnContainer'>
+        <button data-deleteGuestBookEntryButton data-id="{{Id}}" class='btn btn-danger'><i class='fa fa-trash' aria-hidden='true'></i></button>
+        <button data-approveGuestBookEntryButton data-id="{{Id}}" class='btn btn-success'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>
+    </div>
+</script>
+
+@Scripts.Render("~/GuestBook/scripts")

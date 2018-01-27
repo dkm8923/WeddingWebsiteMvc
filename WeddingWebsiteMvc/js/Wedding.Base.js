@@ -3,22 +3,33 @@
     var _guestHeaderId = null;
     var defaultData = null;
     var emailData = null;
+    var guestBookEntryTemplate = Handlebars.compile(document.getElementById("guestBookEntryTemplate").innerHTML);
 
     $("#liHome").addClass("active");
     window.location.href.split('#')[0];
 
     _loadAndSetInitData();
     _initHtmlComponents();
+    _initGuestBookForm();
     _initRsvpForm();
 
     function _loadAndSetInitData()
     {
         $.when(svc.getWeddingInitData()).done(function (response)
         {
+            //console.log("init data");
             //console.log(response);
             defaultData = response.WeddingDescriptionData;
             emailData = response.EmailData;
+            var html = "";
+            for (var i = 0; i < response.GuestBookEntries.length; i++)
+            {
+                response.GuestBookEntries[i].CreatedOn = cu.jsConvertDateToMMDDYY(new Date(Date.parse(response.GuestBookEntries[i].CreatedOn)));
+                html += guestBookEntryTemplate(response.GuestBookEntries[i]);
+            }
 
+            $("#divGuestBookMsgContainer").append(html)
+            
             //$("#pGroomDesc").html(defaultData.GroomDescription);
             //$("#pBrideDesc").html(defaultData.BrideDescription);
             $("#pCeremonyDateTimeLoc").html(defaultData.CeremonyDateTimeLocation);
@@ -129,11 +140,93 @@
         $("#guestCt").val("");
     }
 
-    function _showError(msg) 
+    function _showError(container, msg) 
     {
-        $("#divErrorMsgContainer").empty();
-        $("#divErrorMsgContainer").removeClass("hiddenVisibility");
-        $("#divErrorMsgContainer").append("<span class='errorMsgWedding iconBounce'>" + msg + "</span>");
+        $("#" + container).empty();
+        $("#" + container).removeClass("hiddenVisibility");
+        $("#" + container).append("<span class='errorMsgWedding iconBounce'>" + msg + "</span>");
+    }
+
+    function _initGuestBookForm()
+    {
+        function _resetGuestBookForm()
+        {
+            $("#txtGuestBookFrom").val("");
+            $("#taGuestBookMsg").val("");
+            $("#divGuestBookErrorMsgContainer").empty();
+            $(".borderRed").removeClass("borderRed");
+        }
+
+        $("#btnAddGuestBookEntry").click(function ()
+        {
+            _resetGuestBookForm();
+            $("#divGuestBookFormContainer").removeClass("hidden");
+            $("#btnAddGuestBookEntry").addClass("hidden");
+        });
+
+        $("#btnGuestBookCancel").click(function ()
+        {
+            $("#divGuestBookFormContainer").addClass("hidden");
+            $("#btnAddGuestBookEntry").removeClass("hidden");
+        });
+
+        $("#btnGuestBookSave").click(function ()
+        {
+            var errorArr = [];
+            $("#divGuestBookErrorMsgContainer").empty();
+            $(".borderRed").removeClass("borderRed");
+
+            if ($("#txtGuestBookFrom").val() === "")
+            {
+                errorArr.push("<span class='errorMsgWedding iconBounce'>Please Enter Your Name In The From Field!</span><br />");
+                $("#txtGuestBookFrom").addClass("borderRed");
+            }
+
+            if ($("#taGuestBookMsg").val() === "")
+            {
+                errorArr.push("<span class='errorMsgWedding iconBounce'>Please Enter A Message!</span>");
+                $("#taGuestBookMsg").addClass("borderRed");
+            }
+
+            if (errorArr.length > 0)
+            {
+                for (var i = 0; i < errorArr.length; i++)
+                {
+                    $("#divGuestBookErrorMsgContainer").append(errorArr[i]);
+                }
+
+                $("#divGuestBookErrorMsgContainer").removeClass("hiddenVisibility");
+            }
+            else
+            {
+                $("#divGuestBookFormContainer").addClass("hidden");
+
+                //add guest book entry
+                var postReq = {
+                    Name: $("#txtGuestBookFrom").val(),
+                    Entry: $("#taGuestBookMsg").val()
+                };
+
+                $.when(svc.postGuestBookEntry(postReq)).done(function (response)
+                {
+                    var req = {
+                        Icon: "fa fa-smile-o",
+                        Msg: "Thank You for the Guest Book Entry! Your message will be posted shortly!",
+                        Type: "success"
+                    };
+
+                    cu.createNotification(req);
+
+                    $("#btnAddGuestBookEntry").removeClass("hidden");
+                })
+                .fail(function ()
+                {
+                    console.log("Failure Posting Guest Book Entry....");
+                    $("#btnAddGuestBookEntry").removeClass("hidden");
+                    cu.showSaveErrorNotification(); 
+                });
+            }
+        });
     }
 
     function _initRsvpForm() 
@@ -150,7 +243,7 @@
             var code = $("#confirmCode").val();
             if (code === null || code === "") 
             {
-                _showError("Please Enter Confirmation Code!");
+                _showError("divErrorMsgContainer", "Please Enter Confirmation Code!");
             }
             else 
             {
@@ -167,7 +260,7 @@
                     }
                     else 
                     {
-                        _showError("Incorrect Confirmation Code Entered. Please Try Again!");
+                        _showError("divErrorMsgContainer", "Incorrect Confirmation Code Entered. Please Try Again!");
                     }
                 })
                 .fail(function (e) 
@@ -202,7 +295,7 @@
             var guestCt = $("#guestCt").val();
             if ($("#cbAttending").prop("checked") && (guestCt <= 0 || guestCt > 5 || guestCt === "" || isNaN(guestCt))) 
             {
-                _showError("Please Enter valid Guest Ct!");
+                _showError("divErrorMsgContainer", "Please Enter valid Guest Ct!");
             }
             else 
             {

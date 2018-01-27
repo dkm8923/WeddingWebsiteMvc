@@ -33,5 +33,6 @@ namespace WeddingWebsiteMvc.Models
         public virtual DbSet<ConfirmationCodeLog> ConfirmationCodeLogs { get; set; }
         public virtual DbSet<UsaState> UsaStates { get; set; }
         public virtual DbSet<UsaZipCode> UsaZipCodes { get; set; }
+        public virtual DbSet<GuestBookEntry> GuestBookEntries { get; set; }
     }
 }

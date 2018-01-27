@@ -1,6 +1,10 @@
 ﻿var svc = (function ()
 {
     return {
+        getGuestBookEntry: getGuestBookEntry,
+        postGuestBookEntry: postGuestBookEntry,
+        approveGuestBookEntry: approveGuestBookEntry,
+        deleteGuestBookEntry: deleteGuestBookEntry,
         getGuests: getGuests,
         postGuest: postGuest,
         getEmailData: getEmailData,
@@ -19,6 +23,49 @@
         getUsStates: getUsStates,
         getAddressDataByZip: getAddressDataByZip
     };
+
+    function getGuestBookEntry() 
+    {
+        return $.ajax({
+            type: "GET",
+            url: '/admin/GetGuestBookEntry',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json'
+        });
+    }
+
+    function postGuestBookEntry(req) 
+    {
+        return $.ajax({
+            type: "POST",
+            url: '/wedding/PostGuestBookEntry',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: JSON.stringify(req)
+        });
+    }
+
+    function approveGuestBookEntry(req) 
+    {
+        return $.ajax({
+            type: "POST",
+            url: '/admin/ApproveGuestBookEntry',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: JSON.stringify(req)
+        });
+    }
+
+    function deleteGuestBookEntry(req) 
+    {
+        return $.ajax({
+            type: "POST",
+            url: '/admin/DeleteGuestBookEntry',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            data: JSON.stringify(req)
+        });
+    }
 
     function getGuests() 
     {

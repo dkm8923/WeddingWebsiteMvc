@@ -66,6 +66,9 @@
                                     <a href="#gallery" class="js-scroll-trigger">Gallery</a>
                                 </li>
                                 <li class="navLink">
+                                    <a href="#guestbook" class="js-scroll-trigger">Guest Book</a>
+                                </li>
+                                <li class="navLink">
                                     <a href="#rsvp" class="js-scroll-trigger">RSVP</a>
                                 </li>
                             </ul>
@@ -220,23 +223,13 @@
                             </div>
                         </div>
                         <div class="row row-bottom-padded-md">
-                            <div class="col-md-6 text-center animate-box">
+                            <div class="col-md-12 text-center animate-box">
                                 <div class="wedding-events">
                                     <div class="ceremony-bg" style="background-image: url(@Url.Content("~/images/WestfallOutdoorCeremony.png"));"></div>
                                     <div class="desc">
-                                        <h3>Wedding Ceremony</h3>
+                                        <h3>Wedding Ceremony &amp; Reception</h3>
                                         <p><strong id="pCeremonyDateTimeLoc"></strong></p>
                                         <p id="pCeremonyDesc"></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 text-center animate-box">
-                                <div class="wedding-events">
-                                    <div class="ceremony-bg" style="background-image: url(@Url.Content("~/images/Westfall3.jpg"));"></div>
-                                    <div class="desc">
-                                        <h3>Wedding Party</h3>
-                                        <p><strong id="pReceptionDateTimeLoc"></strong></p>
-                                        <p id="pReceptionDesc"></p>
                                     </div>
                                 </div>
                             </div>
@@ -360,6 +353,47 @@
                 </div>
             </div>
 
+            <div id="guestbook">
+                <div id="fh5co-when-where" class="fh5co-section-gray">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                                <h2>Guest Book</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-block" id="btnAddGuestBookEntry">Add Entry</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="divGuestBookFormContainer" class="row hidden animated fadeIn">
+                            <div class="col-md-8 col-md-offset-2 text-center heading-section">
+                                <div class="form-group">
+                                    <div id="divGuestBookErrorMsgContainer" class="errorMsgContainer hiddenVisibility"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtGuestBookFrom" class="flLeft">From:</label>
+                                    <input type="text" class="form-control" id="txtGuestBookFrom" placeholder="Enter Your Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="taGuestBookMsg" class="flLeft">Message:</label>
+                                    <textarea id="taGuestBookMsg" class="form-control" placeholder="Enter Your Message" rows="4"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-block" id="btnGuestBookCancel">Cancel</button>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-block" id="btnGuestBookSave">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="divGuestBookMsgContainer"></div>
+                    </div>
+                </div>
+            </div>
+
             <div id="rsvp">
                 <div id="fh5co-started" style="background-image:url(@Url.Content("~/images/Westfall4.jpg"));" data-stellar-background-ratio="0.5">
                     <div class="overlay"></div>
@@ -450,6 +484,22 @@
 </body>
 </html>
 
+<script id="guestBookEntryTemplate" type="text/x-handlebars-template">
+    <div class="row row-bottom-padded-md">
+        <div class="col-md-12 text-center">
+            <div class="wedding-events">
+                <div class="desc">
+                    <h3>From: {{Name}} On {{CreatedOn}}</h3>
+                    <p>{{Entry}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
 @Scripts.Render("~/WeddingScripts/scripts")
+
+
+
 
 

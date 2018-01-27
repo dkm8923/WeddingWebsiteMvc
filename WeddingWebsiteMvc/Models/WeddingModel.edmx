@@ -32,6 +32,17 @@
           <Property Name="SentDate" Type="datetime" Nullable="false" />
           <Property Name="SentBy" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="GuestBookEntry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="Entry" Type="varchar" MaxLength="1000" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="Approved" Type="bit" />
+          <Property Name="ApprovedOn" Type="datetime" />
+        </EntityType>
         <EntityType Name="GuestDetail">
           <Key>
             <PropertyRef Name="GuestDetailId" />
@@ -122,6 +133,7 @@ warning 6002: The table/view 'danielke_WeddingDB.dbo.UsaZipCodes' does not have 
           <EntitySet Name="ConfirmationCodeLog" EntityType="Self.ConfirmationCodeLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Email" EntityType="Self.Email" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailLog" EntityType="Self.EmailLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GuestBookEntry" EntityType="Self.GuestBookEntry" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GuestDetail" EntityType="Self.GuestDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GuestHeader" EntityType="Self.GuestHeader" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WeddingDescription" EntityType="Self.WeddingDescription" Schema="dbo" store:Type="Tables" />
@@ -217,6 +229,7 @@ warning 6002: The table/view 'danielke_WeddingDB.dbo.UsaZipCodes' does not have 
           <EntitySet Name="ConfirmationCodeLogs" EntityType="Entities.ConfirmationCodeLog" />
           <EntitySet Name="UsaStates" EntityType="Entities.UsaState" />
           <EntitySet Name="UsaZipCodes" EntityType="Entities.UsaZipCode" />
+          <EntitySet Name="GuestBookEntries" EntityType="Entities.GuestBookEntry" />
         </EntityContainer>
         <EntityType Name="WeddingDescription">
           <Key>
@@ -278,6 +291,17 @@ warning 6002: The table/view 'danielke_WeddingDB.dbo.UsaZipCodes' does not have 
           <Property Name="Pop" Type="Int32" />
           <Property Name="CountyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="CountyWeight" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="GuestBookEntry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Entry" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="Approved" Type="Boolean" />
+          <Property Name="ApprovedOn" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -386,6 +410,18 @@ warning 6002: The table/view 'danielke_WeddingDB.dbo.UsaZipCodes' does not have 
                 <ScalarProperty Name="Long" ColumnName="Long" />
                 <ScalarProperty Name="Lat" ColumnName="Lat" />
                 <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GuestBookEntries">
+            <EntityTypeMapping TypeName="Entities.GuestBookEntry">
+              <MappingFragment StoreEntitySet="GuestBookEntry">
+                <ScalarProperty Name="ApprovedOn" ColumnName="ApprovedOn" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Entry" ColumnName="Entry" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

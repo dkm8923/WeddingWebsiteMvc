@@ -8,7 +8,7 @@
     {
         cu.createKendoEditor("taCeremonyDateTimeLoc");
         cu.createKendoEditor("taCeremonyDesc");
-        cu.createKendoEditor("taReceptionDateTimeLoc");
+        //cu.createKendoEditor("taReceptionDateTimeLoc");
 
         $("#btnCancel").click(function ()
         {
@@ -25,8 +25,8 @@
                     //GroomDescription: $("#taGroomDesc").val(),
                     //BrideDescription: $("#taBrideDesc").val(),
                     CeremonyDateTimeLocation: $("#taCeremonyDateTimeLoc").data("kendoEditor").value(),
-                    CeremonyDescription: $("#taCeremonyDesc").data("kendoEditor").value(),
-                    ReceptionDateTimeLocation: $("#taReceptionDateTimeLoc").data("kendoEditor").value(),
+                    CeremonyDescription: $("#taCeremonyDesc").data("kendoEditor").value()//,
+                    //ReceptionDateTimeLocation: $("#taReceptionDateTimeLoc").data("kendoEditor").value(),
                     //ReceptionDescription: $("#taReceptionDesc").val(),
                 };
 
@@ -72,7 +72,7 @@
             //$("#taBrideDesc").val(defaultData.BrideDescription);
             $("#taCeremonyDateTimeLoc").data("kendoEditor").value(defaultData.CeremonyDateTimeLocation);
             $("#taCeremonyDesc").data("kendoEditor").value(defaultData.CeremonyDescription);
-            $("#taReceptionDateTimeLoc").data("kendoEditor").value(defaultData.ReceptionDateTimeLocation);
+            //$("#taReceptionDateTimeLoc").data("kendoEditor").value(defaultData.ReceptionDateTimeLocation);
             //$("#taReceptionDesc").val(defaultData.ReceptionDescription);
         }
 
@@ -84,8 +84,8 @@
                     //{ ElementId: "taGroomDesc", ErrorType: "Required" },
                     //{ ElementId: "taBrideDesc", ErrorType: "Required" },
                     { ElementId: "taCeremonyDateTimeLoc", ErrorType: "Required", ElementType: "kendoEditor" },
-                    { ElementId: "taCeremonyDesc", ErrorType: "Required", ElementType: "kendoEditor" },
-                    { ElementId: "taReceptionDateTimeLoc", ErrorType: "Required", ElementType: "kendoEditor" }//,
+                    { ElementId: "taCeremonyDesc", ErrorType: "Required", ElementType: "kendoEditor" }//,
+                    //{ ElementId: "taReceptionDateTimeLoc", ErrorType: "Required", ElementType: "kendoEditor" }//,
                     //{ ElementId: "taReceptionDesc", ErrorType: "Required" }
                 ],
                 ErrorMsgContainer: "divErrorMsgContainer"
