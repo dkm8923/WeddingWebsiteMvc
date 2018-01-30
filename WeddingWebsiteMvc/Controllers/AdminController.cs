@@ -641,6 +641,11 @@ namespace WeddingWebsiteMvc.Controllers
                 {
                     this.SendEmailLogic(req);
 
+                    if (!req.IsTestEmail)
+                    {
+                        this.PostEmailLog(new EmailLogReq { EmailId = req.EmailId, GuestDetailId = req.GuestDetailId, RsvpConfimationEmail = req.RsvpConfimationEmail });
+                    }
+
                     return "true";
                 }
                 else
@@ -657,7 +662,7 @@ namespace WeddingWebsiteMvc.Controllers
         public bool SendGuestBookApproveEmail(GuestBookEntry req)
         {
             string emailBody = "A Guest Book Entry Was Added - Name: " + req.Name + " Entry: " + req.Entry;
-            emailBody += "<br /> <a href='https://Wedding.DanielKevinMauk.com/Admin/ApproveGuestBookEntryFromEmail" + req.Id + "'>Click Here To Approve Guest Book Entry</a>";
+            emailBody += "<br /> <a href='https://Wedding.DanielKevinMauk.com/Admin/ApproveGuestBookEntryFromEmail/" + req.Id + "'>Click Here To Approve Guest Book Entry</a>";
 
             this.SendEmailLogic(new SendEmail {
                 EmailId = 0,
@@ -671,7 +676,7 @@ namespace WeddingWebsiteMvc.Controllers
             return true;
         }
 
-        public string ApproveGuestBookEntryFromEmail(GuestBookEntry req)
+        public ActionResult ApproveGuestBookEntryFromEmail(GuestBookEntry req)
         {
             try
             {
@@ -683,17 +688,7 @@ namespace WeddingWebsiteMvc.Controllers
                     context.GuestBookEntries.AddOrUpdate(entryToApprove[0]);
                     context.SaveChanges();
 
-                    this.SendEmailLogic(new SendEmail
-                    {
-                        EmailId = 0,
-                        GuestDetailId = 0,
-                        IsTestEmail = false,
-                        EmailAddress = "dkm8923@gmail.com",
-                        EmailSubject = "Guest Book Entry Approval Succes",
-                        EmailBody = "Guest Book Entry Was Approved Successfully!"
-                    });
-
-                    return "true";
+                    return View("GuestBookApprovalResult");
                 }
             }
             catch (Exception ex)
@@ -742,11 +737,6 @@ namespace WeddingWebsiteMvc.Controllers
                 mailMessage.Body = req.EmailBody;
 
                 smtpClient.Send(mailMessage);
-
-                if (!req.IsTestEmail)
-                {
-                    this.PostEmailLog(new EmailLogReq { EmailId = req.EmailId, GuestDetailId = req.GuestDetailId, RsvpConfimationEmail = req.RsvpConfimationEmail });
-                }
 
                 return true;
             }

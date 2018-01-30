@@ -159,6 +159,11 @@
                     title: "Code",
                     width: 150
                 }
+                , {
+                    field: "FamilyDescription",
+                    title: "Family",
+                    width: 100
+                }
                 ,{
                     field: "FirstName",
                     title: "First Name",
@@ -266,6 +271,7 @@
                 guest.CheckedIn = guestHeaderData[i].CheckedIn;
                 guest.Attending = guestHeaderData[i].Attending;
                 guest.Family = guestHeaderData[i].Family;
+                guest.FamilyDescription = guestHeaderData[i].Family === 1 ? "Bride" : "Groom";
                 guest.GuestCount = guestHeaderData[i].GuestCount
                 guest.ConfirmationCode = guestHeaderData[i].ConfirmationCode
                 guest.UnknownGuest = guestHeaderData[i].UnknownGuest

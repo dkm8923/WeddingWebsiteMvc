@@ -501,6 +501,7 @@
     <Content Include="Views\Admin\EmailMaintenance.cshtml" />
     <Content Include="Views\Shared\_Templates.cshtml" />
     <Content Include="Views\Admin\GuestBookMaintenance.cshtml" />
+    <Content Include="Views\Admin\GuestBookApprovalResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
