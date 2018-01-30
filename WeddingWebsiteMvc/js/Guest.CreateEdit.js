@@ -127,6 +127,7 @@
                             if (guestHeaderData[i].GuestHeaderId === guestHeaderId)
                             {
                                 req = guestHeaderData[i];
+                                req.GuestCount = req.GuestDetails.length === 1 ? 2 : req.GuestDetails.length;
 
                                 var guestDetail = [];
 
@@ -140,6 +141,7 @@
                                 }
 
                                 req.GuestDetails = guestDetail;
+                                
                                 break;
                             }
                         }
@@ -150,6 +152,7 @@
                     {
                         //new guest
                         req = createGuestPostReqObj();
+                        req.GuestCount = 2; //2 guests by default
                     }
 
                     cu.showHideSpinner(true, "divGuestCrudContainer")
@@ -266,6 +269,7 @@
         $("#txtZip").val("");
         $("#txtConfirmationCode").val("");
         $("input[name=rbFamily][value=1]").prop('checked', true);
+        $("#txtGuestCount").val(0);
 
         $("#btnSubmit").data("GuestDetailId", null);
         $("#btnSubmit").data("GuestHeaderId", null);

@@ -470,6 +470,7 @@ namespace WeddingWebsiteMvc.Controllers
                         //clear Guest Header / Detail Id's and set data to active to post
                         req.Active = true;
                         req.GuestHeaderId = 0;
+                        req.GuestCount = req.GuestDetails.Count;
 
                         this.PostGuest(req);
                     }

@@ -155,6 +155,11 @@
                     width: 170
                 }
                 , {
+                    field: "GuestHeaderId",
+                    title: "Link Id",
+                    width: 100
+                }
+                , {
                     field: "ConfirmationCode",
                     title: "Code",
                     width: 150
@@ -275,7 +280,7 @@
                 guest.GuestCount = guestHeaderData[i].GuestCount
                 guest.ConfirmationCode = guestHeaderData[i].ConfirmationCode
                 guest.UnknownGuest = guestHeaderData[i].UnknownGuest
-                guest.GridSearchText = guest.FirstName + " " + guest.LastName + " " + guest.Email;
+                guest.GridSearchText = guest.GuestHeaderId + " " + guest.FamilyDescription + " " + guest.FirstName + " " + guest.LastName + " " + guest.Email + " " + guest.Address1 + " " + guest.Address2 + " " + guest.City + " " + guest.State + " " + guest.Zip + " ";
 
                 guestData.push(guest);
             }
