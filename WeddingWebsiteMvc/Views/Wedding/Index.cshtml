@@ -66,6 +66,12 @@
                                     <a href="#gallery" class="js-scroll-trigger">Gallery</a>
                                 </li>
                                 <li class="navLink">
+                                    <a href="#bridalParty" class="js-scroll-trigger hidden">Bridal Party</a>
+                                </li>
+                                <li class="navLink">
+                                    <a href="#registry" class="js-scroll-trigger">Registry</a>
+                                </li>
+                                <li class="navLink">
                                     <a href="#guestbook" class="js-scroll-trigger">Guest Book</a>
                                 </li>
                                 <li class="navLink">
@@ -80,7 +86,7 @@
             <div id="home">
                 <div class="fh5co-hero" data-section="home">
                     <div class="fh5co-overlay"></div>
-                    <div class="fh5co-cover text-center" data-stellar-background-ratio=".5" style="background-image: url(@Url.Content("~/images/ColombiaWaterfall.JPG"));">
+                    <div class="fh5co-cover text-center" data-stellar-background-ratio=".5" style="background-image: url(https://res.cloudinary.com/dkm8923/image/upload/v1517793805/WeddingWebsite/MainBackgroundImage.jpg);">
                         <div class="display-t">
                             <div class="display-tc">
                                 <div class="container">
@@ -103,12 +109,12 @@
                         <div class="row row-bottom-padded-md animate-box">
                             <div class="col-md-6 col-md-offset-3 text-center">
                                 <div class="col-md-5 col-sm-5 col-xs-5 nopadding">
-                                    <img src="@Url.Content("~/images/groom.jpg")" class="img-responsive" alt="Groom">
+                                    <img src="@Url.Content("https://res.cloudinary.com/dkm8923/image/upload/v1517793795/WeddingWebsite/Groom.jpg")" class="img-responsive" alt="Groom">
                                     <h3>Dan Mauk</h3>
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-xs-2 nopadding"><h2 class="amp-center"><i class="icon-heart"></i></h2></div>
                                 <div class="col-md-5 col-sm-5 col-xs-5 nopadding">
-                                    <img src="@Url.Content("~/images/bride.jpg")" class="img-responsive" alt="Bride">
+                                    <img src="@Url.Content("https://res.cloudinary.com/dkm8923/image/upload/v1517793792/WeddingWebsite/Bride.jpg")" class="img-responsive" alt="Bride">
                                     <h3>Rachel Thompson</h3>
                                 </div>
                             </div>
@@ -225,7 +231,7 @@
                         <div class="row row-bottom-padded-md">
                             <div class="col-md-12 text-center animate-box">
                                 <div class="wedding-events">
-                                    <div class="ceremony-bg" style="background-image: url(@Url.Content("~/images/WestfallOutdoorCeremony.png"));"></div>
+                                    <div class="ceremony-bg" style="background-image: url(@Url.Content("https://res.cloudinary.com/dkm8923/image/upload/v1517793848/WeddingWebsite/WeddingHallPicture.png"));"></div>
                                     <div class="desc">
                                         <h3>Wedding Ceremony &amp; Reception</h3>
                                         <p><strong id="pCeremonyDateTimeLoc"></strong></p>
@@ -243,75 +249,6 @@
                 </div>
             </div>
 
-            <!--<div id="guest" class="hidden">
-                <div id="fh5co-guest">
-                    <div class="container">
-                        <div class="row animate-box">
-                            <div class="col-md-8 col-md-offset-2 text-center heading-section">
-                                <h2>The Groomsmen</h2>
-                            </div>
-                        </div>
-                        <div class="row row-bottom-padded-lg">
-                            <div class="col-md-3 text-center animate-box">
-                                <div class="groom-men">
-                                    <img src="@Url.Content("~/images/groom-men-1.jpg")" class="img-responsive" alt="img">
-                                    <h3>Steve Schultz</h3>
-                                </div>
-                            </div>
-                            <div class="col-md-3 text-center animate-box">
-                                <div class="groom-men">
-                                    <img src="@Url.Content("~/images/groom-men-2.jpg")" class="img-responsive" alt="img">
-                                    <h3>Ryan Mazzocco</h3>
-                                </div>
-                            </div>
-                            <div class="col-md-3 text-center animate-box">
-                                <div class="groom-men">
-                                    <img src="@Url.Content("~/images/groom-men-3.jpg")" class="img-responsive" alt="img">
-                                    <h3>Mike Mauk</h3>
-                                </div>
-                            </div>
-                            <div class="col-md-3 text-center animate-box">
-                                <div class="groom-men">
-                                    <img src="@Url.Content("~/images/groom-men-4.jpg")" class="img-responsive" alt="img">
-                                    <h3>Josh Pease</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row animate-box">
-                            <div class="col-md-8 col-md-offset-2 text-center heading-section">
-                                <h2>The Bridesmaids</h2>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3 text-center animate-box">
-                                <div class="groom-men">
-                                    <img src="@Url.Content("~/images/bridesmaid-1.jpg")" class="img-responsive" alt="img">
-                                    <h3>Arthur Stone</h3>
-                                </div>
-                            </div>
-                            <div class="col-md-3 text-center animate-box">
-                                <div class="groom-men">
-                                    <img src="@Url.Content("~/images/bridesmaid-2.jpg")" class="img-responsive" alt="img">
-                                    <h3>Mike Paterson</h3>
-                                </div>
-                            </div>
-                            <div class="col-md-3 text-center animate-box">
-                                <div class="groom-men">
-                                    <img src="@Url.Content("~/images/bridesmaid-3.jpg")" class="img-responsive" alt="img">
-                                    <h3>Brench Thompson</h3>
-                                </div>
-                            </div>
-                            <div class="col-md-3 text-center animate-box">
-                                <div class="groom-men">
-                                    <img src="@Url.Content("~/images/bridesmaid-4.jpg")" class="img-responsive" alt="img">
-                                    <h3>Blake Haste</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
-
             <div id="gallery">
                 <div id="fh5co-gallery">
                     <div class="container">
@@ -323,34 +260,163 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="gallery animate-box">
-                                    <a class="gallery-img image-popup image-popup" href="images/ColombiaBoat2.jpg"><img src="@Url.Content("~/images/ColombiaBoat2.jpg")" class="img-responsive" alt="img"></a>
+                                    <a class="gallery-img image-popup image-popup" href="https://res.cloudinary.com/dkm8923/image/upload/v1517793834/WeddingWebsite/Gallery1.jpg"><img src="@Url.Content("https://res.cloudinary.com/dkm8923/image/upload/v1517793834/WeddingWebsite/Gallery1.jpg")" class="img-responsive" alt="img"></a>
                                 </div>
                                 <div class="gallery animate-box">
-                                    <a class="gallery-img image-popup" href="images/rafting2.jpg"><img src="@Url.Content("~/images/rafting2.jpg")" class="img-responsive" alt="img"></a>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="gallery animate-box">
-                                    <a class="gallery-img image-popup" href="images/JoshWedding.jpg"><img src="@Url.Content("~/images/JoshWedding.jpg")" class="img-responsive" alt="img"></a>
-                                </div>
-                                <div class="gallery animate-box">
-                                    <a class="gallery-img image-popup" href="images/ColombiaGondola.jpg"><img src="@Url.Content("~/images/ColombiaGondola.jpg")" class="img-responsive" alt="img"></a>
-                                </div>
-                                <div class="gallery animate-box">
-                                    <a class="gallery-img image-popup" href="images/putInBayBoats.jpg"><img src="@Url.Content("~/images/putInBayBoats.jpg")" class="img-responsive" alt="img"></a>
+                                    <a class="gallery-img image-popup" href="https://res.cloudinary.com/dkm8923/image/upload/v1517793843/WeddingWebsite/Gallery2.jpg"><img src="@Url.Content("https://res.cloudinary.com/dkm8923/image/upload/v1517793843/WeddingWebsite/Gallery2.jpg")" class="img-responsive" alt="img"></a>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="gallery animate-box">
-                                    <a class="gallery-img image-popup" href="images/Drinks.jpg"><img src="@Url.Content("~/images/Drinks.jpg")" class="img-responsive" alt="img"></a>
+                                    <a class="gallery-img image-popup" href="https://res.cloudinary.com/dkm8923/image/upload/v1517793836/WeddingWebsite/Gallery3.jpg"><img src="@Url.Content("https://res.cloudinary.com/dkm8923/image/upload/v1517793836/WeddingWebsite/Gallery3.jpg")" class="img-responsive" alt="img"></a>
                                 </div>
                                 <div class="gallery animate-box">
-                                    <a class="gallery-img image-popup" href="images/texasWedding.jpg"><img src="@Url.Content("~/images/texasWedding.jpg")" class="img-responsive" alt="img"></a> 
+                                    <a class="gallery-img image-popup" href="https://res.cloudinary.com/dkm8923/image/upload/v1517793834/WeddingWebsite/Gallery4.jpg"><img src="@Url.Content("https://res.cloudinary.com/dkm8923/image/upload/v1517793834/WeddingWebsite/Gallery4.jpg")" class="img-responsive" alt="img"></a>
+                                </div>
+                                <div class="gallery animate-box">
+                                    <a class="gallery-img image-popup" href="https://res.cloudinary.com/dkm8923/image/upload/v1517793841/WeddingWebsite/Gallery5.jpg"><img src="@Url.Content("https://res.cloudinary.com/dkm8923/image/upload/v1517793841/WeddingWebsite/Gallery5.jpg")" class="img-responsive" alt="img"></a>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="gallery animate-box">
+                                    <a class="gallery-img image-popup" href="https://res.cloudinary.com/dkm8923/image/upload/v1517793835/WeddingWebsite/Gallery6.jpg"><img src="@Url.Content("https://res.cloudinary.com/dkm8923/image/upload/v1517793835/WeddingWebsite/Gallery6.jpg")" class="img-responsive" alt="img"></a>
+                                </div>
+                                <div class="gallery animate-box">
+                                    <a class="gallery-img image-popup" href="https://res.cloudinary.com/dkm8923/image/upload/v1517793840/WeddingWebsite/Gallery7.jpg"><img src="@Url.Content("https://res.cloudinary.com/dkm8923/image/upload/v1517793840/WeddingWebsite/Gallery7.jpg")" class="img-responsive" alt="img"></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div id="bridalParty" class="hidden">
+                <div id="fh5co-guest" class="fh5co-section-gray">
+                    <div class="container">
+                        <div class="row animate-box">
+                            <div class="col-md-8 col-md-offset-2 text-center heading-section">
+                                <h2>The Groomsmen</h2>
+                            </div>
+                        </div>
+                        <div class="row row-bottom-padded-lg">
+                            <div class="col-md-2 text-center animate-box">
+                                <div class="groom-men">
+                                    <img src="@Url.Content("~/images/groom-men-4.jpg")" class="img-responsive" alt="img">
+                                    <h3>Steve Schultz</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center animate-box">
+                                <div class="groom-men">
+                                    <img src="@Url.Content("~/images/groom-men-4.jpg")" class="img-responsive" alt="img">
+                                    <h3>Ryan Mazzocco</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center animate-box">
+                                <div class="groom-men">
+                                    <img src="@Url.Content("~/images/groom-men-4.jpg")" class="img-responsive" alt="img">
+                                    <h3>Mike Mauk</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center animate-box">
+                                <div class="groom-men">
+                                    <img src="@Url.Content("~/images/groom-men-4.jpg")" class="img-responsive" alt="img">
+                                    <h3>Josh Pease</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center animate-box">
+                                <div class="groom-men">
+                                    <img src="@Url.Content("~/images/groom-men-4.jpg")" class="img-responsive" alt="img">
+                                    <h3>Colin Belmore</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center animate-box">
+                                <div class="groom-men">
+                                    <img src="@Url.Content("~/images/groom-men-4.jpg")" class="img-responsive" alt="img">
+                                    <h3>Justin Murray</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row animate-box">
+                            <div class="col-md-8 col-md-offset-2 text-center heading-section">
+                                <h2>The Bridesmaids</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2 text-center animate-box">
+                                <div class="groom-men">
+                                    <img src="@Url.Content("~/images/bridesmaid-4.jpg")" class="img-responsive" alt="img">
+                                    <h3>Arthur Stone</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center animate-box">
+                                <div class="groom-men">
+                                    <img src="@Url.Content("~/images/bridesmaid-4.jpg")" class="img-responsive" alt="img">
+                                    <h3>Mike Paterson</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center animate-box">
+                                <div class="groom-men">
+                                    <img src="@Url.Content("~/images/bridesmaid-4.jpg")" class="img-responsive" alt="img">
+                                    <h3>Brench Thompson</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center animate-box">
+                                <div class="groom-men">
+                                    <img src="@Url.Content("~/images/bridesmaid-4.jpg")" class="img-responsive" alt="img">
+                                    <h3>Blake Haste</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center animate-box">
+                                <div class="groom-men">
+                                    <img src="@Url.Content("~/images/bridesmaid-4.jpg")" class="img-responsive" alt="img">
+                                    <h3>Blake Haste</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-2 text-center animate-box">
+                                <div class="groom-men">
+                                    <img src="@Url.Content("~/images/bridesmaid-4.jpg")" class="img-responsive" alt="img">
+                                    <h3>Blake Haste</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="registry">
+                <div id="fh5co-when-where">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                                <h2>Registry</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                                <div class="form-group">
+                                    <h3>We Are Registered At These Locations: (Click Logo to View Items)</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-bottom-padded-lg">
+                            <div class="col-xs-12 col-sm-12 col-md-6 text-center animate-box">
+                                <div class="divRegistryLogoContainer">
+                                    <a target="_blank" href="https://www.target.com/gift-registry/giftgiver?registryId=59f37cd8b71b490e946c8f7004ed41be&lnk=registry_custom_url#1">
+                                        <img src="@Url.Content("https://res.cloudinary.com/dkm8923/image/upload/c_scale,w_200/v1517796293/RegistryLogo1.png")" class="img-responsive" alt="img">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 text-center animate-box">
+                                <div class="divRegistryLogoContainer">
+                                    <a target="_blank" href="https://www.macys.com/wgl/registry/guest?registryId=6844682&PartnerID=WEDDINGCHANNEL&cm_mmc=WEDDINGCHANNEL-_-Registry-_-n-_-Registry&LinkshareID=660172567&ref=wc">
+                                        <img src="@Url.Content("https://res.cloudinary.com/dkm8923/image/upload/v1517796293/RegistryLogo2.png")" class="img-responsive" alt="img">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </div>
 
             <div id="guestbook">
@@ -395,7 +461,7 @@
             </div>
 
             <div id="rsvp">
-                <div id="fh5co-started" style="background-image:url(@Url.Content("~/images/Westfall4.jpg"));" data-stellar-background-ratio="0.5">
+                <div id="fh5co-started" style="background-image:url(@Url.Content("https://res.cloudinary.com/dkm8923/image/upload/v1517793842/WeddingWebsite/RSVPBackgroundImg.jpg"));" data-stellar-background-ratio="0.5">
                     <div class="overlay"></div>
                     <div class="container">
                         <div class="row animate-box">
