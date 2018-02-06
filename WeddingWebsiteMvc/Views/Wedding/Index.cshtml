@@ -53,26 +53,20 @@
                                 <li id="liHome" class="navLink">
                                     <a href="#home" class="js-scroll-trigger">Home</a>
                                 </li>
-                                @*<li class="navLink">
-                                    <a href="#brideandgroom" class="js-scroll-trigger">Bride &amp; Groom</a>
-                                </li>*@
                                 <li class="navLink">
                                     <a href="#whenwhere" class="js-scroll-trigger">When &amp; Where</a>
                                 </li>
-                                <!--<li class="navLink hidden">
-                                    <a href="#guest" class="js-scroll-trigger">Guest</a>
-                                </li>-->
                                 <li class="navLink">
                                     <a href="#gallery" class="js-scroll-trigger">Gallery</a>
                                 </li>
-                                <li class="navLink">
+                                @*<li class="navLink">
                                     <a href="#bridalParty" class="js-scroll-trigger hidden">Bridal Party</a>
+                                </li>*@
+                                <li class="navLink">
+                                    <a href="#guestbook" class="js-scroll-trigger">Guest Book</a>
                                 </li>
                                 <li class="navLink">
                                     <a href="#registry" class="js-scroll-trigger">Registry</a>
-                                </li>
-                                <li class="navLink">
-                                    <a href="#guestbook" class="js-scroll-trigger">Guest Book</a>
                                 </li>
                                 <li class="navLink">
                                     <a href="#rsvp" class="js-scroll-trigger">RSVP</a>
@@ -142,83 +136,6 @@
                     </div>
                 </div>
             </div>
-
-            @*<div id="brideandgroom">
-                <div id="fh5co-groom-bride">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                                <h2>Bride &amp; Groom</h2>
-                            </div>
-                        </div>
-                        <div class="row padding">
-                            <div class="couple-wrap">
-                                <div class="col-md-6 nopadding animate-box">
-                                    <img src="@Url.Content("~/images/epicRobe.jpg")" class="img-responsive" alt="img">
-                                </div>
-                                <div class="col-md-6 nopadding animate-box">
-                                    <div class="couple-desc">
-                                        <h3>Dan Mauk</h3>
-                                        <p id="pGroomDesc"></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row padding">
-                            <div class="couple-wrap">
-                                <div class="col-md-6 col-md-push-6 nopadding animate-box">
-                                    <img src="@Url.Content("~/images/RachelFruit.jpg")" class="img-responsive" alt="img">
-                                </div>
-                                <div class="col-md-6 col-md-pull-6 nopadding animate-box">
-                                    <div class="couple-desc">
-                                        <h3>Rachel Thompson;</h3>
-                                        <p id="pBrideDesc"></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
-
-            @*<div id="whenwhere">
-                <div id="fh5co-when-where" class="fh5co-section-gray">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                                <h2>When &amp; Where</h2>
-                            </div>
-                        </div>
-                        <div class="row row-bottom-padded-md">
-                            <div class="col-md-6 text-center animate-box">
-                                <div class="wedding-events">
-                                    <div class="ceremony-bg" style="background-image: url(@Url.Content("~/images/WestfallOutdoorCeremony.png"));"></div>
-                                    <div class="desc">
-                                        <h3>Wedding Ceremony</h3>
-                                        <p><strong id="pCeremonyDateTimeLoc"></strong></p>
-                                        <p id="pCeremonyDesc"></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 text-center animate-box">
-                                <div class="wedding-events">
-                                    <div class="ceremony-bg" style="background-image: url(@Url.Content("~/images/Westfall3.jpg"));"></div>
-                                    <div class="desc">
-                                        <h3>Wedding Party</h3>
-                                        <p><strong id="pReceptionDateTimeLoc"></strong></p>
-                                        <p id="pReceptionDesc"></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div id="map" class="fh5co-map"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
 
             <div id="whenwhere">
                 <div id="fh5co-when-where" class="fh5co-section-gray">
@@ -290,7 +207,7 @@
                 </div>
             </div>
 
-            <div id="bridalParty" class="hidden">
+            @*<div id="bridalParty" class="hidden">
                 <div id="fh5co-guest" class="fh5co-section-gray">
                     <div class="container">
                         <div class="row animate-box">
@@ -381,43 +298,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div id="registry">
-                <div id="fh5co-when-where">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                                <h2>Registry</h2>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                                <div class="form-group">
-                                    <h3>We Are Registered At These Locations: (Click Logo to View Items)</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row row-bottom-padded-lg">
-                            <div class="col-xs-12 col-sm-12 col-md-6 text-center animate-box">
-                                <div class="divRegistryLogoContainer">
-                                    <a target="_blank" href="https://www.target.com/gift-registry/giftgiver?registryId=59f37cd8b71b490e946c8f7004ed41be&lnk=registry_custom_url#1">
-                                        <img src="@Url.Content("https://res.cloudinary.com/dkm8923/image/upload/c_scale,w_200/v1517796293/RegistryLogo1.png")" class="img-responsive" alt="img">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-6 text-center animate-box">
-                                <div class="divRegistryLogoContainer">
-                                    <a target="_blank" href="https://www.macys.com/wgl/registry/guest?registryId=6844682&PartnerID=WEDDINGCHANNEL&cm_mmc=WEDDINGCHANNEL-_-Registry-_-n-_-Registry&LinkshareID=660172567&ref=wc">
-                                        <img src="@Url.Content("https://res.cloudinary.com/dkm8923/image/upload/v1517796293/RegistryLogo2.png")" class="img-responsive" alt="img">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
+            </div>*@
 
             <div id="guestbook">
                 <div id="fh5co-when-where" class="fh5co-section-gray">
@@ -456,6 +337,41 @@
                             </div>
                         </div>
                         <div id="divGuestBookMsgContainer"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="registry">
+                <div id="fh5co-when-where">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                                <h2>Registry</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
+                                <div class="form-group">
+                                    <h3>We Are Registered At These Locations: (Click Logo to View Items)</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-bottom-padded-lg">
+                            <div class="col-xs-12 col-sm-12 col-md-6 text-center animate-box">
+                                <div class="divRegistryLogoContainer">
+                                    <a target="_blank" href="https://www.target.com/gift-registry/giftgiver?registryId=59f37cd8b71b490e946c8f7004ed41be&lnk=registry_custom_url#1">
+                                        <img src="@Url.Content("https://res.cloudinary.com/dkm8923/image/upload/c_scale,w_200/v1517796293/RegistryLogo1.png")" class="img-responsive" alt="img">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 text-center animate-box">
+                                <div class="divRegistryLogoContainer">
+                                    <a target="_blank" href="https://www.macys.com/wgl/registry/guest?registryId=6844682&PartnerID=WEDDINGCHANNEL&cm_mmc=WEDDINGCHANNEL-_-Registry-_-n-_-Registry&LinkshareID=660172567&ref=wc">
+                                        <img src="@Url.Content("https://res.cloudinary.com/dkm8923/image/upload/v1517796293/RegistryLogo2.png")" class="img-responsive" alt="img">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
