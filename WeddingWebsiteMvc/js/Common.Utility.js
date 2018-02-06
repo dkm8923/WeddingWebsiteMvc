@@ -304,6 +304,8 @@
             sortable: true,
             resizable: true,
             dataBound: cu.isNullOrBlank(req.DataBound) ? null : req.DataBound,
+            detailTemplate: cu.isNullOrBlank(req.DetailTemplate) ? null : req.DetailTemplate,
+            detailInit: cu.isNullOrBlank(req.DetailInit) ? null : req.DetailInit,
             //columnMenu: true,
             columns: req.Columns
         });

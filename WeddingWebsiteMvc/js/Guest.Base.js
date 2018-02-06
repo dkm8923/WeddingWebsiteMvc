@@ -54,12 +54,12 @@
 
                 $("#txtSearchGuestGrid").keyup(function (e) 
                 {
-                    cu.gridSearchLogic({SearchTextboxId: "txtSearchGuestGrid", GridId: "tblGuestList"});
+                    cu.gridSearchLogic({ SearchTextboxId: "txtSearchGuestGrid", GridId: "tblGuestListHdr"});
                 });
 
                 setGuestTotalData(guestHeaderData);
-                
-                _initGrid(guestData);
+
+                _initParentGrid(guestHeaderData);
                 gce.init(response); //init guest create edit
                 ge.init(emailData); //init guest email
 
@@ -101,65 +101,95 @@
 
         setGuestTotalData(guestHeaderData);
         
-        cu.bindAndRefreshGrid({GridId: "tblGuestList", Data: guestData});
+        cu.bindAndRefreshGrid({ GridId: "tblGuestListHdr", Data: guestData});
 
         $("#txtSearchGuestGrid").val("");
-        $("#tblGuestList").data("kendoGrid").dataSource.filter({});
+        $("#tblGuestListHdr").data("kendoGrid").dataSource.filter({});
     }
 
-    function _initGrid(data) 
+    function _initParentGrid(data)
     {
         setGridHeight();
         cu.createKendoGrid({
-            GridId: "tblGuestList",
+            GridId: "tblGuestListHdr",
             Data: data,
-            DataBound: function () 
+            DetailInit: function (e)
             {
-                $("[data-editGuestButton]").click(function ()
-                {
-                    var guestDetailId = parseInt($(this).data("guestdetailid"));
-                    gce.editGuest(getGuestByGuestDetailId(guestData, guestDetailId));
-                });
+                var guestHdrId = e.data.GuestHeaderId;
+                var container = "nestedGridContainer" + guestHdrId;
+                var gridId = "gridGuestDetails" + guestHdrId;
 
-                $("[data-deleteGuestButton]").click(function ()
-                {
-                    var guestDetailId = parseInt($(this).data("guestdetailid"));
-                    gd.deleteGuestLogic(getGuestByGuestDetailId(guestData, guestDetailId));
-                });
+                $("<div id='" + container + "'>").appendTo(e.detailCell);
+                $("#" + container).append("<div id='gridGuestDetails" + guestHdrId + "' class='defaultGrid singleGrid'></div>");
 
-                $("[data-sendRsvpEmailGuestButton]").click(function ()
-                {
-                    var guestDetailId = parseInt($(this).data("guestdetailid"));
-                    ge.sendEmailToGuest(getGuestByGuestDetailId(guestData, guestDetailId));
-                });
+                $("#gridGuestDetails" + guestHdrId).kendoGrid()
 
-                var gridData = $("#tblGuestList").data("kendoGrid").dataSource.data();
-                for (var i = 0; i < gridData.length; i++)
-                {
-                    if (gridData[i].UnknownGuest)
+                cu.createKendoGrid({
+                    GridId: gridId,
+                    Data: e.data.GuestDetails,
+                    DataBound: function () 
                     {
-                        //console.log("Unknown Guest");
-                        //console.log(gridData[i]);
-                        $("#divGuestGridActions" + gridData[i].GuestDetailId).parent().parent().addClass("gridColumnWarning");
-                    }
-                }
+                        $("[data-editGuestButton]").click(function ()
+                        {
+                            var guestDetailId = parseInt($(this).data("guestdetailid"));
+                            gce.editGuest(getGuestByGuestDetailId(guestData, guestDetailId));
+                        });
+
+                        $("[data-deleteGuestButton]").click(function ()
+                        {
+                            var guestDetailId = parseInt($(this).data("guestdetailid"));
+                            gd.deleteGuestLogic(getGuestByGuestDetailId(guestData, guestDetailId));
+                        });
+
+                        $("[data-sendRsvpEmailGuestButton]").click(function ()
+                        {
+                            var guestDetailId = parseInt($(this).data("guestdetailid"));
+                            ge.sendEmailToGuest(getGuestByGuestDetailId(guestData, guestDetailId));
+                        });
+
+                        var gridData = $("#" + gridId).data("kendoGrid").dataSource.data();
+                        for (var i = 0; i < gridData.length; i++)
+                        {
+                            if (gridData[i].UnknownGuest)
+                            {
+                                //console.log("Unknown Guest");
+                                //console.log(gridData[i]);
+                                $("#divGuestGridActions" + gridData[i].GuestDetailId).parent().parent().addClass("gridColumnWarning");
+                            }
+                        }
+                    },
+                    Columns: [
+                        {
+                            title: "Actions",
+                            //columnMenu: false,
+                            template: function (data) 
+                            {
+                                return guestGridActionsTemplate({ GuestDetailId: data.GuestDetailId, EmailDisabled: cu.isNullOrBlank(data.Email) ? true : false });
+                            },
+                            width: 60
+                        }
+                        , {
+                            field: "FirstName",
+                            title: "First Name",
+                            width: 60
+                        }
+                        , {
+
+                            field: "LastName",
+                            title: "Last name",
+                            width: 60
+                        }
+                        , {
+                            field: "Email",
+                            title: "Email",
+                            width: 60
+                        }
+                    ]
+                });
+
             },
             Columns: [
                 {
-                    title: "Actions",
-                    //columnMenu: false,
-                    template: function (data) 
-                    {
-                        return guestGridActionsTemplate({ GuestDetailId: data.GuestDetailId, EmailDisabled: cu.isNullOrBlank(data.Email) ? true : false});
-                    },
-                    width: 170
-                }
-                , {
-                    field: "GuestHeaderId",
-                    title: "Link Id",
-                    width: 100
-                }
-                , {
                     field: "ConfirmationCode",
                     title: "Code",
                     width: 150
@@ -169,21 +199,15 @@
                     title: "Family",
                     width: 100
                 }
-                ,{
-                    field: "FirstName",
-                    title: "First Name",
+                , {
+                    field: "GuestCount",
+                    title: "Guest Ct",
                     width: 100
                 }
                 , {
-
-                    field: "LastName",
-                    title: "Last name",
-                    width: 100
-                }
-                , {
-                    field: "Email",
-                    title: "Email",
-                    width: 100
+                    field: "NameString",
+                    title: "Members",
+                    width: 200
                 }
                 , {
                     field: "Attending",
@@ -238,7 +262,7 @@
         for (var i = 0; i < guestHeaderData.length; i++)
         {
             var nameString = "";
-
+            
             for (var x = 0; x < guestHeaderData[i].GuestDetails.length; x++)
             {
                 var guest = guestHeaderData[i].GuestDetails[x];
@@ -253,6 +277,7 @@
             }
 
             guestHeaderData[i].NameString = nameString;
+            guestHeaderData[i].FamilyDescription = guestHeaderData[i].Family === 1 ? "Bride" : "Groom";
         }
 
         return guestHeaderData;
@@ -281,6 +306,7 @@
                 guest.ConfirmationCode = guestHeaderData[i].ConfirmationCode
                 guest.UnknownGuest = guestHeaderData[i].UnknownGuest
                 guest.GridSearchText = guest.GuestHeaderId + " " + guest.FamilyDescription + " " + guest.FirstName + " " + guest.LastName + " " + guest.Email + " " + guest.Address1 + " " + guest.Address2 + " " + guest.City + " " + guest.State + " " + guest.Zip + " ";
+                guestHeaderData[i].GridSearchText = guest.GuestHeaderId + " " + guest.FamilyDescription + " " + guest.FirstName + " " + guest.LastName + " " + guest.Email + " " + guest.Address1 + " " + guest.Address2 + " " + guest.City + " " + guest.State + " " + guest.Zip + " ";
 
                 guestData.push(guest);
             }
@@ -341,11 +367,11 @@
     {
         if ($(window).width() <= 720)
         {
-            $("#tblGuestList").height($(window).height() - 300 + "px");
+            $("#tblGuestListHdr").height($(window).height() - 300 + "px");
         }
         else
         {
-            $("#tblGuestList").height($(window).height() - 200 + "px");
+            $("#tblGuestListHdr").height($(window).height() - 200 + "px");
         }
     }
 
@@ -357,6 +383,6 @@
         }
 
         setGridHeight();
-        $("#tblGuestList").data("kendoGrid").resize(true);
+        $("#tblGuestListHdr").data("kendoGrid").resize(true);
     });
 })();
