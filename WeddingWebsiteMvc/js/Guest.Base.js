@@ -42,10 +42,31 @@
                     gce.addNewGuest();
                 });
 
-                //$("#btnExportToExcel").click(function ()
-                //{
-                //    cu.exportGrid("tblGuestList", "Guest Data", false, false);
-                //});
+                $("#btnExportToExcel").click(function ()
+                {
+                    //loop through data and only provide the needed columns
+                    var excelData = [];
+                    for (var i = 0; i < guestData.length; i++)
+                    {
+                        var g = guestData[i];
+                        excelData.push({
+                            FirstName: g.FirstName,
+                            LastName: g.LastName,
+                            Email: g.Email,
+                            Address1: g.Address1,
+                            Address2: g.Address2,
+                            City: g.City,
+                            State: g.State,
+                            Zip: g.Zip,
+                            CheckedIn: g.CheckedIn,
+                            Attending: g.Attending,
+                            Family: g.FamilyDescription,
+                            GuestCount: g.GuestCount
+                        });
+                    }
+
+                    cu.downloadCSV({ data: excelData, filename: "GuestList" });
+                });
 
                 $("#btnSendMassEmail").click(function ()
                 {

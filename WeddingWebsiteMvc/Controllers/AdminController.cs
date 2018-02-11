@@ -230,18 +230,21 @@ namespace WeddingWebsiteMvc.Controllers
                                 var email = emailData.Where(q => q.Id == log.EmailId).FirstOrDefault();
                                 var guestDetail = guestDetailData.Where(q => q.GuestDetailId == log.GuestDetailId).ToList();
 
-                                ret.Add(new EmailLogData
+                                if (guestDetail.Count > 0)
                                 {
-                                    GuestName = guestDetail[0].FirstName + " " + guestDetail[0].LastName,
-                                    GuestEmailAddress = guestDetail[0].Email,
-                                    EmailDescription = email.Description,
-                                    EmailSubject = email.Subject,
-                                    EmailBody = email.Body,
-                                    SentDate = log.SentDate,
-                                    GuestDetailId = log.GuestDetailId,
-                                    EmailId = log.EmailId,
-                                    Id = log.Id
-                                });
+                                    ret.Add(new EmailLogData
+                                    {
+                                        GuestName = guestDetail[0].FirstName + " " + guestDetail[0].LastName,
+                                        GuestEmailAddress = guestDetail[0].Email,
+                                        EmailDescription = email.Description,
+                                        EmailSubject = email.Subject,
+                                        EmailBody = email.Body,
+                                        SentDate = log.SentDate,
+                                        GuestDetailId = log.GuestDetailId,
+                                        EmailId = log.EmailId,
+                                        Id = log.Id
+                                    });
+                                }
                             }
                         }
 
