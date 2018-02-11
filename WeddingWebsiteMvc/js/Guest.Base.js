@@ -31,11 +31,11 @@
                 guestHeaderData = formatGuestHeaderData(response);
                 guestData = formatGuestData(response);
                 
-                console.log("load guest header data");
-                console.log(guestHeaderData);
+                //console.log("load guest header data");
+                //console.log(guestHeaderData);
 
-                console.log("formatted data");
-                console.log(guestData);
+                //console.log("formatted data");
+                //console.log(guestData);
 
                 $("#btnAddNewGuest").click(function ()
                 {
@@ -101,7 +101,7 @@
 
         setGuestTotalData(guestHeaderData);
         
-        cu.bindAndRefreshGrid({ GridId: "tblGuestListHdr", Data: guestData});
+        cu.bindAndRefreshGrid({ GridId: "tblGuestListHdr", Data: guestHeaderData});
 
         $("#txtSearchGuestGrid").val("");
         $("#tblGuestListHdr").data("kendoGrid").dataSource.filter({});
@@ -115,14 +115,13 @@
             Data: data,
             DetailInit: function (e)
             {
+                //console.log("Detail Init");
                 var guestHdrId = e.data.GuestHeaderId;
                 var container = "nestedGridContainer" + guestHdrId;
                 var gridId = "gridGuestDetails" + guestHdrId;
 
                 $("<div id='" + container + "'>").appendTo(e.detailCell);
                 $("#" + container).append("<div id='gridGuestDetails" + guestHdrId + "' class='defaultGrid singleGrid'></div>");
-
-                $("#gridGuestDetails" + guestHdrId).kendoGrid()
 
                 cu.createKendoGrid({
                     GridId: gridId,
@@ -278,6 +277,14 @@
 
             guestHeaderData[i].NameString = nameString;
             guestHeaderData[i].FamilyDescription = guestHeaderData[i].Family === 1 ? "Bride" : "Groom";
+
+            //create grid search string
+            Object.keys(guestHeaderData[i]).forEach(function (key, index)
+            {
+                // key: the name of the object key
+                // index: the ordinal position of the key within the object 
+                guestHeaderData[i].GridSearchText += guestHeaderData[i][key] + " "; 
+            });
         }
 
         return guestHeaderData;
@@ -305,8 +312,13 @@
                 guest.GuestCount = guestHeaderData[i].GuestCount
                 guest.ConfirmationCode = guestHeaderData[i].ConfirmationCode
                 guest.UnknownGuest = guestHeaderData[i].UnknownGuest
-                guest.GridSearchText = guest.GuestHeaderId + " " + guest.FamilyDescription + " " + guest.FirstName + " " + guest.LastName + " " + guest.Email + " " + guest.Address1 + " " + guest.Address2 + " " + guest.City + " " + guest.State + " " + guest.Zip + " ";
-                guestHeaderData[i].GridSearchText = guest.GuestHeaderId + " " + guest.FamilyDescription + " " + guest.FirstName + " " + guest.LastName + " " + guest.Email + " " + guest.Address1 + " " + guest.Address2 + " " + guest.City + " " + guest.State + " " + guest.Zip + " ";
+                
+                Object.keys(guest).forEach(function (key, index)
+                {
+                    // key: the name of the object key
+                    // index: the ordinal position of the key within the object 
+                    guestHeaderData[i].GridSearchText += guest[key] + " ";
+                });
 
                 guestData.push(guest);
             }

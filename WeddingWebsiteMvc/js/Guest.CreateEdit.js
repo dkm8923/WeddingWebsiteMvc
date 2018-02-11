@@ -401,7 +401,12 @@
     {
         var randomInt = (Math.random() * 20) * 10000;
         randomInt = Math.floor(randomInt);
-        var code = lastName.toString() + randomInt.toString();
+        var code = (lastName.toString() + randomInt.toString()).split(" ").join("");
+        if (code.length > 32)
+        {
+            code = code.substring(0, 32);
+        }
+
         return code;
     }
 
