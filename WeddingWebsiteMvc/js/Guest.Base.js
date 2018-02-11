@@ -61,7 +61,8 @@
                             CheckedIn: g.CheckedIn,
                             Attending: g.Attending,
                             Family: g.FamilyDescription,
-                            GuestCount: g.GuestCount
+                            GuestCount: g.GuestCount,
+                            ConfirmationCode: g.ConfirmationCode
                         });
                     }
 
