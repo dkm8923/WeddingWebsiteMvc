@@ -112,8 +112,8 @@ warning 6002: The table/view 'danielke_WeddingDB.dbo.UsaZipCodes' does not have 
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GroomDescription" Type="varchar" MaxLength="2000" />
           <Property Name="BrideDescription" Type="varchar" MaxLength="2000" />
-          <Property Name="CeremonyDateTimeLocation" Type="varchar" MaxLength="2000" />
-          <Property Name="CeremonyDescription" Type="varchar" MaxLength="2000" />
+          <Property Name="CeremonyDateTimeLocation" Type="varchar" MaxLength="8000" />
+          <Property Name="CeremonyDescription" Type="varchar" MaxLength="8000" />
           <Property Name="ReceptionDateTimeLocation" Type="varchar" MaxLength="2000" />
           <Property Name="ReceptionDescription" Type="varchar" MaxLength="2000" />
         </EntityType>
@@ -238,8 +238,8 @@ warning 6002: The table/view 'danielke_WeddingDB.dbo.UsaZipCodes' does not have 
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GroomDescription" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
           <Property Name="BrideDescription" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
-          <Property Name="CeremonyDateTimeLocation" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
-          <Property Name="CeremonyDescription" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="CeremonyDateTimeLocation" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="CeremonyDescription" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
           <Property Name="ReceptionDateTimeLocation" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
           <Property Name="ReceptionDescription" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
         </EntityType>

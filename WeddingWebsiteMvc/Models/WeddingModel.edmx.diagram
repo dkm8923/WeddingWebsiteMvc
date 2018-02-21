@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="Entities.GuestDetail" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Entities.GuestHeader" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="Entities.FK_GuestDetail_GuestHeader" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Entities.WeddingDescription" Width="1.5" PointX="5.625" PointY="2.375" />
+        <EntityTypeShape EntityType="Entities.WeddingDescription" Width="2.25" PointX="5.375" PointY="1.25" />
         <EntityTypeShape EntityType="Entities.Email" Width="1.5" PointX="3.375" PointY="5.75" />
         <EntityTypeShape EntityType="Entities.EmailLog" Width="1.5" PointX="5.375" PointY="5.75" />
         <EntityTypeShape EntityType="Entities.ConfirmationCodeLog" Width="1.5" PointX="0.75" PointY="6.75" />
